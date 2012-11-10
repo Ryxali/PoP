@@ -28,6 +28,11 @@ public class Game extends StateBasedGame {
 		addStates();
 
 	}
+	
+	public static float[] getScales(){
+		float [] r = {((float)appgc.getWidth()/(float)1920), ((float)appgc.getHeight()/(float)1200)};
+		return(r);
+	}
 
 	public static int fetchIntegerFromOptions(String name) {
 		if (optionsData.contains(name)) {
@@ -134,6 +139,7 @@ public class Game extends StateBasedGame {
 		try {
 			appgc = new AppGameContainer(new Game(GAME_NAME));
 			optionsData = loadOptions();
+			appgc.setTargetFrameRate(60);
 			if (optionsData.contains("SizeX:")
 					&& optionsData.contains("SizeY:")) {
 				appgc.setDisplayMode(Integer.parseInt(optionsData

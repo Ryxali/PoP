@@ -5,15 +5,33 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public enum AnimationStore {
-	MENU_ANIMATION(new Animation(fetchImages("res/img/MenuAnimation/", "Menu",
-			".png", 20), 10, true), 10);
-	private Animation anim;
-	private int dur;
-
-	private AnimationStore(Animation anim, int dur) {
+	MENU_ANIMATION(new AnimatedImage("res/img/MenuAnimation/", "Menu", ".png", 20, 10, true)),
+	MENU_FIRE(new AnimatedImage("res/img/FireAni/", "Layer3_", ".png", 10, 100, true)),
+	MENU_LIGHT(new AnimatedImage("res/img/LightAni/", "Layer6_", ".png", 10, 100, true));
+	
+	private AnimatedImage anim;
+	private int[] dur;
+	private byte frames;
+	private String filePath;
+	private String fileName;
+	private String fileEnding;
+	
+	private AnimationStore(AnimatedImage anim) {
 		this.anim = anim;
-		this.dur = dur;
+		filePath = anim.getPath();
+		fileName = anim.getFileName();
+		fileEnding = anim.getFileEnding();
+		frames = (byte) anim.getFrameCount();
+		dur = anim.getDurations();
 	}
+	
+	public void reload(){
+		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, true);
+	}
+	public void unload(){
+		anim = null;
+	}
+	
 
 	private static Image[] fetchImages(String path, String fileBaseName,
 			String fileType, int quantity) {
@@ -28,7 +46,7 @@ public enum AnimationStore {
 		return imgs;
 	}
 
-	public int getDuration() {
+	public int[] getDuration() {
 		return dur;
 	}
 

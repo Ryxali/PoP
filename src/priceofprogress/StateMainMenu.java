@@ -1,5 +1,8 @@
 package priceofprogress;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -16,22 +19,36 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		menuAnimation = new AnimatedImage("res/img/MenuAnimation/", "Menu", ".png", 1, 20);
+		ArrayList <AnimationStore> animgs = new ArrayList<AnimationStore>();
+		Collections.addAll(animgs, AnimationStore.values());
+		for(int i = 0; i < animgs.size(); i++){
+			animgs.get(i).unload();
+		}
+		ArrayList <ImageStore> imgs = new ArrayList<ImageStore>();
+		Collections.addAll(imgs, ImageStore.values());
+		for(int i = 0; i < imgs.size(); i++){
+			imgs.get(i).unload();
+		}
+		loadResources();
+		//menuAnimation = new AnimatedImage("res/img/MenuAnimation/", "Menu", ".png", 1, 20, true);
+		
+	}
+	private void loadResources(){
+		ImageStore.BACKGROUND_MENU_STATIC.reload();
+		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.reload();
+		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.reload();
+		AnimationStore.MENU_FIRE.reload();
+		AnimationStore.MENU_LIGHT.reload();
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		//g.drawImage(ImageStore.COMPANY_LOGO.getImage(), 0, 0);
-		AnimationStore.MENU_ANIMATION.getAnimation().draw(0, 0);
-		//menuAnimation.draw();
-		//g.drawImage(ImageStore.BACKGROUND_MENU_STATIC.getImage(), 0, 0);
-		
-		// g.setDrawMode(Graphics.MODE_COLOR_MULTIPLY);
-
-		// g.drawImage(ImageStore.TEST.getImage(), 0, 0);
-
-		// g.setDrawMode(Graphics.MODE_NORMAL);
+		ImageStore.BACKGROUND_MENU_STATIC.getImage().draw();
+		AnimationStore.MENU_FIRE.getAnimation().draw();
+		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
+		AnimationStore.MENU_LIGHT.getAnimation().draw();
+		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 		
 	}
 
@@ -40,7 +57,9 @@ public class StateMainMenu extends BasicGameState {
 			throws SlickException {
 		Input input = gc.getInput();
 		if(input.isKeyDown(Input.KEY_0)){
-			
+			setResolution(800, 600, gc, sbg);
+		}else if(input.isKeyDown(Input.KEY_1)){
+			AnimationStore.MENU_ANIMATION.reload();
 		}
 		// TODO Auto-generated method stub
 
@@ -49,6 +68,16 @@ public class StateMainMenu extends BasicGameState {
 	public void setResolution(int newResWidth, int newResHeight,
 			GameContainer gc, StateBasedGame sbg) throws SlickException{
 		Game.appgc.setDisplayMode(newResWidth, newResHeight, true);
+		ArrayList<AnimationStore> as = new ArrayList<AnimationStore>();
+		Collections.addAll(as, AnimationStore.values());
+		for(int i = 0; i < as.size(); i++){
+			as.get(i).reload();
+		}
+		ArrayList<ImageStore> is = new ArrayList<ImageStore>();
+		Collections.addAll(is, ImageStore.values());
+		for(int i = 0; i < is.size(); i++){
+			is.get(i).reload();
+		}
 		init(gc, sbg);
 	}
 	
