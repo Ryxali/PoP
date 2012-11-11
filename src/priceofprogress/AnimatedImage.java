@@ -9,7 +9,13 @@ public class AnimatedImage extends Animation {
 	private String path;
 	private String fileName;
 	private String fileEnding;
-
+	private int durs[];
+	/**
+	 * 
+	 */
+	public AnimatedImage(){
+		//super();
+	}
 	public AnimatedImage(String path, String fileName, String fileEnding,
 			int numImgs, int dur, boolean autoUpdate) {
 		super(fetchImages(path, fileName, fileEnding, numImgs), dur, autoUpdate);

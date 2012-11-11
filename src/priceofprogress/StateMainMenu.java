@@ -19,16 +19,6 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		ArrayList <AnimationStore> animgs = new ArrayList<AnimationStore>();
-		Collections.addAll(animgs, AnimationStore.values());
-		for(int i = 0; i < animgs.size(); i++){
-			animgs.get(i).unload();
-		}
-		ArrayList <ImageStore> imgs = new ArrayList<ImageStore>();
-		Collections.addAll(imgs, ImageStore.values());
-		for(int i = 0; i < imgs.size(); i++){
-			imgs.get(i).unload();
-		}
 		loadResources();
 		//menuAnimation = new AnimatedImage("res/img/MenuAnimation/", "Menu", ".png", 1, 20, true);
 		
@@ -39,6 +29,14 @@ public class StateMainMenu extends BasicGameState {
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.reload();
 		AnimationStore.MENU_FIRE.reload();
 		AnimationStore.MENU_LIGHT.reload();
+	}
+	
+	private void unloadResources(){
+		ImageStore.BACKGROUND_MENU_STATIC.unload();
+		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
+		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();
+		AnimationStore.MENU_FIRE.unload();
+		AnimationStore.MENU_LIGHT.unload();
 	}
 
 	@Override
