@@ -3,29 +3,63 @@ package priceofprogress;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
+/**
+ * <p>The storage for Animations in the game. These, along with
+ * the images is initially not loaded to save starting time.</p>
+ * 
+ * <p>You should also clone the animations when using it on 
+ * multiple instances (e.g. creatures) to prevent them from
+ * walking in unison.</p>
+ * @author Niklas Lindblad
+ *
+ */
 public enum AnimationStore {
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
 	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true);
 	
-	
+	/**
+	 * The AnimatedImage object of the animation.
+	 */
 	private AnimatedImage anim;
+	/**
+	 * The duration of each frame.
+	 */
 	private int dur;
+	/**
+	 * The number of frames
+	 */
 	private byte frames;
-	private String filePath;
-	private String fileName;
-	private String fileEnding;
+	/**
+	 * The location of the images
+	 */
+	private final String filePath;
+	/**
+	 * the file name
+	 */
+	private final String fileName;
+	/**
+	 * .png in most cases.
+	 */
+	private final String fileEnding;
+	/**
+	 * Used for checking if the animation is being looped
+	 * automatically.
+	 */
 	private boolean autoRefresh;
-	
+	/**
+	 * Self explanatory builder of the enums. Does nothing special.
+	 * @param anim
+	 * @param filePath
+	 * @param fileName
+	 * @param fileEnding
+	 * @param frames
+	 * @param dur
+	 * @param autoRefresh
+	 */
 	private AnimationStore(AnimatedImage anim, String filePath, String fileName, String fileEnding, int frames, int dur, boolean autoRefresh) {
-		this.anim = anim;
-		//filePath = anim.getPath();
-		//fileName = anim.getFileName();
-		//fileEnding = anim.getFileEnding();
-		//frames = (byte) anim.getFrameCount();
-		//dur = anim.getDurations();
+		this.anim = anim;;
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.fileEnding = fileEnding;
@@ -33,13 +67,23 @@ public enum AnimationStore {
 		this.dur = dur;
 		this.autoRefresh = autoRefresh;
 	}
+	/**
+	 * 
+	 * @return true if the animation is looped automatically.
+	 */
 	public boolean isAutoRefresh(){
 		return autoRefresh;
 	}
-	
+	/**
+	 * Reloads the animation into the memory, fetching the image
+	 * from disk.
+	 */
 	public void reload(){
 		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, true);
 	}
+	/**
+	 * Frees up space by removing the pointers to the animation.
+	 */
 	public void unload(){
 		anim = null;
 	}

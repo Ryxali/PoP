@@ -24,7 +24,7 @@ public class StateMainMenu extends BasicGameState {
 		
 	}
 	private void loadResources(){
-		ImageStore.BACKGROUND_MENU_STATIC.reload();
+		ImageStore.BACKGROUND_MENU_MAIN_STATIC.reload();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.reload();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.reload();
 		AnimationStore.MENU_FIRE.reload();
@@ -32,7 +32,7 @@ public class StateMainMenu extends BasicGameState {
 	}
 	
 	private void unloadResources(){
-		ImageStore.BACKGROUND_MENU_STATIC.unload();
+		ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();
 		AnimationStore.MENU_FIRE.unload();
@@ -42,7 +42,7 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		ImageStore.BACKGROUND_MENU_STATIC.getImage().draw();
+		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
