@@ -48,6 +48,7 @@ public enum AnimationStore {
 	 * automatically.
 	 */
 	private boolean autoRefresh;
+	
 	/**
 	 * Self explanatory builder of the enums. Does nothing special.
 	 * @param anim
@@ -67,6 +68,7 @@ public enum AnimationStore {
 		this.dur = dur;
 		this.autoRefresh = autoRefresh;
 	}
+	
 	/**
 	 * 
 	 * @return true if the animation is looped automatically.
@@ -74,6 +76,7 @@ public enum AnimationStore {
 	public boolean isAutoRefresh(){
 		return autoRefresh;
 	}
+	
 	/**
 	 * Reloads the animation into the memory, fetching the image
 	 * from disk.
@@ -81,6 +84,7 @@ public enum AnimationStore {
 	public void reload(){
 		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, true);
 	}
+	
 	/**
 	 * Frees up space by removing the pointers to the animation.
 	 */
@@ -88,7 +92,14 @@ public enum AnimationStore {
 		anim = null;
 	}
 	
-
+	/**
+	 * Used for creating and returning a set of images.
+	 * @param path
+	 * @param fileBaseName
+	 * @param fileType
+	 * @param quantity
+	 * @return
+	 */
 	private static Image[] fetchImages(String path, String fileBaseName,
 			String fileType, int quantity) {
 		Image[] imgs = new Image[quantity];
@@ -101,11 +112,19 @@ public enum AnimationStore {
 		}
 		return imgs;
 	}
-
+	
+	/**
+	 * 
+	 * @return the duration of each animation image
+	 */
 	public int getDuration() {
 		return dur;
 	}
-
+	
+	/**
+	 * 
+	 * @return returns the animation object
+	 */
 	public Animation getAnimation() {
 		return anim;
 	}

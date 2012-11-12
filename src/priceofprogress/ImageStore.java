@@ -23,21 +23,42 @@ public enum ImageStore {
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
 	BACKGROUND_MENU_SHADOW_STATIC("res/img/StaticShadow.png", null),
 	TEST("res/img/MenuLightAndShadowTestoverlay.png", null);
-	String ref;
-	Image img;
-
+	/**
+	 * The String reference to the image location on disk
+	 */
+	private final String ref;
+	/**
+	 * The image itself
+	 */
+	private Image img;
+	/**
+	 * Constructor for the enums
+	 * @param ref
+	 * @param img
+	 */
 	private ImageStore(String ref, Image img) {
 		this.img = img;
 		this.ref = ref;
 	}
-
+	
+	/**
+	 * loads the image data to ram
+	 */
 	public void reload(){
 		img = fetchImg(ref);
 	}
+	
+	/**
+	 * unloads the image data
+	 */
 	public void unload(){
 		img = null;
 	}
-
+	/**
+	 * safely fetches an image based on ref
+	 * @param ref
+	 * @return the image
+	 */
 	private static Image fetchImg(String ref) {
 		try {
 			Image i = new Image(ref);
@@ -48,11 +69,19 @@ public enum ImageStore {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * 
+	 * @return the ref of the image
+	 */
 	public String getRef() {
 		return ref;
 	}
 
+	/**
+	 * 
+	 * @return the image object
+	 */
 	public Image getImage() {
 		return img;
 	}
