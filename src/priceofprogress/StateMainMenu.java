@@ -12,24 +12,17 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class StateMainMenu extends BasicGameState {
 	public StateMainMenu(int state) {
-		
-	}
 
+	}
+	int x = 0;
+	int y = 0;
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		loadResources();
-		
+
 	}
-	private void loadResources(){
-		ImageStore.BACKGROUND_MENU_MAIN_STATIC.reload();
-		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.reload();
-		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.reload();
-		AnimationStore.MENU_FIRE.reload();
-		AnimationStore.MENU_LIGHT.reload();
-	}
-	
-	private void unloadResources(){
+
+	private void unloadResources() {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();
@@ -40,44 +33,66 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 		
+		ButtonStore.NEW_GAME.draw();
+		g.drawString(x + ", " + y, 300, 50);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
-		if(input.isKeyDown(Input.KEY_0)){
+		x = input.getMouseX();
+		y = input.getMouseY();
+		switch (checkButtons(input)) {
+		case 0:
+			break;
+		case 1:
+			sbg.enterState(State.STATE_PLAY_MAIN.getID());
+			break;
+		default:
+			break;
+		}
+
+		if (input.isKeyDown(Input.KEY_0)) {
 			setResolution(800, 600, gc, sbg);
-		}else if(input.isKeyDown(Input.KEY_1)){
+		} else if (input.isKeyDown(Input.KEY_1)) {
 			AnimationStore.MENU_ANIMATION.reload();
 		}
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	private int checkButtons(Input input) {
+		ButtonStore.NEW_GAME.buttonStateCheck(input);
+		if (ButtonStore.NEW_GAME.getState() == ButtonStore.STATE_HOVER
+				&& ButtonStore.NEW_GAME.isClicked()) {
+			return 1;
+		}
+		return 0;
+	}
+
 	public void setResolution(int newResWidth, int newResHeight,
-			GameContainer gc, StateBasedGame sbg) throws SlickException{
+			GameContainer gc, StateBasedGame sbg) throws SlickException {
 		Game.appgc.setDisplayMode(newResWidth, newResHeight, true);
 		ArrayList<AnimationStore> as = new ArrayList<AnimationStore>();
 		Collections.addAll(as, AnimationStore.values());
-		for(int i = 0; i < as.size(); i++){
+		for (int i = 0; i < as.size(); i++) {
 			as.get(i).reload();
 		}
 		ArrayList<ImageStore> is = new ArrayList<ImageStore>();
 		Collections.addAll(is, ImageStore.values());
-		for(int i = 0; i < is.size(); i++){
+		for (int i = 0; i < is.size(); i++) {
 			is.get(i).reload();
 		}
 		init(gc, sbg);
 	}
-	
-	
 
 	@Override
 	public int getID() {

@@ -17,9 +17,11 @@ import org.newdawn.slick.SlickException;
 public enum ImageStore {
 	DEFAULT("res/img/Default/Def1.png", fetchImg("res/img/Default/Def1.png")),
 	COMPANY_LOGO("res/img/companyLogo.png", null),
+	
 	BUTTON_PLAY_STANDARD("res/img/buttonPlay.png", null),
 	BUTTON_PLAY_PRESSED("res/img/buttonPlay_Pressed.png",null),
 	BUTTON_PLAY_HOVER("res/img/buttonPlay_Hover.png", null),
+	
 	BACKGROUND_MENU_MAIN_STATIC("res/img/MenuStatic.png", null),
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
 	BACKGROUND_MENU_SHADOW_STATIC("res/img/StaticShadow.png", null),
@@ -80,6 +82,13 @@ public enum ImageStore {
 	public String getRef() {
 		return ref;
 	}
+	
+	public float getImageLeftmostX(){
+		return getImage().getCenterOfRotationX()-getImage().getWidth()/2;
+	}
+	public float getImageTopmostY(){
+		return getImage().getCenterOfRotationY()-getImage().getHeight()/2;
+	}
 
 	/**
 	 * 
@@ -89,7 +98,7 @@ public enum ImageStore {
 		if(img != null){
 			return img;
 		}else{
-			return DEFAULT.img;
+			return fetchImg(ref);
 		}
 		
 	}

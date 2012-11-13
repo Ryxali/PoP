@@ -133,7 +133,8 @@ public enum AnimationStore {
 		if(anim != null){
 			return anim;
 		}else{
-			return DEFAULT.getAnimation();
+			reload();
+			return anim;
 		}
 	}
 }
