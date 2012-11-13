@@ -14,6 +14,8 @@ import org.newdawn.slick.SlickException;
  *
  */
 public enum AnimationStore {
+	DEFAULT(new AnimatedImage("res/img/Default/", "Def", ".png", 1, 1000, false),
+			"res/img/Default/", "Def", ".png", 1, 1000, false),
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
@@ -82,14 +84,16 @@ public enum AnimationStore {
 	 * from disk.
 	 */
 	public void reload(){
-		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, true);
+		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh);
 	}
 	
 	/**
 	 * Frees up space by removing the pointers to the animation.
 	 */
 	public void unload(){
-		anim = null;
+		if(!anim.equals(DEFAULT.anim)){
+			anim = null;
+		}
 	}
 	
 	/**
@@ -126,6 +130,10 @@ public enum AnimationStore {
 	 * @return returns the animation object
 	 */
 	public Animation getAnimation() {
-		return anim;
+		if(anim != null){
+			return anim;
+		}else{
+			return DEFAULT.getAnimation();
+		}
 	}
 }

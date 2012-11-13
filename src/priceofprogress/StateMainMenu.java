@@ -11,7 +11,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class StateMainMenu extends BasicGameState {
-	public AnimatedImage menuAnimation;
 	public StateMainMenu(int state) {
 		
 	}
@@ -20,7 +19,6 @@ public class StateMainMenu extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		loadResources();
-		//menuAnimation = new AnimatedImage("res/img/MenuAnimation/", "Menu", ".png", 1, 20, true);
 		
 	}
 	private void loadResources(){

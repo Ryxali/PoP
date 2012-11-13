@@ -15,6 +15,7 @@ import org.newdawn.slick.SlickException;
  *
  */
 public enum ImageStore {
+	DEFAULT("res/img/Default/Def1.png", fetchImg("res/img/Default/Def1.png")),
 	COMPANY_LOGO("res/img/companyLogo.png", null),
 	BUTTON_PLAY_STANDARD("res/img/buttonPlay.png", null),
 	BUTTON_PLAY_PRESSED("res/img/buttonPlay_Pressed.png",null),
@@ -52,7 +53,9 @@ public enum ImageStore {
 	 * unloads the image data
 	 */
 	public void unload(){
-		img = null;
+		if(!img.equals(DEFAULT.img)){
+			img = null;
+		}
 	}
 	/**
 	 * safely fetches an image based on ref
@@ -83,6 +86,11 @@ public enum ImageStore {
 	 * @return the image object
 	 */
 	public Image getImage() {
-		return img;
+		if(img != null){
+			return img;
+		}else{
+			return DEFAULT.img;
+		}
+		
 	}
 }
