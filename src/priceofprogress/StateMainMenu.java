@@ -22,7 +22,7 @@ public class StateMainMenu extends BasicGameState {
 
 	}
 
-	private void unloadResources() {
+	private void unloadUsedResources() {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();

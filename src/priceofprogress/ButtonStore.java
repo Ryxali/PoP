@@ -66,8 +66,11 @@ public enum ButtonStore {
 	}
 	
 	public void buttonStateCheck(Input input){
-		if(getButton().getImageLeftmostX() >= input.getMouseX() &&
-				getButton().getImageLeftmostX() + getImage().getWidth() <= input.getMouseX()){
+		if(xPos <= input.getMouseX() &&
+				input.getMouseX() >= xPos + getImage().getWidth() &&
+				yPos <= input.getMouseY() &&
+				input.getMouseY() <= yPos){
+			System.out.println("!");
 			if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
 				state = 2;
 				clicked = true;
