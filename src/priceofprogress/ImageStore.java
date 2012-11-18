@@ -55,7 +55,7 @@ public enum ImageStore {
 	 * unloads the image data
 	 */
 	public void unload(){
-		if(!img.equals(DEFAULT.img)){
+		if(img != DEFAULT.img){
 			img = null;
 		}
 	}

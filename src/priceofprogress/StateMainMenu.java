@@ -19,6 +19,7 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		
 
 	}
 
@@ -33,15 +34,20 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
+		ButtonStore.NEW_GAME.draw();
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 		
-		ButtonStore.NEW_GAME.draw();
+		
 		g.drawString(x + ", " + y, 300, 50);
+	}
+	
+	private void enterState(StateBasedGame sbg, int state){
+		unloadUsedResources();
+		sbg.enterState(state);
 	}
 
 	@Override
@@ -54,7 +60,7 @@ public class StateMainMenu extends BasicGameState {
 		case 0:
 			break;
 		case 1:
-			sbg.enterState(State.STATE_PLAY_MAIN.getID());
+			enterState(sbg, State.STATE_PLAY_MAIN.getID());
 			break;
 		default:
 			break;
