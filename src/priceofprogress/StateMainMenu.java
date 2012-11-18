@@ -16,6 +16,8 @@ public class StateMainMenu extends BasicGameState {
 	}
 	int x = 0;
 	int y = 0;
+	
+	private int nextState = 0;
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -35,14 +37,23 @@ public class StateMainMenu extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
+		AnimationStore.MENU_CLUTTER.getAnimation().draw();
 		ButtonStore.NEW_GAME.draw();
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 		
+		stateChangeCheck(sbg);
 		
 		g.drawString(x + ", " + y, 300, 50);
+	}
+	
+	private void stateChangeCheck(StateBasedGame sbg){
+		if(AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER.getAnimation().getFrameCount()-1){
+			enterState(sbg, nextState);
+			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(false);
+		}
 	}
 	
 	private void enterState(StateBasedGame sbg, int state){
@@ -60,14 +71,16 @@ public class StateMainMenu extends BasicGameState {
 		case 0:
 			break;
 		case 1:
-			enterState(sbg, State.STATE_PLAY_MAIN.getID());
+			nextState = State.STATE_PLAY_MAIN.getID();
+			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
 			break;
 		default:
 			break;
 		}
 
 		if (input.isKeyDown(Input.KEY_0)) {
-			setResolution(800, 600, gc, sbg);
+			//setResolution(800, 600, gc, sbg);
+			AnimationStore.MENU_CLUTTER.getAnimation().update(5);
 		} else if (input.isKeyDown(Input.KEY_1)) {
 			AnimationStore.MENU_ANIMATION.reload();
 		}

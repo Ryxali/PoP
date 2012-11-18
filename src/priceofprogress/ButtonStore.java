@@ -7,7 +7,7 @@ public enum ButtonStore {
 	NEW_GAME(ImageStore.BUTTON_PLAY_STANDARD, 
 			ImageStore.BUTTON_PLAY_HOVER, 
 			ImageStore.BUTTON_PLAY_PRESSED,
-			500, 500);
+			250, 300);
 	
 	private final ImageStore imgIdle;
 	private final ImageStore imgHover;

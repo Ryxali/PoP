@@ -18,9 +18,9 @@ public enum ImageStore {
 	DEFAULT("res/img/Default/Def1.png", fetchImg("res/img/Default/Def1.png")),
 	COMPANY_LOGO("res/img/companyLogo.png", null),
 	
-	BUTTON_PLAY_STANDARD("res/img/buttonPlay.png", null),
-	BUTTON_PLAY_PRESSED("res/img/buttonPlay_Pressed.png",null),
-	BUTTON_PLAY_HOVER("res/img/buttonPlay_Hover.png", null),
+	BUTTON_PLAY_STANDARD("res/img/NewGameButton/NewGameIdle.png", null),
+	BUTTON_PLAY_PRESSED("res/img/NewGameButton/NewGameClick.png",null),
+	BUTTON_PLAY_HOVER("res/img/NewGameButton/NewGameHover.png", null),
 	
 	BACKGROUND_MENU_MAIN_STATIC("res/img/MenuStatic.png", null),
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
@@ -69,10 +69,9 @@ public enum ImageStore {
 			Image i = new Image(ref);
 			float[] f = Game.getScales();
 			return i.getScaledCopy((int)(i.getWidth()*f[0]), (int)(i.getHeight()*f[1]));
-		} catch (SlickException e) {
-			e.printStackTrace();
+		} catch(Exception e){
+			return DEFAULT.getImage();
 		}
-		return null;
 	}
 	
 	/**
