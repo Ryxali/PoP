@@ -4,10 +4,22 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
 public enum ButtonStore {
-	NEW_GAME(ImageStore.BUTTON_PLAY_STANDARD, 
+	NEW_GAME(ImageStore.BUTTON_PLAY_IDLE, 
 			ImageStore.BUTTON_PLAY_HOVER, 
 			ImageStore.BUTTON_PLAY_PRESSED,
-			250, 300);
+			250, 335),
+	LOAD_GAME(ImageStore.BUTTON_LOADGAME_IDLE,
+			ImageStore.BUTTON_LOADGAME_HOVER,
+			ImageStore.BUTTON_LOADGAME_PRESSED,
+			496, 604),
+	OPTIONS(ImageStore.BUTTON_OPTIONS_IDLE,
+			ImageStore.BUTTON_OPTIONS_HOVER,
+			ImageStore.BUTTON_OPTIONS_PRESSED,
+			950, 385),
+	EXIT(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			1570, 445);
 	
 	private final ImageStore imgIdle;
 	private final ImageStore imgHover;
@@ -31,15 +43,18 @@ public enum ButtonStore {
 	}
 	
 	public void draw(){
-		getImage().draw(xPos, yPos);
+		float [] f = Game.getScales();
+		getImage().draw((int)(xPos * f[0]) , (int)(yPos * f[1]));
 	}
 	
 	public int getX(){
-		return xPos;
+		float [] f = Game.getScales();
+		return (int)(xPos * f[0]);
 	}
 	
 	public int getY(){
-		return yPos;
+		float [] f = Game.getScales();
+		return (int)(yPos * f[1]);
 	}
 	
 	public Image getImage(){
@@ -68,10 +83,10 @@ public enum ButtonStore {
 	public void buttonStateCheck(Input input){
 		int mX = input.getMouseX();
 		int mY = input.getMouseY();
-		if(xPos <= mX &&
-				mX <= xPos + getImage().getWidth() &&
-				yPos <= mY &&
-				mY <= yPos + getImage().getHeight()){
+		if(getX() <= mX &&
+				mX <= getX() + getImage().getWidth() &&
+				getY() <= mY &&
+				mY <= getY() + getImage().getHeight()){
 			if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)){
 				state = 2;
 				clicked = true;

@@ -139,7 +139,7 @@ public class Game extends StateBasedGame {
 		try {
 			appgc = new AppGameContainer(new Game(GAME_NAME));
 			optionsData = loadOptions();
-			appgc.setTargetFrameRate(60);
+			//appgc.setTargetFrameRate(60);
 			if (optionsData.contains("SizeX:")
 					&& optionsData.contains("SizeY:")) {
 				appgc.setDisplayMode(Integer.parseInt(optionsData

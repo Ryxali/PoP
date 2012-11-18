@@ -38,7 +38,12 @@ public class StateMainMenu extends BasicGameState {
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_CLUTTER.getAnimation().draw();
+		
 		ButtonStore.NEW_GAME.draw();
+		ButtonStore.LOAD_GAME.draw();
+		ButtonStore.OPTIONS.draw();
+		ButtonStore.EXIT.draw();
+		
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
@@ -58,6 +63,9 @@ public class StateMainMenu extends BasicGameState {
 	
 	private void enterState(StateBasedGame sbg, int state){
 		unloadUsedResources();
+		if(state == 9001){
+			System.exit(0);
+		}
 		sbg.enterState(state);
 	}
 
@@ -72,6 +80,14 @@ public class StateMainMenu extends BasicGameState {
 			break;
 		case 1:
 			nextState = State.STATE_PLAY_MAIN.getID();
+			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			nextState = 9001;
 			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
 			break;
 		default:
@@ -90,9 +106,21 @@ public class StateMainMenu extends BasicGameState {
 
 	private int checkButtons(Input input) {
 		ButtonStore.NEW_GAME.buttonStateCheck(input);
+		ButtonStore.LOAD_GAME.buttonStateCheck(input);
+		ButtonStore.OPTIONS.buttonStateCheck(input);
+		ButtonStore.EXIT.buttonStateCheck(input);
 		if (ButtonStore.NEW_GAME.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.NEW_GAME.isClicked()) {
 			return 1;
+		}else if(ButtonStore.LOAD_GAME.getState() == ButtonStore.STATE_HOVER
+				&& ButtonStore.OPTIONS.isClicked()){
+			return 2;
+		}else if(ButtonStore.OPTIONS.getState() == ButtonStore.STATE_HOVER
+				&& ButtonStore.OPTIONS.isClicked()){
+			return 3;
+		}else if(ButtonStore.EXIT.getState() == ButtonStore.STATE_HOVER
+				&& ButtonStore.EXIT.isClicked()){
+			return 4;
 		}
 		return 0;
 	}
