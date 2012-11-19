@@ -7,7 +7,7 @@ public enum ButtonStore {
 	NEW_GAME(ImageStore.BUTTON_PLAY_IDLE, 
 			ImageStore.BUTTON_PLAY_HOVER, 
 			ImageStore.BUTTON_PLAY_PRESSED,
-			250, 335),
+			247, 333),
 	LOAD_GAME(ImageStore.BUTTON_LOADGAME_IDLE,
 			ImageStore.BUTTON_LOADGAME_HOVER,
 			ImageStore.BUTTON_LOADGAME_PRESSED,
@@ -15,11 +15,11 @@ public enum ButtonStore {
 	OPTIONS(ImageStore.BUTTON_OPTIONS_IDLE,
 			ImageStore.BUTTON_OPTIONS_HOVER,
 			ImageStore.BUTTON_OPTIONS_PRESSED,
-			950, 385),
+			943, 385),
 	EXIT(ImageStore.BUTTON_EXIT_IDLE,
 			ImageStore.BUTTON_EXIT_HOVER,
 			ImageStore.BUTTON_EXIT_PRESSED,
-			1570, 445);
+			1597, 453);
 	
 	private final ImageStore imgIdle;
 	private final ImageStore imgHover;

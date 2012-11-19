@@ -22,12 +22,39 @@ public class Game extends StateBasedGame {
 	public static final String GAME_NAME = "Price of Progress";
 	private static AppGameContainer appgc;
 	public static ArrayList<String> optionsData;
+	private boolean phasing = true;
 
 	public Game(String gameName) {
 		super(gameName);
 		addStates();
-
 	}
+	
+	public void setPhasing(boolean phase) {
+		phasing = phase;
+
+		if (phase) {
+			AnimationStore.MENU_CLUTTER.getAnimation()
+					.setCurrentFrame(
+							AnimationStore.MENU_CLUTTER.getAnimation()
+									.getFrameCount() - 1);
+
+			AnimationStore.MENU_CLUTTER.getAnimation().stopAt(0);
+
+		} else {
+			AnimationStore.MENU_CLUTTER.getAnimation().setCurrentFrame(0);
+			AnimationStore.MENU_CLUTTER.getAnimation()
+					.stopAt(AnimationStore.MENU_CLUTTER.getAnimation()
+							.getFrameCount() - 1);
+
+		}
+		AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
+		AnimationStore.MENU_CLUTTER.getAnimation().start();
+	}
+	
+	public boolean getPhasing(){
+		return phasing;
+	}
+	
 	public static AppGameContainer getGameContainer(){
 		return appgc;
 	}

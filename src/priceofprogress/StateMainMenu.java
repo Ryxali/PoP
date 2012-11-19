@@ -18,13 +18,13 @@ public class StateMainMenu extends BasicGameState {
 
 	int x = 0;
 	int y = 0;
-
+	
 	private int nextState = 0;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-
+		((Game) sbg).setPhasing(true);
 	}
 
 	private void unloadUsedResources() {
@@ -42,28 +42,35 @@ public class StateMainMenu extends BasicGameState {
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_CLUTTER.getAnimation().draw();
-
-		ButtonStore.NEW_GAME.draw();
-		ButtonStore.LOAD_GAME.draw();
-		ButtonStore.OPTIONS.draw();
-		ButtonStore.EXIT.draw();
+		if (isChangingState(sbg)) {
+			ButtonStore.NEW_GAME.draw();
+			ButtonStore.LOAD_GAME.draw();
+			ButtonStore.OPTIONS.draw();
+			ButtonStore.EXIT.draw();
+		}
 
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
 		AnimationStore.MENU_LIGHT.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 
-		stateChangeCheck(sbg);
-
 		g.drawString(x + ", " + y, 300, 50);
 	}
 
-	private void stateChangeCheck(StateBasedGame sbg) {
+	private boolean isChangingState(StateBasedGame sbg) {
+
 		if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
-				.getAnimation().getFrameCount() - 1) {
+				.getAnimation().getFrameCount()-1 && nextState != 0) {
 			enterState(sbg, nextState);
-			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(false);
+			((Game) sbg).setPhasing(true);
+			// AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(false);
+			nextState = 0;
+		} else if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == 0
+				&& nextState == 0) {
+			return true;
 		}
+		return false;
+
 	}
 
 	private void enterState(StateBasedGame sbg, int state) {
@@ -74,29 +81,23 @@ public class StateMainMenu extends BasicGameState {
 		sbg.enterState(state);
 	}
 
+	/**
+	 * true == in, false == out
+	 * 
+	 * @param phase
+	 */
+	
+
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
 		x = input.getMouseX();
 		y = input.getMouseY();
-		switch (checkButtons(input)) {
-		case 0:
-			break;
-		case 1:
-			nextState = State.STATE_PLAY_MAIN.getID();
-			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			nextState = 9001;
-			AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(true);
-			break;
-		default:
-			break;
+		int res = checkButtons(input);
+		if (res != 0) {
+			nextState = res;
+			((Game) sbg).setPhasing(false);
 		}
 
 		if (input.isKeyDown(Input.KEY_0)) {
@@ -115,16 +116,16 @@ public class StateMainMenu extends BasicGameState {
 		ButtonStore.EXIT.buttonStateCheck(input);
 		if (ButtonStore.NEW_GAME.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.NEW_GAME.isClicked()) {
-			return 1;
+			return State.STATE_PLAY_MAIN.getID();
 		} else if (ButtonStore.LOAD_GAME.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.OPTIONS.isClicked()) {
-			return 2;
+			return State.STATE_MENU_LOADGAME.getID();
 		} else if (ButtonStore.OPTIONS.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.OPTIONS.isClicked()) {
-			return 3;
+			return State.STATE_MENU_OPTIONS.getID();
 		} else if (ButtonStore.EXIT.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.EXIT.isClicked()) {
-			return 4;
+			return 9001;
 		}
 		return 0;
 	}
