@@ -3,6 +3,7 @@ package priceofprogress;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.newdawn.slick.BigImage;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -21,7 +22,6 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		
 
 	}
 
@@ -100,7 +100,6 @@ public class StateMainMenu extends BasicGameState {
 		} else if (input.isKeyDown(Input.KEY_1)) {
 			AnimationStore.MENU_ANIMATION.reload();
 		}
-		// TODO Auto-generated method stub
 
 	}
 
@@ -127,7 +126,7 @@ public class StateMainMenu extends BasicGameState {
 
 	public void setResolution(int newResWidth, int newResHeight,
 			GameContainer gc, StateBasedGame sbg) throws SlickException {
-		Game.appgc.setDisplayMode(newResWidth, newResHeight, true);
+		Game.getGameContainer().setDisplayMode(newResWidth, newResHeight, true);
 		ArrayList<AnimationStore> as = new ArrayList<AnimationStore>();
 		Collections.addAll(as, AnimationStore.values());
 		for (int i = 0; i < as.size(); i++) {

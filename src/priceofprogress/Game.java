@@ -20,7 +20,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Game extends StateBasedGame {
 
 	public static final String GAME_NAME = "Price of Progress";
-	public static AppGameContainer appgc;
+	private static AppGameContainer appgc;
 	public static ArrayList<String> optionsData;
 
 	public Game(String gameName) {
@@ -28,7 +28,9 @@ public class Game extends StateBasedGame {
 		addStates();
 
 	}
-	
+	public static AppGameContainer getGameContainer(){
+		return appgc;
+	}
 	public static float[] getScales(){
 		float [] r = {((float)appgc.getWidth()/(float)1920), ((float)appgc.getHeight()/(float)1200)};
 		return(r);
@@ -139,7 +141,7 @@ public class Game extends StateBasedGame {
 		try {
 			appgc = new AppGameContainer(new Game(GAME_NAME));
 			optionsData = loadOptions();
-			//appgc.setTargetFrameRate(60);
+			appgc.setTargetFrameRate(60);
 			if (optionsData.contains("SizeX:")
 					&& optionsData.contains("SizeY:")) {
 				appgc.setDisplayMode(Integer.parseInt(optionsData
@@ -159,7 +161,6 @@ public class Game extends StateBasedGame {
 						appgc.getScreenHeight(), true);
 				appgc.start();
 			} catch (SlickException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 

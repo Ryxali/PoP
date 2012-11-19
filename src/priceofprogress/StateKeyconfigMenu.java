@@ -32,7 +32,6 @@ public class StateKeyconfigMenu extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return State.STATE_MENU_KEYCONFIG.getID();
 	}
 }

@@ -16,7 +16,7 @@ public enum FileSaveSlot {
 	}
 	
 	public void loadData(){
-		
+		//TODO get that data loader done
 	}
 	
 	public PPWData getData(){
