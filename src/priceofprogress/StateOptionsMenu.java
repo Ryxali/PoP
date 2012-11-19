@@ -16,7 +16,13 @@ public StateOptionsMenu(int state){
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		
+		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
+		AnimationStore.MENU_CLUTTER.getAnimation().draw();
+
+		AnimationStore.MENU_FIRE.getAnimation().draw();
+		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();
+		AnimationStore.MENU_LIGHT.getAnimation().draw();
+		ImageStore.BACKGROUND_MENU_SHADOW_STATIC.getImage().draw();
 	}
 	
 	@Override
