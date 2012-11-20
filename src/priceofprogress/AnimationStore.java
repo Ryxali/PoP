@@ -14,14 +14,16 @@ import org.newdawn.slick.SlickException;
  *
  */
 public enum AnimationStore {
-	DEFAULT(new AnimatedImage("res/img/Default/", "Def", ".png", 1, 1000, false),
+	DEFAULT(new AnimatedImage("res/img/Default/", "Def", ".png", 1, 1000, false, 1),
 			"res/img/Default/", "Def", ".png", 1, 1000, false),
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
-	MENU_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, false),
+	MENU_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
 	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true);
 	
+	public static boolean DIR_FORWARD = true;
+	public static boolean DIR_REVERSE = false;
 	/**
 	 * The AnimatedImage object of the animation.
 	 */
@@ -52,6 +54,8 @@ public enum AnimationStore {
 	 */
 	private boolean autoRefresh;
 	
+	private int rev = 1;
+	
 	/**
 	 * Self explanatory builder of the enums. Does nothing special.
 	 * @param anim
@@ -71,6 +75,26 @@ public enum AnimationStore {
 		this.dur = dur;
 		this.autoRefresh = autoRefresh;
 	}
+	/**
+	 * Reconstructs the animation for looping backwards or forwards, depending on input
+	 * @param dir true for regular, false for backwards
+	 */
+	public void setDir(boolean dir){
+		if(dir){
+			rev = 1;
+		}else{
+			rev = -1;
+		}
+		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh, rev);
+	}
+	public boolean isRegularDir(){
+		if(rev == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	
 	/**
 	 * 
@@ -85,7 +109,7 @@ public enum AnimationStore {
 	 * from disk.
 	 */
 	public void reload(){
-		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh);
+		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh, rev);
 	}
 	
 	/**

@@ -24,10 +24,13 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		((Game) sbg).setPhasing(true);
+		AnimationStore.MENU_CLUTTER.reload();
+		AnimationStore.MENU_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
+		AnimationStore.MENU_CLUTTER.getAnimation().setLooping(false);
 	}
 
 	private void unloadUsedResources() {
+		//Just a check since we want to keep these animations when we go into options etc.
 		if (nextState != 3 && nextState != 2) {
 			ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
 			ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
@@ -42,7 +45,7 @@ public class StateMainMenu extends BasicGameState {
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_CLUTTER.getAnimation().draw();
-		if (isChangingState(sbg)) {
+		if (!isChangingState(sbg)) {
 			ButtonStore.NEW_GAME.draw();
 			ButtonStore.LOAD_GAME.draw();
 			ButtonStore.OPTIONS.draw();
@@ -58,19 +61,15 @@ public class StateMainMenu extends BasicGameState {
 	}
 
 	private boolean isChangingState(StateBasedGame sbg) {
-
-		if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
-				.getAnimation().getFrameCount()-1 && nextState != 0) {
-			enterState(sbg, nextState);
-			((Game) sbg).setPhasing(true);
-			// AnimationStore.MENU_CLUTTER.getAnimation().setAutoUpdate(false);
-			nextState = 0;
-		} else if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == 0
-				&& nextState == 0) {
-			return true;
+		if(AnimationStore.MENU_CLUTTER.isRegularDir()){
+			if(AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == 
+					AnimationStore.MENU_CLUTTER.getAnimation().getFrameCount()-1){
+				return false;
+			}
+		}else{
+			
 		}
-		return false;
-
+		return true;
 	}
 
 	private void enterState(StateBasedGame sbg, int state) {
@@ -97,7 +96,7 @@ public class StateMainMenu extends BasicGameState {
 		int res = checkButtons(input);
 		if (res != 0) {
 			nextState = res;
-			((Game) sbg).setPhasing(false);
+			AnimationStore.MENU_CLUTTER.setDir(true);
 		}
 
 		if (input.isKeyDown(Input.KEY_0)) {
