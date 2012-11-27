@@ -18,8 +18,7 @@ public class StateMainMenu extends BasicGameState {
 
 	int x = 0;
 	int y = 0;
-	
-	private int nextState = 0;
+
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
@@ -30,8 +29,9 @@ public class StateMainMenu extends BasicGameState {
 	}
 
 	private void unloadUsedResources() {
-		//Just a check since we want to keep these animations when we go into options etc.
-		if (nextState != 3 && nextState != 2) {
+		// Just a check since we want to keep these animations when we go into
+		// options etc.
+		if (State.getNextState() != 3 && State.getNextState() != 2) {
 			ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
 			ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
 			ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();
@@ -61,23 +61,29 @@ public class StateMainMenu extends BasicGameState {
 	}
 
 	private boolean isChangingState(StateBasedGame sbg) {
-		if(AnimationStore.MENU_CLUTTER.isRegularDir()){
-			if(AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == 
-					AnimationStore.MENU_CLUTTER.getAnimation().getFrameCount()-1){
+		if (!AnimationStore.MENU_CLUTTER.isRegularDir()) {
+			if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
+					.getAnimation().getFrameCount() - 1) {
 				return false;
 			}
-		}else{
-			
+		} else {
+			if (AnimationStore.MENU_CLUTTER.isRegularDir()) {
+				if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
+						.getAnimation().getFrameCount() - 1) {
+					AnimationStore.MENU_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
+					enterState(sbg);
+				}
+			}
 		}
 		return true;
 	}
 
-	private void enterState(StateBasedGame sbg, int state) {
+	private void enterState(StateBasedGame sbg) {
 		unloadUsedResources();
-		if (state == 9001) {
+		if (State.getNextState() == 9001) {
 			System.exit(0);
 		}
-		sbg.enterState(state);
+		State.enterState(sbg, State.getNextState());
 	}
 
 	/**
@@ -85,7 +91,6 @@ public class StateMainMenu extends BasicGameState {
 	 * 
 	 * @param phase
 	 */
-	
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
@@ -94,8 +99,8 @@ public class StateMainMenu extends BasicGameState {
 		x = input.getMouseX();
 		y = input.getMouseY();
 		int res = checkButtons(input);
-		if (res != 0) {
-			nextState = res;
+		if (res != 0 && res != State.getNextState()) {
+			State.setNextState(res);
 			AnimationStore.MENU_CLUTTER.setDir(true);
 		}
 
