@@ -31,6 +31,8 @@ public enum ImageStore {
 	BUTTON_OPTIONS_HOVER("res/img/OptionsButton/OptionsHover.png", null),
 	BUTTON_OPTIONS_PRESSED("res/img/OptionsButton/OptionsClick.png", null),
 	
+	BUTTON_SLIDER("res/img/OptionsButton/OptionsClick.png", null),
+	
 	BACKGROUND_MENU_MAIN_STATIC("res/img/MenuStatic.png", null),
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
 	BACKGROUND_MENU_SHADOW_STATIC("res/img/StaticShadow.png", null),

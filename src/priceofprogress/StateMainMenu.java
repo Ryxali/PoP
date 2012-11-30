@@ -23,9 +23,9 @@ public class StateMainMenu extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		AnimationStore.MENU_CLUTTER.reload();
-		AnimationStore.MENU_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
-		AnimationStore.MENU_CLUTTER.getAnimation().setLooping(false);
+		AnimationStore.MENU_MAIN_CLUTTER.reload();
+		AnimationStore.MENU_MAIN_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
+		AnimationStore.MENU_MAIN_CLUTTER.getAnimation().setLooping(false);
 	}
 
 	private void unloadUsedResources() {
@@ -44,12 +44,12 @@ public class StateMainMenu extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
-		AnimationStore.MENU_CLUTTER.getAnimation().draw();
+		AnimationStore.MENU_MAIN_CLUTTER.getAnimation().draw();
 		if (!isChangingState(sbg)) {
-			ButtonStore.NEW_GAME.draw();
-			ButtonStore.LOAD_GAME.draw();
-			ButtonStore.OPTIONS.draw();
-			ButtonStore.EXIT.draw();
+			ButtonStore.NEW_GAME.draw(g);
+			ButtonStore.LOAD_GAME.draw(g);
+			ButtonStore.OPTIONS.draw(g);
+			ButtonStore.EXIT.draw(g);
 		}
 
 		AnimationStore.MENU_FIRE.getAnimation().draw();
@@ -61,16 +61,16 @@ public class StateMainMenu extends BasicGameState {
 	}
 
 	private boolean isChangingState(StateBasedGame sbg) {
-		if (!AnimationStore.MENU_CLUTTER.isRegularDir()) {
-			if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
+		if (!AnimationStore.MENU_MAIN_CLUTTER.isRegularDir()) {
+			if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
 					.getAnimation().getFrameCount() - 1) {
 				return false;
 			}
 		} else {
-			if (AnimationStore.MENU_CLUTTER.isRegularDir()) {
-				if (AnimationStore.MENU_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_CLUTTER
+			if (AnimationStore.MENU_MAIN_CLUTTER.isRegularDir()) {
+				if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
 						.getAnimation().getFrameCount() - 1) {
-					AnimationStore.MENU_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
+					AnimationStore.MENU_MAIN_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
 					enterState(sbg);
 				}
 			}
@@ -101,12 +101,12 @@ public class StateMainMenu extends BasicGameState {
 		int res = checkButtons(input);
 		if (res != 0 && res != State.getNextState()) {
 			State.setNextState(res);
-			AnimationStore.MENU_CLUTTER.setDir(true);
+			AnimationStore.MENU_MAIN_CLUTTER.setDir(true);
 		}
 
 		if (input.isKeyDown(Input.KEY_0)) {
 			// setResolution(800, 600, gc, sbg);
-			AnimationStore.MENU_CLUTTER.getAnimation().update(5);
+			AnimationStore.MENU_MAIN_CLUTTER.getAnimation().update(5);
 		} else if (input.isKeyDown(Input.KEY_1)) {
 			AnimationStore.MENU_ANIMATION.reload();
 		}

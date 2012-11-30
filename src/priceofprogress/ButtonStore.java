@@ -1,5 +1,6 @@
 package priceofprogress;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
@@ -7,42 +8,78 @@ public enum ButtonStore {
 	NEW_GAME(ImageStore.BUTTON_PLAY_IDLE, 
 			ImageStore.BUTTON_PLAY_HOVER, 
 			ImageStore.BUTTON_PLAY_PRESSED,
-			247, 333),
+			247, 333, 0, null),
 	LOAD_GAME(ImageStore.BUTTON_LOADGAME_IDLE,
 			ImageStore.BUTTON_LOADGAME_HOVER,
 			ImageStore.BUTTON_LOADGAME_PRESSED,
-			496, 604),
+			496, 604, 0, null),
 	OPTIONS(ImageStore.BUTTON_OPTIONS_IDLE,
 			ImageStore.BUTTON_OPTIONS_HOVER,
 			ImageStore.BUTTON_OPTIONS_PRESSED,
-			943, 385),
+			943, 385, 0, null),
 	EXIT(ImageStore.BUTTON_EXIT_IDLE,
 			ImageStore.BUTTON_EXIT_HOVER,
 			ImageStore.BUTTON_EXIT_PRESSED,
-			1597, 453);
+			1597, 453, 0, null),
+	RESOLUTION(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			250, 300, 1, DropdownList.RESOLUTION),
+	KEY_CONFIG(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			600, 300, 0, null),
+	VOLUME_SOUND(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			600, 500, 2, null),
+	VOLUME_MUSIC(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			600, 700, 2, null);
 	
 	private final ImageStore imgIdle;
 	private final ImageStore imgHover;
 	private final ImageStore imgPressed;
+	private final int mode;
 	
 	public static final int STATE_IDLE = 0;
 	public static final int STATE_HOVER = 1;
 	public static final int STATE_PRESSED = 2;
+	
+	private static final int MODE_REGULAR = 0;
+	private static final int MODE_DROPDOWN = 1;
+	private static final int MODE_SLIDER = 2;
+	
+	private static final ImageStore SLIDER_BAR = ImageStore.BUTTON_SLIDER;
 	
 	private int state = 0;
 	private boolean clicked = false;
 	private int xPos;
 	private int yPos;
 	
-	private ButtonStore(ImageStore imgIdle, ImageStore imgHover, ImageStore imgPressed, int xPos, int yPos){
+	private DropdownList dList;
+	
+	private ButtonStore(ImageStore imgIdle, ImageStore imgHover, ImageStore imgPressed,
+			int xPos, int yPos, int mode, DropdownList dList){
 		this.imgIdle = imgIdle;
 		this.imgHover = imgHover;
 		this.imgPressed = imgPressed;
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.mode = mode;
+		this.dList = dList;
 	}
 	
-	public void draw(){
+	public void draw(Graphics g){
+		if(mode == MODE_SLIDER){
+			SLIDER_BAR.getImage().draw();
+		}else if(mode == MODE_DROPDOWN){
+			if(dList != null){
+				dList.draw(g);
+				
+			}
+		}
 		float [] f = Game.getScales();
 		getImage().draw((int)(xPos * f[0]) , (int)(yPos * f[1]));
 	}

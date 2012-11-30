@@ -19,7 +19,9 @@ public enum AnimationStore {
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
-	MENU_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
+	MENU_MAIN_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
+	MENU_OPTIONS_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
+	MENU_KEYCONFIG_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
 	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true);
 	
 	public static boolean DIR_FORWARD = true;
