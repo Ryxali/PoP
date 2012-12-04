@@ -93,7 +93,6 @@ public enum ImageStore {
 	public String getRef() {
 		return ref;
 	}
-	
 	public float getImageLeftmostX(){
 		return getImage().getCenterOfRotationX()-getImage().getWidth()/2;
 	}

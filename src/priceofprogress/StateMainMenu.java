@@ -19,7 +19,6 @@ public class StateMainMenu extends BasicGameState {
 	int x = 0;
 	int y = 0;
 
-
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -40,6 +39,9 @@ public class StateMainMenu extends BasicGameState {
 		}
 	}
 
+	/**
+	 * Renders the background, buttons etc.
+	 */
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
@@ -60,6 +62,15 @@ public class StateMainMenu extends BasicGameState {
 		g.drawString(x + ", " + y, 300, 50);
 	}
 
+	/**
+	 * A check based on the menu clutters fading animation. Note that this
+	 * method will change state automatically on it's own.
+	 * 
+	 * @param sbg
+	 *            the game itself
+	 * @return true if it is about fade out, false if it's not
+	 * 
+	 */
 	private boolean isChangingState(StateBasedGame sbg) {
 		if (!AnimationStore.MENU_MAIN_CLUTTER.isRegularDir()) {
 			if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
@@ -67,40 +78,42 @@ public class StateMainMenu extends BasicGameState {
 				return false;
 			}
 		} else {
-			if (AnimationStore.MENU_MAIN_CLUTTER.isRegularDir()) {
-				if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
-						.getAnimation().getFrameCount() - 1) {
-					AnimationStore.MENU_MAIN_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
-					enterState(sbg);
-				}
+			if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
+					.getAnimation().getFrameCount() - 1) {
+				AnimationStore.MENU_MAIN_CLUTTER
+						.setDir(AnimationStore.DIR_REVERSE);
+				enterState(sbg);
 			}
 		}
 		return true;
 	}
 
+	/**
+	 * Jumps to warp 5 towards the next state
+	 * 
+	 * @param sbg
+	 *            the game itself
+	 */
 	private void enterState(StateBasedGame sbg) {
 		unloadUsedResources();
-		if (State.getNextState() == 9001) {
+		if (State.getNextState() == State.EXIT_GAME) {
 			System.exit(0);
 		}
 		State.enterState(sbg, State.getNextState());
 	}
-
 	/**
-	 * true == in, false == out
-	 * 
-	 * @param phase
+	 * This handles all actions the player takes while in the main menu,
+	 * so everything button state changes go here.
 	 */
-
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Input input = gc.getInput();
 		x = input.getMouseX();
 		y = input.getMouseY();
-		int res = checkButtons(input);
-		if (res != 0 && res != State.getNextState()) {
-			State.setNextState(res);
+		int nState = checkButtonsAndSetNextState(input);
+		if (nState != 0 && nState != State.getNextState()) {
+			State.setNextState(nState);
 			AnimationStore.MENU_MAIN_CLUTTER.setDir(true);
 		}
 
@@ -112,8 +125,13 @@ public class StateMainMenu extends BasicGameState {
 		}
 
 	}
-
-	private int checkButtons(Input input) {
+	/**
+	 * checks all active buttons if they're being hovered or clicked.
+	 * @param input the current user input
+	 * @return possibly the next state the game should go into. Either
+	 * that or 0 for nothing or 9001 for exiting the game.
+	 */
+	private int checkButtonsAndSetNextState(Input input) {
 		ButtonStore.NEW_GAME.buttonStateCheck(input);
 		ButtonStore.LOAD_GAME.buttonStateCheck(input);
 		ButtonStore.OPTIONS.buttonStateCheck(input);
@@ -129,11 +147,13 @@ public class StateMainMenu extends BasicGameState {
 			return State.STATE_MENU_OPTIONS.getID();
 		} else if (ButtonStore.EXIT.getState() == ButtonStore.STATE_HOVER
 				&& ButtonStore.EXIT.isClicked()) {
-			return 9001;
+			return State.EXIT_GAME;
 		}
 		return 0;
 	}
-
+	/**
+	 * This need be moved elsewhere...
+	 */
 	public void setResolution(int newResWidth, int newResHeight,
 			GameContainer gc, StateBasedGame sbg) throws SlickException {
 		Game.getGameContainer().setDisplayMode(newResWidth, newResHeight, true);
@@ -149,7 +169,6 @@ public class StateMainMenu extends BasicGameState {
 		}
 		init(gc, sbg);
 	}
-
 	@Override
 	public int getID() {
 		return State.STATE_MENU_MAIN.getID();

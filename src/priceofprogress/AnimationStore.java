@@ -19,12 +19,18 @@ public enum AnimationStore {
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
-	MENU_MAIN_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
-	MENU_OPTIONS_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
-	MENU_KEYCONFIG_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 100, true),
+	MENU_MAIN_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 80, true),
+	MENU_OPTIONS_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 80, true),
+	MENU_KEYCONFIG_CLUTTER(null, "res/img/BlueprintClutter/", "Blueprintclutter1_", ".png", 6, 80, true),
 	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true);
 	
-	public static boolean DIR_FORWARD = true;
+	/**
+	 * The regular animation order
+	 */
+	public static boolean DIR_REGULAR = true;
+	/**
+	 * The reverse animation order
+	 */
 	public static boolean DIR_REVERSE = false;
 	/**
 	 * The AnimatedImage object of the animation.
@@ -89,6 +95,10 @@ public enum AnimationStore {
 		}
 		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh, rev);
 	}
+	/**
+	 * 
+	 * @return true if it's animation is run regularly, false if it's in reverse
+	 */
 	public boolean isRegularDir(){
 		if(rev == 1){
 			return true;
@@ -124,7 +134,7 @@ public enum AnimationStore {
 	}
 	
 	/**
-	 * Used for creating and returning a set of images.
+	 * Used for creating and returning an array of images.
 	 * @param path
 	 * @param fileBaseName
 	 * @param fileType

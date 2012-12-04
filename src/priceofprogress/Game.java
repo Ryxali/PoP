@@ -22,21 +22,34 @@ public class Game extends StateBasedGame {
 	public static final String GAME_NAME = "Price of Progress";
 	private static AppGameContainer appgc;
 	public static ArrayList<String> optionsData;
-	private boolean phasing = true;
-
+	/**
+	 * creates a game
+	 * @param gameName
+	 */
 	public Game(String gameName) {
 		super(gameName);
 		addStates();
 	}
-	
+	/**
+	 * mostly used for fetching the current graphics options
+	 * @return the game container of this game
+	 */
 	public static AppGameContainer getGameContainer(){
 		return appgc;
 	}
+	/**
+	 * 
+	 * @return an array of the width and height scales described as a decimal
+	 */
 	public static float[] getScales(){
 		float [] r = {((float)appgc.getWidth()/(float)1920), ((float)appgc.getHeight()/(float)1200)};
 		return(r);
 	}
-
+	/**
+	 * 
+	 * @param name the option name
+	 * @return an integer matching <b>name</b>
+	 */
 	public static int fetchIntegerFromOptions(String name) {
 		if (optionsData.contains(name)) {
 			return Integer
@@ -45,6 +58,11 @@ public class Game extends StateBasedGame {
 			return (Integer) null;
 		}
 	}
+	/**
+	 * 
+	 * @param name the option name
+	 * @return a string matching <b>name</b>
+	 */
 	public static String fetchStringFromOptions(String name){
 		if(optionsData.contains(name)){
 			return optionsData.get(optionsData.indexOf(name)+1);
@@ -52,6 +70,11 @@ public class Game extends StateBasedGame {
 			return null;
 		}
 	}
+	/**
+	 * 
+	 * @param name the option name
+	 * @return a boolean matching <b>name</b>
+	 */
 	public static Boolean fetchBooleanFromOptions(String name){
 		if(optionsData.contains(name)){
 			return stringToBoolean(optionsData.get(optionsData.indexOf(name)+1));
@@ -59,7 +82,10 @@ public class Game extends StateBasedGame {
 			return null;
 		}
 	}
-
+	/**
+	 * loads the option values
+	 * @return
+	 */
 	private static ArrayList<String> loadOptions() {
 		ArrayList<String> res = new ArrayList<String>();
 		try {
@@ -68,16 +94,6 @@ public class Game extends StateBasedGame {
 			while (indata.hasNext()) {
 				res.add(indata.next());
 			}
-			/*
-			 * winSizeX = Integer.parseInt(indata.next()); winSizeY =
-			 * Integer.parseInt(indata.next()); fullScreen =
-			 * Boolean.parseBoolean(indata.next()); moveLeft = indata.nextInt();
-			 * moveRight = indata.nextInt(); jump = indata.nextInt(); fire =
-			 * indata.nextInt(); System.out.println(fire); interract =
-			 * indata.nextInt();
-			 * soundHandler.setVolume(Float.valueOf(indata.next()));
-			 * soundHandler.setSoundVolume(Float.valueOf(indata.next()));
-			 */
 			indata.close();
 
 		} catch (FileNotFoundException ex) {
@@ -97,7 +113,6 @@ public class Game extends StateBasedGame {
 		try {
 			PrintWriter utdata = new PrintWriter(new BufferedWriter(
 					new FileWriter("options.txt")));
-
 			utdata.println("SizeX: " + appgc.getScreenWidth());
 			utdata.println("SizeY: " + appgc.getScreenHeight());
 			utdata.println("FullScreen: " + true);
@@ -114,7 +129,9 @@ public class Game extends StateBasedGame {
 		}
 
 	}
-
+	/**
+	 * adds the game states to the game
+	 */
 	private void addStates() {
 		// this.addState(new StateMainMenu(States.STATE_MENU_MAIN.getID()));
 		ArrayList<State> states = new ArrayList<State>();
@@ -123,7 +140,11 @@ public class Game extends StateBasedGame {
 			this.addState(states.get(i).getState());
 		}
 	}
-
+	/**
+	 * 
+	 * @param line
+	 * @return
+	 */
 	private static Boolean stringToBoolean(String line) {
 		if (line.equals("true")) {
 			return true;
@@ -135,6 +156,7 @@ public class Game extends StateBasedGame {
 	}
 
 	/**
+	 * sets up the game container and sets it sailin'
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -168,7 +190,10 @@ public class Game extends StateBasedGame {
 		}
 	
 	}
-
+	/**
+	 * Initiates all the states of the game and causes the game
+	 * to enter the main menu state.
+	 */
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		ArrayList<State> states = new ArrayList<State>();
