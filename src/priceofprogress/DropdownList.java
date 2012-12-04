@@ -7,23 +7,30 @@ import java.util.Collections;
 import org.newdawn.slick.Graphics;
 
 public enum DropdownList {
-	RESOLUTION(strPack("", ""), ButtonStore.RESOLUTION, ImageStore.BUTTON_SLIDER);
-	
+	RESOLUTION(strPack("1990x1321", "MEGAPLOX"), ImageStore.BUTTON_LIST_ITEM_RESOLUTION);
+	/**
+	 * The List items for the dropdown list
+	 */
 	private String[] items;
+	/**
+	 * The background image used as a frame for the list items.
+	 * This will loop according to amount of list items.
+	 */
 	private final ImageStore listBg;
-	private ButtonStore srcButton;
-	
-	private DropdownList(String[] items, ButtonStore srcButton, ImageStore listBg){
+	/**
+	 * 
+	 * @param items The list items
+	 * @param listBg
+	 */
+	private DropdownList(String[] items, ImageStore listBg){
 		this.items = items;
 		this.listBg = listBg;
-		this.srcButton = srcButton;
 	}
 	
 	
 	
 	private static String[] strPack(String str1, String... strings){
-		String [] str;
-		str = Arrays.copyOf(strings, strings.length+1);
+		String [] str = Arrays.copyOf(strings, strings.length+1);
 		str[str.length-1] = str1;
 		return str;
 	}
@@ -32,12 +39,12 @@ public enum DropdownList {
 		return items;
 	}
 	
-	public void draw(Graphics g){
-		int xDraw = srcButton.getX()+srcButton.getImage().getWidth();
+	public void draw(Graphics g, ButtonStore b){
+		int xDraw = b.getX()+b.getImage().getWidth();
 		for(int i = 0; i < items.length; i++){
-			int yDraw = srcButton.getY() + listBg.getImage().getHeight()*i;
+			int yDraw = b.getY() + listBg.getImage().getHeight()*i;
 			listBg.getImage().draw(xDraw, yDraw);
-			g.drawString(items[i], xDraw +listBg.getImage().getWidth()/2, 
+			g.drawString(items[i], xDraw +listBg.getImage().getWidth()/4, 
 					yDraw + listBg.getImage().getHeight()/2);
 		}
 	}

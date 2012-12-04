@@ -25,8 +25,11 @@ public class StateOptionsMenu extends BasicGameState {
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
 		AnimationStore.MENU_OPTIONS_CLUTTER.getAnimation().draw();
-		if(isChangingState(sbg)){
-			
+		if(!isChangingState(sbg)){
+			ButtonStore.RESOLUTION.draw(g);
+			ButtonStore.KEY_CONFIG.draw(g);
+			ButtonStore.VOLUME_MUSIC.draw(g);
+			ButtonStore.VOLUME_SOUND.draw(g);
 		}
 		AnimationStore.MENU_FIRE.getAnimation().draw();
 		ImageStore.BACKGROUND_MENU_LIGHT_STATIC.getImage().draw();

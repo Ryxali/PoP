@@ -36,7 +36,11 @@ public enum ButtonStore {
 	VOLUME_MUSIC(ImageStore.BUTTON_EXIT_IDLE,
 			ImageStore.BUTTON_EXIT_HOVER,
 			ImageStore.BUTTON_EXIT_PRESSED,
-			600, 700, 2, null);
+			600, 700, 2, null),
+	BACK(ImageStore.BUTTON_EXIT_IDLE,
+			ImageStore.BUTTON_EXIT_HOVER,
+			ImageStore.BUTTON_EXIT_PRESSED,
+			900, 300, 0, null);
 	
 	private final ImageStore imgIdle;
 	private final ImageStore imgHover;
@@ -76,7 +80,7 @@ public enum ButtonStore {
 			SLIDER_BAR.getImage().draw();
 		}else if(mode == MODE_DROPDOWN){
 			if(dList != null){
-				dList.draw(g);
+				dList.draw(g, this);
 				
 			}
 		}
