@@ -18,6 +18,8 @@ import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Game extends StateBasedGame {
+	public static long delta = 0;
+	public static long lastRunTime = 0;
 
 	public static final String GAME_NAME = "Price of Progress";
 	private static AppGameContainer appgc;
@@ -36,6 +38,13 @@ public class Game extends StateBasedGame {
 	 */
 	public static AppGameContainer getGameContainer(){
 		return appgc;
+	}
+	public static void updateDelta(long curRunTime){
+		delta = curRunTime - lastRunTime;
+		lastRunTime = curRunTime;
+	}
+	public static long getDelta(){
+		return delta;
 	}
 	/**
 	 * 

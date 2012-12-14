@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
  * will not be preloaded by default to shorten 
  * startup time.</p>
  * <p>Also, on a side note, since images here are a 
- * single reference; it might be worthwile to clone
+ * single reference; it might be worthwhile to clone
  * these for multiple uses.</p>
  * @author Niklas Lindblad
  *
