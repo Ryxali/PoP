@@ -84,18 +84,15 @@ public enum ButtonStore {
 				
 			}
 		}
-		float [] f = Game.getScales();
-		getImage().draw((int)(xPos * f[0]) , (int)(yPos * f[1]));
+		getImage().draw((int)(xPos * Game.getWidthScale()) , (int)(yPos * Game.getHeightScale()));
 	}
 	
 	public int getX(){
-		float [] f = Game.getScales();
-		return (int)(xPos * f[0]);
+		return (int)(xPos * Game.getWidthScale());
 	}
 	
 	public int getY(){
-		float [] f = Game.getScales();
-		return (int)(yPos * f[1]);
+		return (int)(yPos * Game.getHeightScale());
 	}
 	
 	public Image getImage(){

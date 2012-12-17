@@ -51,14 +51,13 @@ public class AnimatedImage extends Animation {
 	private static Image[] fetchImages(String path, String fileBaseName,
 			String fileType, int quantity, int stepSize) {
 		Image[] imgs = new Image[quantity];
-		float[] scls = Game.getScales();
 		if (stepSize == 1) {
 			for (int i = 0; i < quantity; i += 1) {
 				try {
 					imgs[i] = new Image(path + fileBaseName + (i + 1)
 							+ fileType);
-					int sclX = (int) (imgs[i].getWidth() * scls[0]);
-					int sclY = (int) (imgs[i].getHeight() * scls[1]);
+					int sclX = (int) (imgs[i].getWidth() * Game.getWidthScale());
+					int sclY = (int) (imgs[i].getHeight() * Game.getHeightScale());
 					imgs[i] = imgs[i].getScaledCopy(sclX, sclY);
 				} catch (SlickException e) {
 					e.printStackTrace();
@@ -69,8 +68,8 @@ public class AnimatedImage extends Animation {
 				try {
 					imgs[i] = new Image(path + fileBaseName + (quantity-i)
 							+ fileType);
-					int sclX = (int) (imgs[i].getWidth() * scls[0]);
-					int sclY = (int) (imgs[i].getHeight() * scls[1]);
+					int sclX = (int) (imgs[i].getWidth() * Game.getWidthScale());
+					int sclY = (int) (imgs[i].getHeight() * Game.getHeightScale());
 					imgs[i] = imgs[i].getScaledCopy(sclX, sclY);
 				} catch (SlickException e) {
 					e.printStackTrace();

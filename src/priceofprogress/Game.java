@@ -52,14 +52,11 @@ public class Game extends StateBasedGame {
 		return delta;
 	}
 
-	/**
-	 * 
-	 * @return an array of the width and height scales described as a decimal
-	 */
-	public static float[] getScales() {
-		float[] r = { ((float) appgc.getWidth() / (float) 1920),
-				((float) appgc.getHeight() / (float) 1200) };
-		return (r);
+	public static float getWidthScale() {
+		return (float) appgc.getWidth()/(float)1920;
+	}
+	public static float getHeightScale(){
+		return (float) appgc.getHeight()/(float)1200;
 	}
 
 	/**
@@ -99,7 +96,6 @@ public class Game extends StateBasedGame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
 		try {
 			setupAppgc();
 			appgc.start();

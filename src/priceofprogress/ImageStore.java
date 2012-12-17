@@ -79,8 +79,8 @@ public enum ImageStore {
 	private static Image fetchImg(String ref) {
 		try {
 			Image i = new Image(ref);
-			float[] f = Game.getScales();
-			return i.getScaledCopy((int)(i.getWidth()*f[0]), (int)(i.getHeight()*f[1]));
+			return i.getScaledCopy((int)(i.getWidth()*Game.getWidthScale()),
+					(int)(i.getHeight()*Game.getHeightScale()));
 		} catch(Exception e){
 			return DEFAULT.getImage();
 		}

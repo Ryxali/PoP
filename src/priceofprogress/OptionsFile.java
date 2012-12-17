@@ -16,16 +16,6 @@ public class OptionsFile {
 	public ArrayList<? super Object> data;
 
 	private static String path = "options.txt";
-	public static final String FIELD_RESOLUTION_X = "SizeX:";
-	public static final String FIELD_RESOLUTION_Y = "SizeY:";
-	public static final String FIELD_FULLSCREEN = "FullScreen:";
-	public static final String FIELD_KEY_MOVELEFT = "MvLeft:";
-	public static final String FIELD_KEY_MOVERIGHT = "MvRight:";
-	public static final String FIELD_KEY_JUMP = "Jump:";
-	public static final String FIELD_KEY_FIRE = "Fire:";
-	public static final String FIELD_KEY_INTERRACT = "Interact:";
-	public static final String FIELD_VOLUME_MUSIC = "MusicVolume:";
-	public static final String FIELD_VOLUME_SOUND = "SoundVolume:";
 
 	public static OptionsFile get() {
 		if (optionsFile == null) {
@@ -41,7 +31,11 @@ public class OptionsFile {
 	private OptionsFile() {
 		data = loadData();
 	}
-
+	/**
+	 * returns an integer value matching the option name
+	 * @param name
+	 * @return
+	 */
 	public Integer fetchIntegerFromOptions(String name) {
 		if (data.contains(name)) {
 			return (Integer) data.get(data.indexOf(name) + 1);
@@ -49,7 +43,11 @@ public class OptionsFile {
 			return null;
 		}
 	}
-
+	/**
+	 * returns a string value matching the option name
+	 * @param name
+	 * @return
+	 */
 	public String fetchStringFromOptions(String name) {
 		if (data.contains(name)) {
 			return (String) data.get(data.indexOf(name) + 1);
@@ -102,20 +100,10 @@ public class OptionsFile {
 		try {
 			PrintWriter utdata = new PrintWriter(new BufferedWriter(
 					new FileWriter(path)));
-			utdata.println(FIELD_RESOLUTION_X + " "
-					+ Game.getGameContainer().getScreenWidth());
-			utdata.println(FIELD_RESOLUTION_Y + " "
-					+ Game.getGameContainer().getScreenHeight());
-			utdata.println(FIELD_FULLSCREEN + " " + true);
-			utdata.println(FIELD_KEY_MOVELEFT + " " + 65);
-			utdata.println(FIELD_KEY_MOVERIGHT + " " + 68);
-			utdata.println(FIELD_KEY_JUMP + " " + 32);
-			utdata.println(FIELD_KEY_FIRE + " " + 0);
-			utdata.println(FIELD_KEY_INTERRACT + " " + 2);
-			utdata.println(FIELD_VOLUME_MUSIC + " "
-					+ Game.getGameContainer().getMusicVolume());
-			utdata.println(FIELD_VOLUME_SOUND + " "
-					+ Game.getGameContainer().getSoundVolume());
+			Option[] o = Option.values();
+			for(int i = 0; i < o.length; i++){
+				utdata.println(o[i].getPrintableNameAndValue());
+			}
 			utdata.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -147,7 +135,12 @@ public class OptionsFile {
 		} else if (indata.hasNextFloat()) {
 			list.add(indata.nextFloat());
 		} else if (indata.hasNext()) {
-			list.add(indata.next());
+			String s = indata.next();
+			if(s.length() == 1){//Fer chars
+				list.add(s.charAt(0));
+			}else{
+				list.add(indata.next());
+			}
 		}
 	}
 

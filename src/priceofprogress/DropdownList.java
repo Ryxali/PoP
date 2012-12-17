@@ -1,5 +1,6 @@
 package priceofprogress;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,14 +33,17 @@ public enum DropdownList {
 	 * Neatly and efficiently packs all strings given and returns them as an array.
 	 * This is only used in the constructor of the enums as you can't type string arrays
 	 * there.
-	 * @param str1 the mandetory first string
+	 * @param str1 the mandatory first string
 	 * @param strings all strings in succession
 	 * @return a bundle of strings
 	 */
 	private static String[] strPack(String str1, String... strings){
-		String [] str = Arrays.copyOf(strings, strings.length+1);
-		str[str.length-1] = str1;
-		return str;
+		strings = Arrays.copyOf(strings, strings.length+1);
+		for(int i = strings.length-1; i > 0; i--){
+			strings[i] = strings[i-1];
+		}
+		strings[0] = str1;
+		return strings;
 	}
 	/**
 	 * 
