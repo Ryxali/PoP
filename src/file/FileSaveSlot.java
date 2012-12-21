@@ -1,4 +1,5 @@
-package priceofprogress;
+package file;
+
 
 public enum FileSaveSlot {
 	SLOT_1(null, "saves/slot_1", "Slot 1"),

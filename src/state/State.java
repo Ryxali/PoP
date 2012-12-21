@@ -1,7 +1,8 @@
-package priceofprogress;
+package state;
 
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
 
 public enum State {
 	STATE_MENU_MAIN(0, new StateMainMenu(0)),

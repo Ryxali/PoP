@@ -1,4 +1,6 @@
-package priceofprogress;
+package file;
+
+import priceofprogress.Game;
 
 public enum Option {
 	FIELD_RESOLUTION_X("SizeX:", String.valueOf(Game.getGameContainer().getScreenWidth())),

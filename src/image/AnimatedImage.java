@@ -1,9 +1,11 @@
-package priceofprogress;
+package image;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
+import priceofprogress.Game;
 
 public class AnimatedImage extends Animation {
 	private String path;

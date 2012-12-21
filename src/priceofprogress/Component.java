@@ -2,7 +2,7 @@ package priceofprogress;
 
 import java.util.Arrays;
 
-public enum Component {
+public enum Component{
 	//TODO add object to represent these units
 	VACCUM("Vaccum Unit", toArray(0));
 

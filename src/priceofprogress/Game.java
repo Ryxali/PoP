@@ -17,6 +17,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.state.StateBasedGame;
 
+import file.OptionsFile;
+
+import state.State;
+
 public class Game extends StateBasedGame {
 	public static long delta = 0;
 	public static long lastRunTime = 0;

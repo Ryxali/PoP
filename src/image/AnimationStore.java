@@ -1,4 +1,5 @@
-package priceofprogress;
+package image;
+
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
@@ -130,6 +131,12 @@ public enum AnimationStore {
 	public void unload(){
 		if(!anim.equals(DEFAULT.anim)){
 			anim = null;
+		}
+	}
+	public static void unloadAll(){
+		AnimationStore [] temp = values();
+		for(int i = 0; i < temp.length; i++){
+			temp[i].unload();
 		}
 	}
 	
