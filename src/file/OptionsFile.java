@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -67,6 +68,21 @@ public class OptionsFile {
 		if (data.contains(name)) {
 			return (Boolean) data.get(data.indexOf(name) + 1);
 		} else {
+			return null;
+		}
+	}
+	
+	public Double fetchDoubleFromOptions(String name){
+		if(data.contains(name)){
+			return (Double) data.get(data.indexOf(name) + 1);
+		} else {
+			return null;
+		}
+	}
+	public Object fetchObjectFromOptions(String name){
+		if(data.contains(name)){
+			return data.get(data.indexOf(name) + 1);
+		}else{
 			return null;
 		}
 	}
@@ -137,10 +153,10 @@ public class OptionsFile {
 			list.add(indata.nextFloat());
 		} else if (indata.hasNext()) {
 			String s = indata.next();
-			if(s.length() == 1){//Fer chars
+			if(s.length() == 1){
 				list.add(s.charAt(0));
 			}else{
-				list.add(indata.next());
+				list.add(s);
 			}
 		}
 	}
@@ -154,7 +170,7 @@ public class OptionsFile {
 		ArrayList<? super Object> res = new ArrayList<Object>();
 		try {
 			Scanner indata = new Scanner(new File(path));
-
+			indata.useLocale(Locale.ENGLISH);
 			while (indata.hasNext()) {
 				addValue(res, indata);
 			}
@@ -169,6 +185,9 @@ public class OptionsFile {
 			System.out.println("FILE CORRUPT, MAKING ANOTHER");
 			createFreshOptionFile();
 			return loadData();
+		}
+		for(int i = 0; i < res.size(); i++){
+			System.out.println(res.get(i) + " " + res.get(i).getClass().getSimpleName());
 		}
 		return res;
 	}

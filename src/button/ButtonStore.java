@@ -1,12 +1,13 @@
 package button;
 
+
+import file.Option;
 import image.ImageStore;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
-import priceofprogress.Game;
 
 public enum ButtonStore {
 	NEW_GAME(new StandardButton(247, 333,
@@ -25,22 +26,24 @@ public enum ButtonStore {
 			ImageStore.BUTTON_EXIT_IDLE,
 			ImageStore.BUTTON_EXIT_HOVER,
 			ImageStore.BUTTON_EXIT_PRESSED)),
-	RESOLUTION(new ListButton(400, 553,
+	RESOLUTION(new ListButton(385, 568,
 			ImageStore.BUTTON_RESOLUTION_IDLE,
 			ImageStore.BUTTON_RESOLUTION_HOVER,
 			DropdownList.RESOLUTION)),
-	KEY_CONFIG(new StandardButton(600, 300,
+	KEY_CONFIG(new StandardButton(685, 380,
 			ImageStore.BUTTON_KEYCONFIG_IDLE,
 			ImageStore.BUTTON_KEYCONFIG_HOVER,
 			ImageStore.BUTTON_KEYCONFIG_PRESSED)),
-	VOLUME_SOUND(new SliderButton(600, 500,
+	VOLUME_SOUND(new SliderButton(1538, 362,
 			ImageStore.BUTTON_SLIDER_BUTTON,
 			ImageStore.BUTTON_SLIDER_VERTICAL,
-			SliderButton.FACING_VERTICAL)),
-	VOLUME_MUSIC(new SliderButton(600, 700,
+			SliderButton.ALIGN_VERTICAL,
+			Option.FIELD_VOLUME_SOUND.getName())),
+	VOLUME_MUSIC(new SliderButton(1065, 670,
 			ImageStore.BUTTON_SLIDER_BUTTON,
 			ImageStore.BUTTON_SLIDER_HORIZONTAL,
-			SliderButton.FACING_HORIZONTAL)),
+			SliderButton.ALIGN_HORIZONTAL,
+			Option.FIELD_VOLUME_MUSIC.getName())),
 	BACK(new StandardButton(900, 300,
 			ImageStore.BUTTON_EXIT_IDLE,
 			ImageStore.BUTTON_EXIT_HOVER,

@@ -1,10 +1,11 @@
 package state;
 
+import image.AnimationStore;
+import image.ImageStore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import image.AnimationStore;
-import image.ImageStore;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,20 +13,28 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+
 import button.ButtonStore;
+
+
+
 
 public abstract class BasicMenuState extends BasicGeneralState{
 	int x = 0;
 	int y = 0;
+	protected AnimationStore menuClutter;
+	private ArrayList<ButtonStore> buttons = new ArrayList<ButtonStore>();
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		ImageStore.BACKGROUND_MENU_MAIN_STATIC.getImage().draw();
-		AnimationStore.MENU_MAIN_CLUTTER.getAnimation().draw();
+		menuClutter.getAnimation().draw();
 		
 		if (!isChangingState(sbg)) {
-			renderButtons(gc, sbg, g);
+			for(int i = 0; i < buttons.size(); i++){
+				buttons.get(i).getButton().draw(g);
+			}
 		}
 
 		AnimationStore.MENU_FIRE.getAnimation().draw();
@@ -36,6 +45,17 @@ public abstract class BasicMenuState extends BasicGeneralState{
 		g.drawString(x + ", " + y, 300, 50);
 	}
 	
+	public void init(GameContainer gc, StateBasedGame sbg)
+			throws SlickException{
+		initialize(gc, sbg);
+		menuClutter = setMenuClutter();
+		
+	}
+	
+	public abstract void initialize(GameContainer gc, StateBasedGame sbg)
+			throws SlickException;
+	public abstract AnimationStore setMenuClutter();
+	
 	/**
 	 * A check based on the menu clutters fading animation. Note that this
 	 * method will change state automatically on it's own.
@@ -45,21 +65,26 @@ public abstract class BasicMenuState extends BasicGeneralState{
 	 * 
 	 */
 	public boolean isChangingState(StateBasedGame sbg) {
-		if (!AnimationStore.MENU_MAIN_CLUTTER.isRegularDir()) {
-			if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
+		if (!menuClutter.isRegularDir()) {
+			if (menuClutter.getAnimation().getFrame() == menuClutter
 					.getAnimation().getFrameCount() - 1) {
 				return false;
 			}
 		} else {
-			if (AnimationStore.MENU_MAIN_CLUTTER.getAnimation().getFrame() == AnimationStore.MENU_MAIN_CLUTTER
+			if (menuClutter.getAnimation().getFrame() == menuClutter
 					.getAnimation().getFrameCount() - 1) {
-				AnimationStore.MENU_MAIN_CLUTTER
+				menuClutter
 						.setDir(AnimationStore.DIR_REVERSE);
 				enterState(sbg);
 			}
 		}
 		return true;
 	}
+	
+	public void addButton(ButtonStore button){
+		buttons.add(button);
+	}
+	
 	/**
 	 * Jumps to warp 5 towards the next state
 	 * 
@@ -74,7 +99,39 @@ public abstract class BasicMenuState extends BasicGeneralState{
 			State.enterState(sbg, State.getNextState());
 		}
 	}
-	public abstract int checkButtonsAndSetNextState(Input input);
-	public abstract void unloadUsedResources();
-	public abstract void renderButtons(GameContainer gc, StateBasedGame sbg, Graphics g);
+	
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+			throws SlickException {
+		Input input = gc.getInput();
+		x = input.getMouseX();
+		y = input.getMouseY();
+		int nState = checkButtonsAndSetNextState(input);
+		if (nState != 0 && nState != State.getNextState()) {
+			State.setNextState(nState);
+			AnimationStore.MENU_MAIN_CLUTTER.setDir(true);
+		}
+	}
+	
+	public int checkButtonsAndSetNextState(Input input){
+		for(int i = 0; i < buttons.size(); i++){
+			buttons.get(i).getButton().buttonStateCheck(input);
+		}
+		return checkNextState(input);
+	}
+	
+	public abstract int checkNextState(Input input);
+	
+	private void unloadUsedResources(){
+		if (State.getNextState() != 3 && State.getNextState() != 2) {
+			ImageStore.BACKGROUND_MENU_MAIN_STATIC.unload();
+			ImageStore.BACKGROUND_MENU_LIGHT_STATIC.unload();
+			ImageStore.BACKGROUND_MENU_SHADOW_STATIC.unload();
+			AnimationStore.MENU_FIRE.unload();
+			AnimationStore.MENU_LIGHT.unload();
+		}
+		for(int i = 0; i < buttons.size(); i++){
+			buttons.get(i).getButton().unload();
+		}
+		menuClutter.unload();
+	}
 }

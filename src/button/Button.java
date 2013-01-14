@@ -1,5 +1,7 @@
 package button;
 
+
+
 import image.ImageStore;
 
 import org.newdawn.slick.Graphics;
@@ -7,6 +9,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
 import priceofprogress.Game;
+
 
 
 public abstract class Button {

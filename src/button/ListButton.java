@@ -1,10 +1,13 @@
 package button;
 
+
+
 import image.ImageStore;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+
 
 public class ListButton extends Button {
 	private ImageStore idleImg;
@@ -26,6 +29,10 @@ public class ListButton extends Button {
 	public void setDList(DropdownList dList) {
 		this.dList = dList;
 		states = new int[dList.getItems().length];
+	}
+	
+	public DropdownList getDList(){
+		return dList;
 	}
 
 	@Override
