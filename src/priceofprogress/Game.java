@@ -1,5 +1,7 @@
 package priceofprogress;
 
+import java.awt.DisplayMode;
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,9 +19,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.state.StateBasedGame;
 
+import state.State;
+
 import file.OptionsFile;
 
-import state.State;
+
 
 public class Game extends StateBasedGame {
 	public static long delta = 0;
@@ -36,6 +40,22 @@ public class Game extends StateBasedGame {
 	public Game(String gameName) {
 		super(gameName);
 		addStates();
+	}
+	public static String[] getValidResolutions(){
+		String[] str;
+		ArrayList <String> strings = new ArrayList<String>();
+		GraphicsEnvironment gc = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		DisplayMode[] displayModes = gc.getDefaultScreenDevice().getDisplayModes();
+		int sizeX = gc.getDefaultScreenDevice().getDisplayMode().getWidth();
+		int sizeY = gc.getDefaultScreenDevice().getDisplayMode().getHeight();
+		for (int z = 0; z < displayModes.length; z++) {
+            if (displayModes[z].getWidth() == sizeX && displayModes[z].getHeight() == sizeY) {
+                strings.add(displayModes[z].getWidth() + "x" + displayModes[z].getHeight());
+            }
+        }
+		str  = new String[strings.size()];
+		strings.toArray(str);
+		return str;
 	}
 
 	/**
@@ -112,6 +132,11 @@ public class Game extends StateBasedGame {
 				e1.printStackTrace();
 			}
 
+		}catch(ExceptionInInitializerError e2){
+			System.out.println("dafer");
+			e2.printStackTrace();
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
 
 	}

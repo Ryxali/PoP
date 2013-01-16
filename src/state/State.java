@@ -23,6 +23,7 @@ public enum State {
 	 */
 	private static int nextState = 0;
 	public static final int EXIT_GAME = 9001;
+	public static final int NO_CHANGE = 0;
 	/**
 	 * 
 	 * @param id the id of the state

@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 
 import priceofprogress.Game;
 
+
 public class AnimatedImage extends Animation {
 	private String path;
 	private String fileName;

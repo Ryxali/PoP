@@ -1,6 +1,7 @@
 package file;
 
 
+
 public enum FileSaveSlot {
 	SLOT_1(null, "saves/slot_1", "Slot 1"),
 	SLOT_2(null, "saves/slot_2", "Slot 2"),

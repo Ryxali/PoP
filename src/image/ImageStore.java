@@ -5,6 +5,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import priceofprogress.Game;
+
+
 /**
  * <p>The storage for all the images in the game. It's 
  * important to note that most (if not all) images 
@@ -100,6 +102,8 @@ public enum ImageStore {
 			return i.getScaledCopy((int)(i.getWidth()*Game.getWidthScale()),
 					(int)(i.getHeight()*Game.getHeightScale()));
 		} catch(Exception e){
+			System.out.println(ref);
+			e.printStackTrace();
 			return DEFAULT.getImage();
 		}
 	}

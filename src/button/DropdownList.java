@@ -1,5 +1,7 @@
 package button;
 
+
+
 import image.ImageStore;
 
 import java.lang.reflect.Array;
@@ -10,11 +12,14 @@ import java.util.Collections;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import priceofprogress.Game;
+
+
 
 
 
 public enum DropdownList {
-	RESOLUTION(strPack("1990x1321", "MEGAPLOX"), 
+	RESOLUTION(Game.getValidResolutions(), 
 			new StandardButton(
 					ImageStore.BUTTON_LOADGAME_IDLE,
 					ImageStore.BUTTON_LOADGAME_HOVER,
@@ -39,6 +44,7 @@ public enum DropdownList {
 	private int listDispLength;
 	private DropdownList(String[] items, StandardButton bgButton, int listDispLength){
 		this.items = items;
+		System.out.println(items.length + " <..---");
 		for(int i = 0; i < items.length; i++){
 			bgButtons.add(bgButton.copy());
 		}
@@ -78,6 +84,16 @@ public enum DropdownList {
 	 */
 	public String[] getItems() {
 		return items;
+	}
+	
+	public String getItem(int index){
+		return items[index];
+	}
+	public int[] getResValues(int index){
+		String s = items[index];
+		int[] i = { Integer.parseInt(items[index].substring(0, items[index].indexOf("x"))),
+				Integer.parseInt(items[index].substring(items[index].indexOf("x")))};
+		return i;
 	}
 	/**
 	 * draws the list at the right side of the given button

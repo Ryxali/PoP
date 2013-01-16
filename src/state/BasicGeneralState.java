@@ -1,5 +1,6 @@
 package state;
 
+
 import image.AnimationStore;
 import image.ImageStore;
 
@@ -13,6 +14,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import priceofprogress.Game;
+
 
 public abstract class BasicGeneralState extends BasicGameState{
 	/**
