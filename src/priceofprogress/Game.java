@@ -23,8 +23,6 @@ import state.State;
 
 import file.OptionsFile;
 
-
-
 public class Game extends StateBasedGame {
 	public static long delta = 0;
 	public static long lastRunTime = 0;
@@ -41,20 +39,37 @@ public class Game extends StateBasedGame {
 		super(gameName);
 		addStates();
 	}
-	public static String[] getValidResolutions(){
+
+	public static String[] getValidResolutions() {
 		String[] str;
-		ArrayList <String> strings = new ArrayList<String>();
-		GraphicsEnvironment gc = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		ArrayList<String> strings = new ArrayList<String>();
+		GraphicsEnvironment gc = GraphicsEnvironment
+				.getLocalGraphicsEnvironment();
 		DisplayMode[] displayModes = gc.getDefaultScreenDevice().getDisplayModes();
 		int sizeX = gc.getDefaultScreenDevice().getDisplayMode().getWidth();
 		int sizeY = gc.getDefaultScreenDevice().getDisplayMode().getHeight();
 		for (int z = 0; z < displayModes.length; z++) {
-            if (displayModes[z].getWidth() == sizeX && displayModes[z].getHeight() == sizeY) {
-                strings.add(displayModes[z].getWidth() + "x" + displayModes[z].getHeight());
-            }
-        }
-		str  = new String[strings.size()];
-		strings.toArray(str);
+			// System.out.println(displayModes[z].getWidth() + "x"
+			// + displayModes[z].getHeight());
+			if ((double)displayModes[z].getWidth() / (double)displayModes[z].getHeight() ==
+					(double)sizeX / (double)sizeY
+
+					&& displayModes[z].getRefreshRate() == gc
+							.getDefaultScreenDevice().getDisplayMode()
+							.getRefreshRate()
+					&& displayModes[z].getBitDepth() == gc
+							.getDefaultScreenDevice().getDisplayMode()
+							.getBitDepth()) {
+				strings.add(displayModes[z].getWidth() + "x"
+						+ displayModes[z].getHeight());
+
+			}
+		}
+		str = new String[strings.size()];
+		for (int d = 0; d < str.length; d++) {
+			str[d] = strings.get(d);
+			System.out.println(strings.get(d));
+		}
 		return str;
 	}
 
@@ -77,10 +92,11 @@ public class Game extends StateBasedGame {
 	}
 
 	public static float getWidthScale() {
-		return (float) appgc.getWidth()/(float)1920;
+		return (float) appgc.getWidth() / (float) 1920;
 	}
-	public static float getHeightScale(){
-		return (float) appgc.getHeight()/(float)1200;
+
+	public static float getHeightScale() {
+		return (float) appgc.getHeight() / (float) 1200;
 	}
 
 	/**
@@ -94,20 +110,21 @@ public class Game extends StateBasedGame {
 			this.addState(states.get(i).getState());
 		}
 	}
+
 	/**
 	 * sets upp the application according to either the options settings (if
 	 * they exist), or the system default (with fullscreen enabled).
+	 * 
 	 * @throws SlickException
 	 */
-	private static void setupAppgc() throws SlickException{
+	private static void setupAppgc() throws SlickException {
 		appgc = new AppGameContainer(new Game(GAME_NAME));
 		appgc.setTargetFrameRate(60);
 		if (OptionsFile.get().contains("SizeX:", "SizeY:", "FullScreen:")) {
 			appgc.setDisplayMode(
 					OptionsFile.get().fetchIntegerFromOptions("SizeX:"),
 					OptionsFile.get().fetchIntegerFromOptions("SizeY:"),
-					OptionsFile.get()
-							.fetchBooleanFromOptions("FullScreen:"));
+					OptionsFile.get().fetchBooleanFromOptions("FullScreen:"));
 		} else {
 			appgc.setDisplayMode(appgc.getScreenWidth(),
 					appgc.getScreenHeight(), true);
@@ -132,10 +149,10 @@ public class Game extends StateBasedGame {
 				e1.printStackTrace();
 			}
 
-		}catch(ExceptionInInitializerError e2){
+		} catch (ExceptionInInitializerError e2) {
 			System.out.println("dafer");
 			e2.printStackTrace();
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 

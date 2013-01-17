@@ -1,6 +1,6 @@
 package state;
 
-
+import file.OptionsFile;
 import image.AnimationStore;
 
 import org.newdawn.slick.GameContainer;
@@ -10,20 +10,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import priceofprogress.Game;
 
 import button.ButtonStore;
-
-
-
-
-
+import button.ListButton;
 
 public class StateOptionsMenu extends BasicMenuState {
 
 	public StateOptionsMenu(int state) {
 
 	}
-	
+
 	@Override
 	public void initialize(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
@@ -42,24 +39,39 @@ public class StateOptionsMenu extends BasicMenuState {
 		return AnimationStore.MENU_OPTIONS_CLUTTER;
 	}
 
-	
-
 	@Override
 	public int getID() {
-		/*if (ButtonStore.BACK.getButton().hasBeenClicked() == Button.PRESSED_TRUE) {
-			return State.STATE_PLAY_MAIN.getID();
-		} else if (ButtonStore.KEY_CONFIG.getButton().hasBeenClicked() == Button.PRESSED_TRUE) {
-			return State.STATE_MENU_KEYCONFIG.getID();
-		} else{
-			int res = DropdownList.RESOLUTION.getBgButton(ButtonStore.RESOLUTION.getButton().hasBeenClicked()).hasBeenClicked();
-			
-			
-		}*/
+		/*
+		 * if (ButtonStore.BACK.getButton().hasBeenClicked() ==
+		 * Button.PRESSED_TRUE) { return State.STATE_PLAY_MAIN.getID(); } else
+		 * if (ButtonStore.KEY_CONFIG.getButton().hasBeenClicked() ==
+		 * Button.PRESSED_TRUE) { return State.STATE_MENU_KEYCONFIG.getID(); }
+		 * else{ int res =
+		 * DropdownList.RESOLUTION.getBgButton(ButtonStore.RESOLUTION
+		 * .getButton().hasBeenClicked()).hasBeenClicked();
+		 * 
+		 * 
+		 * }
+		 */
 		return State.STATE_MENU_OPTIONS.getID();
 	}
 
-	public int checkNextState(Input input) {
+	public int checkButtonStates(Input input) {
+		int checkResChange = ButtonStore.RESOLUTION.getButton()
+				.hasBeenClicked();
+		System.out.println(checkResChange);
+		if(checkResChange != -1){
+			System.out.println("CLICEREDE");
+			int[] r = ((ListButton) ButtonStore.RESOLUTION.getButton()).getDList().getResValues(checkResChange);
+			
+			try {
+				Game.getGameContainer().setDisplayMode(r[0], r[1], true);
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		return State.NO_CHANGE;
 	}
-	
 }

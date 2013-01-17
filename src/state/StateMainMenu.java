@@ -52,7 +52,7 @@ public class StateMainMenu extends BasicMenuState {
 	 * that or 0 for nothing or 9001 for exiting the game.
 	 */
 	@Override
-	public int checkNextState(Input input) {
+	public int checkButtonStates(Input input) {
 		if (ButtonStore.NEW_GAME.getButton().hasBeenClicked() == Button.PRESSED_TRUE) {
 			return State.STATE_PLAY_MAIN.getID();
 		} else if (ButtonStore.LOAD_GAME.getButton().hasBeenClicked() == Button.PRESSED_TRUE) {

@@ -116,10 +116,10 @@ public abstract class BasicMenuState extends BasicGeneralState{
 		for(int i = 0; i < buttons.size(); i++){
 			buttons.get(i).getButton().buttonStateCheck(input);
 		}
-		return checkNextState(input);
+		return checkButtonStates(input);
 	}
 	
-	public abstract int checkNextState(Input input);
+	public abstract int checkButtonStates(Input input);
 	
 	private void unloadUsedResources(){
 		if (State.getNextState() != 3 && State.getNextState() != 2) {

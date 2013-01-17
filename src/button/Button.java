@@ -69,6 +69,10 @@ public abstract class Button {
 		return 0;
 	}
 	
+	public DropdownList getDList(){
+		return null;
+	}
+	
 	public boolean pointContains(int lBound, int point, int rBound){
 		if(lBound <= point && point <= rBound){
 			return true;

@@ -30,7 +30,7 @@ public class ListButton extends Button {
 		this.dList = dList;
 		states = new int[dList.getItems().length];
 	}
-	
+	@Override
 	public DropdownList getDList(){
 		return dList;
 	}
@@ -44,6 +44,9 @@ public class ListButton extends Button {
 						x + getStoredImage().getImage().getWidth(),
 						y + dList.getBgButton().getStoredImage()
 										.getImage().getHeight() * i, g);
+				g.drawString(dList.getItem(i), x + getStoredImage().getImage().getWidth(),
+						y + dList.getBgButton().getStoredImage()
+						.getImage().getHeight() * i);
 			}
 		}
 	}
@@ -97,12 +100,11 @@ public class ListButton extends Button {
 	@Override
 	public int hasBeenClicked(){
 		for(int i = 0; i < dList.getDisplayLength(); i++){
-			if(dList.getBgButton(i).isClicked() &&
-					dList.getBgButton(i).getState() == STATE_HOVER){
+			if(dList.getBgButton(i).hasBeenClicked() == 1){
 				return i;
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	@Override
