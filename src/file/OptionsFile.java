@@ -38,11 +38,15 @@ public class OptionsFile {
 	 * @param name
 	 * @return
 	 */
-	public Integer fetchIntegerFromOptions(String name) {
+	public int fetchIntegerFromOptions(String name) {
 		if (data.contains(name)) {
-			return (Integer) data.get(data.indexOf(name) + 1);
+			if(data.get(data.indexOf(name) + 1) instanceof Byte){
+				return (Byte) data.get(data.indexOf(name) + 1);
+			}else{
+				return (Integer) data.get(data.indexOf(name) + 1);
+			}
 		} else {
-			return null;
+			return (Integer) null;
 		}
 	}
 	/**
@@ -64,19 +68,19 @@ public class OptionsFile {
 	 * @param name
 	 * @return
 	 */
-	public Boolean fetchBooleanFromOptions(String name) {
+	public boolean fetchBooleanFromOptions(String name) {
 		if (data.contains(name)) {
 			return (Boolean) data.get(data.indexOf(name) + 1);
 		} else {
-			return null;
+			return (Boolean) null;
 		}
 	}
 	
-	public Double fetchDoubleFromOptions(String name){
+	public double fetchDoubleFromOptions(String name){
 		if(data.contains(name)){
 			return (Double) data.get(data.indexOf(name) + 1);
 		} else {
-			return null;
+			return (Double) null;
 		}
 	}
 	public Object fetchObjectFromOptions(String name){

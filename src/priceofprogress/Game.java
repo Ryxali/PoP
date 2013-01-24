@@ -87,8 +87,8 @@ public class Game extends StateBasedGame {
 		lastRunTime = curRunTime;
 	}
 
-	public static long getDelta() {
-		return delta;
+	public static double getDelta() {
+		return (double)delta;
 	}
 
 	public static float getWidthScale() {

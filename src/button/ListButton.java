@@ -83,11 +83,13 @@ public class ListButton extends Button {
 									.getHeight() * (i + 1))) {
 						if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 							dList.getBgButton(i).setState(STATE_PRESSED);
+							dList.getBgButton(i).setClicked(true);
 						} else {
 							dList.getBgButton(i).setState(STATE_HOVER);
 						}
 					}else{
 						dList.getBgButton(i).setState(STATE_IDLE);
+						dList.getBgButton(i).setClicked(false);
 					}
 				}
 			} else {
@@ -100,8 +102,12 @@ public class ListButton extends Button {
 	@Override
 	public int hasBeenClicked(){
 		for(int i = 0; i < dList.getDisplayLength(); i++){
-			if(dList.getBgButton(i).hasBeenClicked() == 1){
+			if(dList.getBgButtons().get(i).hasBeenClicked() == Button.PRESSED_TRUE){
+				System.out.println("DERR");
 				return i;
+				
+			}else{
+				System.out.println("dorer");
 			}
 		}
 		return -1;
@@ -137,6 +143,14 @@ public class ListButton extends Button {
 		idleImg.unload();
 		hoverImg.unload();
 		dList.getBgButton().getStoredImage().unload();
+	}
+
+	@Override
+	public void reload() {
+		idleImg.reload();
+		hoverImg.reload();
+		dList.getBgButton().getStoredImage().reload();
+		
 	}
 
 }

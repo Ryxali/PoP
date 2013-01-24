@@ -4,6 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import priceofprogress.Game;
 
@@ -20,6 +21,7 @@ public class AnimatedImage extends Animation {
 	public AnimatedImage() {
 		// super();
 	}
+	
 
 	public AnimatedImage(String path, String fileName, String fileEnding,
 			int numImgs, int dur, boolean autoUpdate, int stepSize) {
@@ -39,6 +41,39 @@ public class AnimatedImage extends Animation {
 		this.fileEnding = fileEnding;
 	}
 
+	public AnimatedImage(ImageStore srcImg, byte frames, int dur) {
+		super(makeSheet(srcImg.getImage(), frames), dur);
+	}
+	private static SpriteSheet makeSheet(Image srcImg, int frames){
+		try {
+			return new SpriteSheet(srcImg, srcImg.getWidth()/frames, srcImg.getHeight());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return null;
+	}
+
+	private static Image[] extract(String filePath, int frames){
+		Image imgs[] = new Image[frames];
+		Image tempImg;
+		try {
+			tempImg = new Image(filePath);
+			for(int i = 0; i < frames; i++){
+				
+				imgs[i] = tempImg.getSubImage(
+						(int)((double)tempImg.getWidth()*((double)i/(double)frames)),
+						0,
+						(int) (((double)(i+1)/(double)frames)*(double)tempImg.getWidth()),
+						tempImg.getHeight()
+						);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return imgs;
+	}
 	public String getPath() {
 		return path;
 	}
@@ -49,6 +84,12 @@ public class AnimatedImage extends Animation {
 
 	public String getFileEnding() {
 		return fileEnding;
+	}
+	
+	public void destroy() throws SlickException{
+		for(int i = 0; i < getFrameCount(); i++){
+			getImage(i).destroy();
+		}
 	}
 
 	private static Image[] fetchImages(String path, String fileBaseName,

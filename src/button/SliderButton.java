@@ -136,8 +136,15 @@ public class SliderButton extends Button {
 
 	@Override
 	public void unload() {
-		// TODO Auto-generated method stub
+		sliderImg.unload();
+		sliderBar.unload();
+	}
 
+	@Override
+	public void reload() {
+		sliderImg.reload();
+		sliderBar.reload();
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package priceofprogress;
+package machines;
 
 import java.util.Arrays;
 

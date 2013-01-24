@@ -23,7 +23,14 @@ public enum AnimationStore {
 	MENU_MAIN_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 5, 80, true),
 	MENU_OPTIONS_CLUTTER(null, "res/img/Blueprint_Options/", "Blueprintclutter2_", ".png", 5, 80, true),
 	MENU_KEYCONFIG_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 6, 80, true),
-	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true);
+	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true),
+	WOUBLE_WALK_LEFT(null, "res/img/Entities/Character/WalkLeft/", "Character_Walk_L_", ".png", 5, 80, true),
+	WOUBLE_WALK_RIGHT(null, "res/img/Entities/Character/WalkRight/", "Character_Walk_R_", ".png", 5, 80, true),
+	CHARACTER_IDLE(ImageStore.CHAR_ANIM_SHEET_IDLE, 2, 500),
+	CHARACTER_WALK_LEFT(ImageStore.CHAR_ANIM_SHEET_WALK_LEFT, 8, 200),
+	CHARACTER_WALK_RIGHT(ImageStore.CHAR_ANIM_SHEET_WALK_RIGHT, 8, 200),
+	CHARACTER_JUMP_RIGHT(ImageStore.CHAR_ANIM_SHEET_JUMP_RIGHT, 5, 250),
+	CHARACTER_JUMP_LEFT(ImageStore.CHAR_ANIM_SHEET_JUMP_LEFT, 5, 250);
 	
 	/**
 	 * The regular animation order
@@ -57,6 +64,8 @@ public enum AnimationStore {
 	 * .png in most cases.
 	 */
 	private final String fileEnding;
+	
+	private final ImageStore srcImg;
 	/**
 	 * Used for checking if the animation is being looped
 	 * automatically.
@@ -64,6 +73,8 @@ public enum AnimationStore {
 	private boolean autoRefresh;
 	
 	private int rev = 1;
+	
+	private final boolean usingSpriteSheet;
 	
 	/**
 	 * Self explanatory builder of the enums. Does nothing special.
@@ -82,7 +93,19 @@ public enum AnimationStore {
 		this.fileEnding = fileEnding;
 		this.frames = (byte) frames;
 		this.dur = dur;
+		this.srcImg = null;
 		this.autoRefresh = autoRefresh;
+		usingSpriteSheet = false;
+	}
+	private AnimationStore(ImageStore srcImg, int frames, int dur){
+		this.filePath = null;
+		this.fileName = null;
+		this.fileEnding = null;
+		this.srcImg = srcImg;
+		this.frames = (byte) frames;
+		this.dur = dur;
+		this.autoRefresh = true;
+		usingSpriteSheet = true;
 	}
 	/**
 	 * Reconstructs the animation for looping backwards or forwards, depending on input
@@ -122,7 +145,11 @@ public enum AnimationStore {
 	 * from disk.
 	 */
 	public void reload(){
-		anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh, rev);
+		if(!usingSpriteSheet){
+			anim = new AnimatedImage(filePath, fileName, fileEnding, frames, dur, autoRefresh, rev);
+		}else{
+			anim = new AnimatedImage(srcImg, frames, dur);
+		}
 	}
 	
 	/**
@@ -130,7 +157,14 @@ public enum AnimationStore {
 	 */
 	public void unload(){
 		if(!anim.equals(DEFAULT.anim)){
-			anim = null;
+			try {
+				if(anim != null){
+				anim.destroy();
+				anim = null;
+				}
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	public static void unloadAll(){
@@ -173,7 +207,7 @@ public enum AnimationStore {
 	 * 
 	 * @return returns the animation object
 	 */
-	public Animation getAnimation() {
+	public AnimatedImage getAnimation() {
 		if(anim != null){
 			return anim;
 		}else{

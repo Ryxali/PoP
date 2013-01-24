@@ -9,9 +9,9 @@ public enum FileSaveSlot {
 	SLOT_4(null, "saves/slot_4", "Slot 4");
 	
 	private String filePath;
-	private PPWData data;
+	private PPWDataLoader data;
 	private String name;
-	private FileSaveSlot(PPWData data, String filePath, String name){
+	private FileSaveSlot(PPWDataLoader data, String filePath, String name){
 		this.filePath = filePath;
 		this.data = data;
 		this.name = name;
@@ -21,7 +21,17 @@ public enum FileSaveSlot {
 		//TODO get that data loader done
 	}
 	
-	public PPWData getData(){
+	public PPWDataLoader getData(){
 		return data;
+	}
+	
+	public FileSaveSlot getSlotByName(String name){
+		FileSaveSlot [] s = values();
+		for(int i = 0; i < s.length; i++){
+			if(s[i].name.equals(name)){
+				return s[i];
+			}
+		}
+		return null;
 	}
 }

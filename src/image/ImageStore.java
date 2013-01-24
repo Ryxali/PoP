@@ -22,6 +22,7 @@ public enum ImageStore {
 	DEFAULT("res/img/Default/Def1.png", fetchImg("res/img/Default/Def1.png")),
 	COMPANY_LOGO("res/img/companyLogo.png", null),
 	
+	//Button Block
 	BUTTON_PLAY_IDLE("res/img/NewGameButton/NewGameIdle.png", null),
 	BUTTON_PLAY_HOVER("res/img/NewGameButton/NewGameHover.png", null),
 	BUTTON_PLAY_PRESSED("res/img/NewGameButton/NewGameClick.png",null),
@@ -50,10 +51,23 @@ public enum ImageStore {
 	BUTTON_SLIDER_BUTTON("res/img/Sliders/SliderButton.png", null),
 	BUTTON_LIST_ITEM_RESOLUTION("res/img/LoadGameButton/LoadGameHover.png", null),
 	
+	//Menu Items
 	BACKGROUND_MENU_MAIN_STATIC("res/img/MenuStatic.png", null),
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
 	BACKGROUND_MENU_SHADOW_STATIC("res/img/StaticShadow.png", null),
-	TEST("res/img/MenuLightAndShadowTestoverlay.png", null);
+	
+	OVERLAY_CRAFTING_BACKGROUND("res/img/CraftMenu/BG.png", null),
+	OVERLAY_CRAFTING_SLOT("res/img/CraftMenu/BG_Slot_Empty.png", null),
+	
+	//Machine parts (for crafting) here.
+	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
+	
+	//Character and Entity animation sheets below:
+	CHAR_ANIM_SHEET_WALK_LEFT("res/img/Entities/Character/WalkLeftAniMainChar.png", null),
+	CHAR_ANIM_SHEET_WALK_RIGHT("res/img/Entities/Character/WalkRightAniMainChar.png", null),
+	CHAR_ANIM_SHEET_IDLE("res/img/Entities/Character/AnimationTest/StandAnimation.png", null),
+	CHAR_ANIM_SHEET_JUMP_RIGHT("res/img/Entities/Character/JumpRightAniMainChar.png", null),
+	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainChar.png", null);
 	/**
 	 * The String reference to the image location on disk
 	 */
@@ -84,7 +98,14 @@ public enum ImageStore {
 	 */
 	public void unload(){
 		if(img != DEFAULT.img){
-			img = null;
+			try {
+				if(img != null){
+					img.destroy();
+					img = null;
+				}
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

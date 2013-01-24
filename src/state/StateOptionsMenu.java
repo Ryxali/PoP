@@ -59,13 +59,12 @@ public class StateOptionsMenu extends BasicMenuState {
 	public int checkButtonStates(Input input) {
 		int checkResChange = ButtonStore.RESOLUTION.getButton()
 				.hasBeenClicked();
-		System.out.println(checkResChange);
 		if(checkResChange != -1){
-			System.out.println("CLICEREDE");
 			int[] r = ((ListButton) ButtonStore.RESOLUTION.getButton()).getDList().getResValues(checkResChange);
 			
 			try {
 				Game.getGameContainer().setDisplayMode(r[0], r[1], true);
+				reloadUsedResources();
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

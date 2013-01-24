@@ -44,7 +44,6 @@ public enum DropdownList {
 	private int listDispLength;
 	private DropdownList(String[] items, StandardButton bgButton, int listDispLength){
 		this.items = items;
-		System.out.println(items.length + " <..---");
 		for(int i = 0; i < items.length; i++){
 			bgButtons.add(bgButton.copy());
 		}
@@ -92,7 +91,7 @@ public enum DropdownList {
 	public int[] getResValues(int index){
 		String s = items[index];
 		int[] i = { Integer.parseInt(items[index].substring(0, items[index].indexOf("x"))),
-				Integer.parseInt(items[index].substring(items[index].indexOf("x")))};
+				Integer.parseInt(items[index].substring(items[index].indexOf("x")+1))};
 		return i;
 	}
 	/**

@@ -64,9 +64,9 @@ public abstract class Button {
 	}
 	public int hasBeenClicked(){
 		if(clicked && getState() == STATE_HOVER){
-			return 1;
+			return PRESSED_TRUE;
 		}
-		return 0;
+		return PRESSED_FALSE;
 	}
 	
 	public DropdownList getDList(){
@@ -81,4 +81,6 @@ public abstract class Button {
 	}
 	
 	public abstract void unload();
+	
+	public abstract void reload();
 }

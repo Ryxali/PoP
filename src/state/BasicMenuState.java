@@ -134,4 +134,18 @@ public abstract class BasicMenuState extends BasicGeneralState{
 		}
 		menuClutter.unload();
 	}
+	
+	public void reloadUsedResources(){
+			ImageStore.BACKGROUND_MENU_MAIN_STATIC.reload();
+			ImageStore.BACKGROUND_MENU_LIGHT_STATIC.reload();
+			ImageStore.BACKGROUND_MENU_SHADOW_STATIC.reload();
+			AnimationStore.MENU_FIRE.reload();
+			AnimationStore.MENU_LIGHT.reload();
+		for(int i = 0; i < buttons.size(); i++){
+			buttons.get(i).getButton().reload();
+		}
+		menuClutter.reload();
+		menuClutter.setDir(AnimationStore.DIR_REVERSE);
+		menuClutter.getAnimation().setLooping(false);
+	}
 }
