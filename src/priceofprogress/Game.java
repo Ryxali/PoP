@@ -171,4 +171,9 @@ public class Game extends StateBasedGame {
 		this.enterState(State.STATE_MENU_MAIN.getID());
 	}
 
+	public void enterDefaultState() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
