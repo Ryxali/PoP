@@ -32,6 +32,5 @@ public class Error implements Runnable{
 
 	@Override
 	public void run() {
-		
 	}
 }

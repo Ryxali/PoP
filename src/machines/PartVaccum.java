@@ -35,4 +35,10 @@ public class PartVaccum extends Part{
 		return 0;
 	}
 
+	@Override
+	public void draw(int x, int y, Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

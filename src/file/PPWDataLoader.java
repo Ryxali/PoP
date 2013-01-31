@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import terrain.Terrain;
+
 public class PPWDataLoader {
 	
 	private static ArrayList<String[]> fileData;
@@ -20,7 +22,7 @@ public class PPWDataLoader {
 				strs.add(indata.nextLine().split("/"));
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		fileData = strs;
@@ -28,5 +30,10 @@ public class PPWDataLoader {
 	}
 	public static void saveData(String ref){
 		//TODO save.
+	}
+	
+	public static void loadTerrain(Terrain terrain, String ref){
+		ArrayList<String[]> loadedTerrain = loadData(ref);
+		
 	}
 }

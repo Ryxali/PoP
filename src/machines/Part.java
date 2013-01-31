@@ -3,16 +3,18 @@ package machines;
 
 
 import image.AnimationStore;
+import image.Drawable;
 import image.ImageStore;
 
 import java.util.Arrays;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import priceofprogress.Physics;
 import priceofprogress.Weight;
 
-public abstract class Part implements Weight{
+public abstract class Part implements Weight, Drawable{
 	private int[] possPos;
 	private ImageStore img;
 	private Machine machine;
@@ -39,9 +41,10 @@ public abstract class Part implements Weight{
 	public Machine getMachine(){
 		return machine;
 	}
-	
+	public Image getImage(){
+		return img.getImage();
+	}
 	public abstract void deviceUpdate();
-	public abstract void draw(Graphics g);
 	
 	
 	
