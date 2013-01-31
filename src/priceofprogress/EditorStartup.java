@@ -34,7 +34,7 @@ public class EditorStartup extends Game{
 	}
 	
 	protected static void setupAppgc() throws SlickException{
-		setAppgc(new AppGameContainer(new EditorStartup(EDITOR_NAME)));
+		setGameContainer(new AppGameContainer(new EditorStartup(EDITOR_NAME)));
 		getGameContainer().setTargetFrameRate(60);
 		if (OptionsFile.get().contains("SizeX:", "SizeY:", "FullScreen:")) {
 			getGameContainer().setDisplayMode(
@@ -46,11 +46,6 @@ public class EditorStartup extends Game{
 			getGameContainer().setDisplayMode(getGameContainer().getScreenWidth(),
 					getGameContainer().getScreenHeight(), true);
 		}
-	}
-
-	private static void setAppgc(AppGameContainer appGameContainer) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public static void main(String[] args) {
