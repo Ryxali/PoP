@@ -82,6 +82,10 @@ public class Game extends StateBasedGame {
 	public static AppGameContainer getGameContainer() {
 		return appgc;
 	}
+	
+	public static void setGameContainer(AppGameContainer newGameContainer){
+		appgc = newGameContainer;
+	}
 
 	public static void updateDelta(long curRunTime) {
 		delta = curRunTime - lastRunTime;
@@ -166,7 +170,7 @@ public class Game extends StateBasedGame {
 
 	/**
 	 * Initiates all the states of the game and causes the game to enter the
-	 * main menu state.
+	 * default state which is the Main Menu state for normal startup.
 	 */
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
@@ -174,12 +178,15 @@ public class Game extends StateBasedGame {
 		for (int i = 0; i < states.length; i++) {
 			this.getState(states[i].getID()).init(gc, this);
 		}
-		this.enterState(State.STATE_MENU_MAIN.getID());
+		enterDefaultState();
 	}
 
+	/**
+	 * Causes the game to enter the default state.
+	 * This method exists so it can be called from normal startup and overridden in editor startup
+	 */
 	public void enterDefaultState() {
-		// TODO Auto-generated method stub
-		
+		this.enterState(State.STATE_MENU_MAIN.getID());
 	}
 
 }

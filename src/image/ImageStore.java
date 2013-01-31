@@ -69,7 +69,14 @@ public enum ImageStore {
 	CHAR_ANIM_SHEET_WALK_RIGHT("res/img/Entities/Character/WalkRightAniMainChar.png", null),
 	CHAR_ANIM_SHEET_IDLE("res/img/Entities/Character/AnimationTest/StandAnimation.png", null),
 	CHAR_ANIM_SHEET_JUMP_RIGHT("res/img/Entities/Character/JumpRightAniMainChar.png", null),
-	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainChar.png", null);
+	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainChar.png", null),
+	
+	//Blocks for world building
+	BLOCK_EARTH("res/img/blocks/EarthBlock.png", null),
+	BLOCK_GRASSres("res/img/blocks/EarthBlock.png", null),
+	BLOCK_GRAVEL("res/img/blocks/EarthBlock.png", null),
+	BLOCK_ROCK("res/img/blocks/EarthBlock.png", null);
+	
 	/**
 	 * The String reference to the image location on disk
 	 */
