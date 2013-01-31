@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Terrain {
 	private static Terrain curMap;
-	
 	public static Terrain get(){
 		if(curMap != null){
 			return curMap;
