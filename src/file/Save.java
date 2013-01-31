@@ -5,13 +5,23 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PPWDataLoader {
+public class Save {
 	
-	private static ArrayList<String[]> fileData;
+	private static Save save;
+	private ArrayList<String[]> fileData;
 	
+	private Save(){
+		
+	}
 	
+	public static Save get(){
+		if(save == null){
+			save = new Save();
+		}
+		return save;
+	}
 	
-	public static ArrayList<String[]> loadData(String ref){
+	public void loadFile(String ref){
 		ArrayList <String[]> strs = new ArrayList<String[]>();
 		try {
 			Scanner indata = new Scanner(new File(ref));
@@ -24,9 +34,12 @@ public class PPWDataLoader {
 			e.printStackTrace();
 		}
 		fileData = strs;
-		return strs;
 	}
-	public static void saveData(String ref){
-		//TODO save.
+	public void print(){
+		for(int i = 0; i < fileData.size(); i++){
+			for(int j = 0; j < fileData.get(i).length; j++){
+				System.out.println(fileData.get(i)[j] + " ");
+			}
+		}
 	}
 }

@@ -59,6 +59,8 @@ public enum ImageStore {
 	OVERLAY_CRAFTING_BACKGROUND("res/img/CraftMenu/BG.png", null),
 	OVERLAY_CRAFTING_SLOT("res/img/CraftMenu/BG_Slot_Empty.png", null),
 	
+	INVENTORY_FRAME_SLOT("res/img/Default/Def1.png", null),
+	
 	//Machine parts (for crafting) here.
 	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
 	

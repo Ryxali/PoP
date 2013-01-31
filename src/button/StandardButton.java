@@ -34,6 +34,10 @@ public class StandardButton extends Button {
 		getStoredImage().draw(x, y);
 
 	}
+	
+	public void draw(){
+		getStoredImage().draw(x, y);
+	}
 	public void draw(int x, int y, Graphics g){
 		getStoredImage().draw(x, y);
 	}

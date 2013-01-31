@@ -22,6 +22,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import state.State;
 
 import file.OptionsFile;
+import file.Save;
 
 public class Game extends StateBasedGame {
 	public static long delta = 0;
@@ -85,6 +86,9 @@ public class Game extends StateBasedGame {
 	public static void updateDelta(long curRunTime) {
 		delta = curRunTime - lastRunTime;
 		lastRunTime = curRunTime;
+		if(delta > 200){
+			delta = 10;
+		}
 	}
 
 	public static double getDelta() {
@@ -137,6 +141,8 @@ public class Game extends StateBasedGame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Save.get().loadFile("testy.txt");
+		Save.get().print();
 		try {
 			setupAppgc();
 			appgc.start();

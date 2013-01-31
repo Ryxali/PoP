@@ -103,11 +103,7 @@ public class ListButton extends Button {
 	public int hasBeenClicked(){
 		for(int i = 0; i < dList.getDisplayLength(); i++){
 			if(dList.getBgButtons().get(i).hasBeenClicked() == Button.PRESSED_TRUE){
-				System.out.println("DERR");
 				return i;
-				
-			}else{
-				System.out.println("dorer");
 			}
 		}
 		return -1;

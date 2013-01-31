@@ -1,5 +1,6 @@
 package state;
 
+import gui.Inventory;
 import gui.MachineCraftInterface;
 import image.ImageStore;
 
@@ -32,6 +33,7 @@ public class StatePlay extends BasicGameState {
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
+		Inventory.get().draw();
 		if(isCrafting){
 			MachineCraftInterface.get().draw();
 		}

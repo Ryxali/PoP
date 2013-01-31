@@ -1,5 +1,7 @@
 package gui;
 
+import org.newdawn.slick.Input;
+
 import priceofprogress.Game;
 import image.ImageStore;
 
@@ -65,9 +67,8 @@ public class MachineCraftInterface extends Interface {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
+	public void update(Input input) {
+		
 	}
 
 }
