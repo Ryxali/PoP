@@ -42,13 +42,13 @@ public class Inventory extends Interface{
 
 	@Override
 	public void update(Input input) {
-		for (int i = 0; i < slots.size(); i++) {
+		/*for (int i = 0; i < slots.size(); i++) {
 			slots.get(i).getButton().buttonStateCheck(input);
 			slots.get(i).update();
 			if(!slots.get(i).isEmpty()){
 				
 			}
-		}
+		}*/
 		
 	}
 	public Object checkPickups(){

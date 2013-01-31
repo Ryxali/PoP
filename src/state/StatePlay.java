@@ -43,13 +43,13 @@ public class StatePlay extends BasicGameState {
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
-		Inventory.get().draw();
+		//Inventory.get().draw();
 		if(isCrafting){
 			MachineCraftInterface.get().draw();
 		}
-		if(heldItem != null){
+		/*if(heldItem != null){
 			heldItem.draw(mouseX, mouseY, g);
-		}
+		}*/
 	}
 	
 	@Override
@@ -65,9 +65,9 @@ public class StatePlay extends BasicGameState {
 		}
 		Inventory.get().update(gc.getInput());
 		Object obj = Inventory.get().checkPickups();
-		if(!obj.equals(0) && obj instanceof Drawable){
+		/*if(!obj.equals(0) && obj instanceof Drawable){
 			heldItem = (Drawable) obj;
-		}
+		}*/
 		mouseX = gc.getInput().getMouseX();
 		mouseY = gc.getInput().getMouseY();
 		
