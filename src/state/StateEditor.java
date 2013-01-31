@@ -18,11 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import priceofprogress.EditorStartup;
 
 public class StateEditor extends BasicGeneralState {
-	
+	/** Keeps a list containing lists of blocks */
 	private Object[] loadedMap = null;
 	private boolean working = false;
 	/** Price of Progress Map */
 	String fileType = "ppm";
+	/**  */
+	int defaultBlockLength = 30;
 	
 	public StateEditor(int state){
 		
@@ -35,6 +37,14 @@ public class StateEditor extends BasicGeneralState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		System.out.println("paint");
 		ImageStore.COMPANY_LOGO.draw(0, 0);
+		
+		ImageStore.BLOCK_EARTH.getImage();
+		// längd 30 höjd 3
+		for (int height = 0; height < 3; height++) {
+			for(int length = 0; length < defaultBlockLength; length++){
+				ImageStore.BLOCK_EARTH.draw(length*64, 1200-64*height);
+			}
+		}
 		
 	}
 	
@@ -49,11 +59,10 @@ public class StateEditor extends BasicGeneralState {
 	
 	private void workList(){
 		working = true;
-		// pause
-		EditorStartup.getGameContainer().pause();
+		
 		// if we don not have a map choose to create a new one, load one or exit the editor
-		if(loadedMap == null){
-			String[] choices = {"Create new map", "Load map", "Exit"};
+		/**if(loadedMap == null){
+			String[] choices = {"New map", "Load map", "Exit"};
 			int theChoice = JOptionPane.showOptionDialog(null, "No map loaded", "Editor",
 						JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
 			if(theChoice == 0){
@@ -67,36 +76,74 @@ public class StateEditor extends BasicGeneralState {
 				System.exit(0);
 			}
 		}else{
-			
-		}
-		// resume
-		EditorStartup.getGameContainer().resume();
+			String[] choices = {"Edit map", "New map", "Load map", "Exit"};
+			int choice = JOptionPane.showOptionDialog(null, "What to do?", "Editor",
+						JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
+			if(choice == 0){
+				
+			}
+			else if(choice == 1){
+				createNewMap();
+			}
+			else if(choice == 2){
+				loadMap();
+			}
+			else if(choice == 3){
+				// 0 = yes, 1 = 
+				int choice2 = JOptionPane.showConfirmDialog(null, "Save map before exit?");
+				if(choice2 == 0){
+					saveMap();
+					System.out.println("Exit");
+					System.exit(0);
+				}
+				else if(choice2 == 1){
+					
+				}else if(choice2 == 2){
+					// user changed his or her mind and does not want to exit anymore.
+				}
+			}
+		}*/
+		working = false;
 	}
 	
 	private void createNewMap(){
-		
+		// autogen blocks with flat or random height
+		String[] choices = {"Falt Terrain", "Randomly Shifting Terrain", "Cancel"};
+		int choice = JOptionPane.showOptionDialog(null, "How do you want to create the map?", "New Map",
+					JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
+		if(choice == 0){
+			// flat blocks
+			
+		}
+		else if(choice == 1){
+			// random blockgen
+		}
+		else if(choice == 2){
+			// user changed his or her mind and does not want to create a map anymore.
+		}
 	}
 	
 	private void loadMap(){
-		
-	}
-	
-	private void saveMap() throws FileNotFoundException{
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
-        // Limit the file types that can be chosen
+        // Limit the file types that can be chosen.
         fc.setAcceptAllFileFilterUsed(false);
         int returnVal = fc.showOpenDialog(null);
-        // Check if file is of right type
+        // Check if file is of right type.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             
             if(file.getName().toLowerCase().endsWith("." + fileType)){
-            	Scanner indata = new Scanner(new File(file.getAbsolutePath()));
-                while (indata.hasNext()) {
-                    //textList.add(indata.nextLine());
-                }
-            	
+            	Scanner indata;
+				try {
+					indata = new Scanner(new File(file.getAbsolutePath()));
+					while (indata.hasNext()) {
+						
+	                    //textList.add(indata.nextLine());
+	                }
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
             }else{
             	JOptionPane.showMessageDialog(null, file.getName() + " is not a "
             			+ fileType + " file. Try again.", "File Error", JOptionPane.WARNING_MESSAGE, null);
@@ -104,8 +151,12 @@ public class StateEditor extends BasicGeneralState {
             }
             
         } else {
-            // user changed his or her mind and does not want to load a file anymore
+            // user changed his or her mind and does not want to load a file anymore.
         }
+	}
+	
+	private void saveMap(){
+		
 	}
 	
 	@Override
