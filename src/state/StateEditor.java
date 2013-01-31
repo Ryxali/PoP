@@ -2,6 +2,7 @@ package state;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import image.ImageStore;
@@ -16,11 +17,17 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import priceofprogress.EditorStartup;
+import terrain.Block;
+import terrain.Blocks;
+import terrain.StaticBlock;
+import terrain.Terrain;
 
 public class StateEditor extends BasicGeneralState {
 	/** Keeps a list containing lists of blocks */
-	private Object[] loadedMap = null;
+	private ArrayList<ArrayList<Block>> loadedMap = new ArrayList<ArrayList<Block>>();
+	
 	private boolean working = false;
+	
 	/** Price of Progress Map */
 	String fileType = "ppm";
 	/**  */
@@ -31,30 +38,39 @@ public class StateEditor extends BasicGeneralState {
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-		//System.out.println("It Lives!!!!!!!!!!!!!");
+		// Create an empty map
+		Terrain.get();
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		System.out.println("paint");
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		
-		ImageStore.BLOCK_EARTH.getImage();
-		// längd 30 höjd 3
-		for (int height = 0; height < 3; height++) {
-			for(int length = 0; length < defaultBlockLength; length++){
-				ImageStore.BLOCK_EARTH.draw(length*64, 1200-64*height);
+		for (int i = 0; i < loadedMap.size(); i++) {
+			for (int j = 0; j < loadedMap.get(i).size(); j++) {
+				loadedMap.get(i).get(j).getRef().draw(loadedMap.get(i).get(j).getXPos(), loadedMap.get(i).get(j).getYPos());
 			}
 		}
-		
 	}
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		System.out.println("updateur");
-		if(working == false){
-			workList();
+		//System.out.println("updateur");
+		
+		
+		for (int i = 0; i < 6; i++) {
+			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
+			for (int j = 0; j < defaultBlockLength; j++) {
+				
+				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-i*64));
+			}
+			loadedMap.add(currentBlockRow);
 		}
+		
+		/**if(working == false){
+			workList();
+		}*/
 	}
 	
 	private void workList(){
@@ -107,23 +123,13 @@ public class StateEditor extends BasicGeneralState {
 	}
 	
 	private void createNewMap(){
-		// autogen blocks with flat or random height
-		String[] choices = {"Falt Terrain", "Randomly Shifting Terrain", "Cancel"};
-		int choice = JOptionPane.showOptionDialog(null, "How do you want to create the map?", "New Map",
-					JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
-		if(choice == 0){
-			// flat blocks
-			
-		}
-		else if(choice == 1){
-			// random blockgen
-		}
-		else if(choice == 2){
-			// user changed his or her mind and does not want to create a map anymore.
-		}
+		// use Terrain
+		
 	}
 	
 	private void loadMap(){
+		// call File/ dataLoader
+		/**
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
         // Limit the file types that can be chosen.
@@ -153,6 +159,7 @@ public class StateEditor extends BasicGeneralState {
         } else {
             // user changed his or her mind and does not want to load a file anymore.
         }
+        */
 	}
 	
 	private void saveMap(){
