@@ -1,8 +1,13 @@
 package state;
 
+import gui.Interface;
 import gui.Inventory;
 import gui.MachineCraftInterface;
+import image.Drawable;
 import image.ImageStore;
+
+import machines.Machine;
+import machines.Part;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -21,6 +26,11 @@ public class StatePlay extends BasicGameState {
 	
 	private boolean isCrafting = false;
 	
+	private int mouseX = 0;
+	private int mouseY = 0;
+	
+	private Drawable heldItem;
+	
 	public StatePlay(int state){
 		
 	}
@@ -37,6 +47,9 @@ public class StatePlay extends BasicGameState {
 		if(isCrafting){
 			MachineCraftInterface.get().draw();
 		}
+		if(heldItem != null){
+			heldItem.draw(mouseX, mouseY, g);
+		}
 	}
 	
 	@Override
@@ -50,6 +63,13 @@ public class StatePlay extends BasicGameState {
 		}else{
 			isCrafting = false;
 		}
+		Inventory.get().update(gc.getInput());
+		Object obj = Inventory.get().checkPickups();
+		if(!obj.equals(0) && obj instanceof Drawable){
+			heldItem = (Drawable) obj;
+		}
+		mouseX = gc.getInput().getMouseX();
+		mouseY = gc.getInput().getMouseY();
 		
 	}
 	

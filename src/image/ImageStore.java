@@ -73,9 +73,30 @@ public enum ImageStore {
 	
 	//Blocks for world building
 	BLOCK_EARTH("res/img/blocks/EarthBlock.png", null),
-	BLOCK_GRASSres("res/img/blocks/EarthBlock.png", null),
+	BLOCK_GRASS("res/img/blocks/EarthBlock.png", null),
 	BLOCK_GRAVEL("res/img/blocks/EarthBlock.png", null),
-	BLOCK_ROCK("res/img/blocks/EarthBlock.png", null);
+	BLOCK_ROCK("res/img/blocks/EarthBlock.png", null),
+	
+	
+	//Backdrop images
+	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.PNG", null),
+	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.PNG", null),
+	
+	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.PNG", null),
+	
+	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.PNG", null),
+	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.PNG", null),
+	FOREST_BACKDROP_MID_3("res/img/Backdrops/ForestWorld/Mid/Tree_3.PNG", null),
+	FOREST_BACKDROP_MID_4("res/img/Backdrops/ForestWorld/Mid/Tree_4.PNG", null),
+	FOREST_BACKDROP_MID_5("res/img/Backdrops/ForestWorld/Mid/Tree_5.PNG", null),
+	FOREST_BACKDROP_MID_6("res/img/Backdrops/ForestWorld/Mid/Tree_6.PNG", null),
+	FOREST_BACKDROP_MID_7("res/img/Backdrops/ForestWorld/Mid/Tree_7.PNG", null),
+	
+	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.PNG", null),
+	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.PNG", null),
+	FOREST_BACKDROP_SKY_3("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_3.PNG", null),
+	FOREST_BACKDROP_SKY_4("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_4.PNG", null),
+	FOREST_BACKDROP_SKY_5("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_5.PNG", null);
 	
 	/**
 	 * The String reference to the image location on disk
