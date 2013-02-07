@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import file.PPWDataLoader;
 import image.ImageStore;
 
 import javax.swing.JFileChooser;
@@ -23,15 +24,11 @@ import terrain.Terrain;
 
 public class StateEditor extends BasicGeneralState {
 	/** The URL of the current map. */
-	private String mapRef = "defaultMapRef";
-	/** Keeps a list containing lists of blocks */
-	private ArrayList<ArrayList<Block>> blockMap = new ArrayList<ArrayList<Block>>();
-	/** The file-type supported by this editor. Price of Progress Map. */
-	private String fileType = "PPW";
+	private String mapRef = "maps/defaultMapRef.PPW";
 	/** The default number of blocks created in an horizontal line when a new map is created */
 	int defaultBlockLength = 30;
 	
-	private boolean working = false;
+	public boolean notSaved = true;
 	
 	public StateEditor(int state){
 		
@@ -43,13 +40,12 @@ public class StateEditor extends BasicGeneralState {
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		System.out.println("render");
 		//backdrop
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		//draws all blocks 
-		for (int i = 0; i < blockMap.size(); i++) {
-			for (int j = 0; j < blockMap.get(i).size(); j++) {
-				blockMap.get(i).get(j).getRef().draw(blockMap.get(i).get(j).getXPos(), blockMap.get(i).get(j).getYPos());
+		for (int i = 0; i < Terrain.get().size(); i++) {
+			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
+				Terrain.get().getBlock(i, j).getRef().draw(Terrain.get().getBlock(i, j).getXPos(), Terrain.get().getBlock(i, j).getYPos());
 			}
 		}
 	}
@@ -59,17 +55,11 @@ public class StateEditor extends BasicGeneralState {
 			throws SlickException {
 		//System.out.println("update");
 		
-		/**if(working == false){
-			workList();
-		}*/
-	}
-	
-	private void workList(){
-		working = true;
-		
-		// if we don not have a map choose to create a new one, load one or exit the editor
-		
-		working = false;
+		// save what we has
+		if(notSaved){
+			notSaved = false;
+			saveMap();
+		}
 	}
 	
 	private void createNewMap(){
@@ -79,42 +69,24 @@ public class StateEditor extends BasicGeneralState {
 		for (int i = 0; i < 6; i++) {
 			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 			for (int j = 0; j < defaultBlockLength; j++) {
-				
 				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-i*64));
 			}
-			blockMap.add(currentBlockRow);
+			Terrain.get().addBlockRow(currentBlockRow);
 		}
 	}
 	
 	private void loadMap(){
-		// Create a file chooser
-        JFileChooser fc = new JFileChooser();
-        // Limit the file types that can be chosen.
-        fc.setAcceptAllFileFilterUsed(false);
-        
-        //WONGWONGWONGWONGWONGWONGWONGWONGWONGWONGWONG
-        int returnVal = fc.showOpenDialog(null);
-        
-        // Check if file is of right type.
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File choosenFile = fc.getSelectedFile();
-            
-            if(choosenFile.getName().toLowerCase().endsWith("." + fileType)){
-				// load the file
-            	file.PPWDataLoader.loadTerrain(Terrain.get(), choosenFile.getName());
-            }else{
-            	System.out.println(choosenFile.getName() + " is not a " + fileType + " file.");
-            }
-        }
+		// behövs kanske int
+		// returna namn?
 	}
 	
 	private void saveMap(){
-		if(mapRef == "defaultMapRef"){
-			//välja namn
-			
-			mapRef = "res/" + mapRef;
+		if(mapRef == "maps/defaultMapRef.PPW"){
+			PPWDataLoader.saveTerrain(mapRef, true);
+		}else{
+			PPWDataLoader.saveTerrain(mapRef, false);
 		}
-		file.PPWDataLoader.saveData(mapRef);
+		
 	}
 	
 	@Override

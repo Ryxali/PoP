@@ -6,17 +6,23 @@ import org.newdawn.slick.Graphics;
 
 public abstract class Block {
 	
+	private int iD;
 	private int x;
 	private int y;
 	private ImageStore ref;
 	
-	public Block(int xPos, int yPos, ImageStore ref){
+	public Block( int iD, int xPos, int yPos, ImageStore ref){
+		this.iD = iD;
 		this.x = xPos;
 		this.y = yPos;
 		this.ref = ref;
 	}
 	
 	public abstract void draw(Graphics g);
+	
+	public int getID(){
+		return this.iD;
+	}
 	
 	public int getXPos(){
 		return this.x;

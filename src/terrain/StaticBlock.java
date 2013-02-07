@@ -6,8 +6,8 @@ import org.newdawn.slick.Graphics;
 
 public class StaticBlock extends Block{
 
-	public StaticBlock(int xPos, int yPos, ImageStore ref) {
-		super(xPos, yPos, ref);
+	public StaticBlock( int iD, int xPos, int yPos, ImageStore ref) {
+		super(iD, xPos, yPos, ref);
 	}
 	
 	public void addPoses(int xPos, int yPos){
@@ -31,7 +31,7 @@ public class StaticBlock extends Block{
 	 */
 	@Override
 	public Block clone(int x, int y) {
-		return new StaticBlock(x, y, getRef());
+		return new StaticBlock(getID(), x, y, getRef());
 	}
 	
 }

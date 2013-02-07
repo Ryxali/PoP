@@ -17,6 +17,10 @@ public class Terrain {
 		col = new ArrayList<ArrayList<Block>>();
 	}
 	
+	public void addBlockRow(ArrayList<Block> blockRow){
+		col.add(blockRow);
+	}
+	
 	public ArrayList<Block> getRow(int colN){
 		return col.get(colN);
 	}
