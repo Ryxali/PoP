@@ -28,4 +28,21 @@ public class Terrain {
 	public Block getBlock(int colN, int rowN){
 		return col.get(colN).get(rowN);
 	}
+	/**
+	 * Returns the number rows of blocks in the current map.
+	 * 
+	 * @return the number of rows of the current map.
+	 */
+	public int size(){
+		return col.size();
+	}
+	/**
+	 * Returns the number of blocks on a specified row in the current map.
+	 * 
+	 * @param row the row whose size shall be measured.
+	 * @return the number of blocks in the row.
+	 */
+	public int rowSize(int row){
+		return col.get(row).size();
+	}
 }

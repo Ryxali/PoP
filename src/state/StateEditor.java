@@ -8,7 +8,6 @@ import java.util.Scanner;
 import image.ImageStore;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -23,32 +22,34 @@ import terrain.StaticBlock;
 import terrain.Terrain;
 
 public class StateEditor extends BasicGeneralState {
+	/** The URL of the current map. */
+	private String mapRef = "defaultMapRef";
 	/** Keeps a list containing lists of blocks */
-	private ArrayList<ArrayList<Block>> loadedMap = new ArrayList<ArrayList<Block>>();
+	private ArrayList<ArrayList<Block>> blockMap = new ArrayList<ArrayList<Block>>();
+	/** The file-type supported by this editor. Price of Progress Map. */
+	private String fileType = "PPW";
+	/** The default number of blocks created in an horizontal line when a new map is created */
+	int defaultBlockLength = 30;
 	
 	private boolean working = false;
-	
-	/** Price of Progress Map */
-	String fileType = "ppm";
-	/**  */
-	int defaultBlockLength = 30;
 	
 	public StateEditor(int state){
 		
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-		// Create an empty map
-		Terrain.get();
+		// start with a new map
+		createNewMap();
 	}
-	@Override
+	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		System.out.println("paint");
+		System.out.println("render");
+		//backdrop
 		ImageStore.COMPANY_LOGO.draw(0, 0);
-		
-		for (int i = 0; i < loadedMap.size(); i++) {
-			for (int j = 0; j < loadedMap.get(i).size(); j++) {
-				loadedMap.get(i).get(j).getRef().draw(loadedMap.get(i).get(j).getXPos(), loadedMap.get(i).get(j).getYPos());
+		//draws all blocks 
+		for (int i = 0; i < blockMap.size(); i++) {
+			for (int j = 0; j < blockMap.get(i).size(); j++) {
+				blockMap.get(i).get(j).getRef().draw(blockMap.get(i).get(j).getXPos(), blockMap.get(i).get(j).getYPos());
 			}
 		}
 	}
@@ -56,17 +57,7 @@ public class StateEditor extends BasicGeneralState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		//System.out.println("updateur");
-		
-		
-		for (int i = 0; i < 6; i++) {
-			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
-			for (int j = 0; j < defaultBlockLength; j++) {
-				
-				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-i*64));
-			}
-			loadedMap.add(currentBlockRow);
-		}
+		//System.out.println("update");
 		
 		/**if(working == false){
 			workList();
@@ -77,93 +68,53 @@ public class StateEditor extends BasicGeneralState {
 		working = true;
 		
 		// if we don not have a map choose to create a new one, load one or exit the editor
-		/**if(loadedMap == null){
-			String[] choices = {"New map", "Load map", "Exit"};
-			int theChoice = JOptionPane.showOptionDialog(null, "No map loaded", "Editor",
-						JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
-			if(theChoice == 0){
-				createNewMap();
-			}
-			else if(theChoice == 1){
-				loadMap();
-			}
-			else if(theChoice == 2){
-				System.out.println("Exit");
-				System.exit(0);
-			}
-		}else{
-			String[] choices = {"Edit map", "New map", "Load map", "Exit"};
-			int choice = JOptionPane.showOptionDialog(null, "What to do?", "Editor",
-						JOptionPane.YES_NO_CANCEL_OPTION , JOptionPane.QUESTION_MESSAGE, null, choices, null);
-			if(choice == 0){
-				
-			}
-			else if(choice == 1){
-				createNewMap();
-			}
-			else if(choice == 2){
-				loadMap();
-			}
-			else if(choice == 3){
-				// 0 = yes, 1 = 
-				int choice2 = JOptionPane.showConfirmDialog(null, "Save map before exit?");
-				if(choice2 == 0){
-					saveMap();
-					System.out.println("Exit");
-					System.exit(0);
-				}
-				else if(choice2 == 1){
-					
-				}else if(choice2 == 2){
-					// user changed his or her mind and does not want to exit anymore.
-				}
-			}
-		}*/
+		
 		working = false;
 	}
 	
 	private void createNewMap(){
-		// use Terrain
-		
+		// Create an empty map
+		Terrain.get();
+		// Make a default map
+		for (int i = 0; i < 6; i++) {
+			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
+			for (int j = 0; j < defaultBlockLength; j++) {
+				
+				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-i*64));
+			}
+			blockMap.add(currentBlockRow);
+		}
 	}
 	
 	private void loadMap(){
-		// call File/ dataLoader
-		/**
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
         // Limit the file types that can be chosen.
         fc.setAcceptAllFileFilterUsed(false);
+        
+        //WONGWONGWONGWONGWONGWONGWONGWONGWONGWONGWONG
         int returnVal = fc.showOpenDialog(null);
+        
         // Check if file is of right type.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
+            File choosenFile = fc.getSelectedFile();
             
-            if(file.getName().toLowerCase().endsWith("." + fileType)){
-            	Scanner indata;
-				try {
-					indata = new Scanner(new File(file.getAbsolutePath()));
-					while (indata.hasNext()) {
-						
-	                    //textList.add(indata.nextLine());
-	                }
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+            if(choosenFile.getName().toLowerCase().endsWith("." + fileType)){
+				// load the file
+            	file.PPWDataLoader.loadTerrain(Terrain.get(), choosenFile.getName());
             }else{
-            	JOptionPane.showMessageDialog(null, file.getName() + " is not a "
-            			+ fileType + " file. Try again.", "File Error", JOptionPane.WARNING_MESSAGE, null);
-            	saveMap();
+            	System.out.println(choosenFile.getName() + " is not a " + fileType + " file.");
             }
-            
-        } else {
-            // user changed his or her mind and does not want to load a file anymore.
         }
-        */
 	}
 	
 	private void saveMap(){
-		
+		if(mapRef == "defaultMapRef"){
+			//välja namn
+			
+			mapRef = "res/" + mapRef;
+		}
+		file.PPWDataLoader.saveData(mapRef);
 	}
 	
 	@Override

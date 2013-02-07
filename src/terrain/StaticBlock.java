@@ -21,8 +21,13 @@ public class StaticBlock extends Block{
 	}
 
 	/**
-	 * Creates and returns a static block with the desired values.
+	 * Creates and returns a new static block with the desired positions
+	 * and the same block-subclass as this one (StaticBlock).
 	 * 
+	 * @param x the horizontal position of the new block.
+	 * @param y the vertical position of the new block.
+	 * 
+	 * @return the new block
 	 */
 	@Override
 	public Block clone(int x, int y) {
