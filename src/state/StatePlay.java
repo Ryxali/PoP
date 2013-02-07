@@ -3,7 +3,9 @@ package state;
 import gui.Interface;
 import gui.Inventory;
 import gui.MachineCraftInterface;
+import image.BackDrop;
 import image.Drawable;
+import image.ImageCluster;
 import image.ImageStore;
 
 import machines.Machine;
@@ -36,16 +38,17 @@ public class StatePlay extends BasicGameState {
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-		
+		BackDrop.get().rebuild(ImageCluster.FOREST);
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		ImageStore.COMPANY_LOGO.draw(0, 0);
+		BackDrop.get().draw(g);
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
-		Inventory.get().draw();
+		Inventory.get().draw(g);
 		if(isCrafting){
-			MachineCraftInterface.get().draw();
+			MachineCraftInterface.get().draw(g);
 		}
 		if(heldItem != null){
 			heldItem.draw(mouseX, mouseY, g);
@@ -57,6 +60,7 @@ public class StatePlay extends BasicGameState {
 			throws SlickException {
 		Game.updateDelta(gc.getTime());
 		Characters.MAIN_CHAR.getCharacter().update(gc.getInput());
+		BackDrop.get().update(gc.getInput());
 		Entities.WOUBLE.getEntity().update();
 		if(gc.getInput().isKeyDown(Input.KEY_E)){
 			isCrafting = true;
@@ -64,8 +68,8 @@ public class StatePlay extends BasicGameState {
 			isCrafting = false;
 		}
 		Inventory.get().update(gc.getInput());
-		Object obj = Inventory.get().checkPickups();
-		if(!(obj instanceof Integer) && obj instanceof Drawable){
+		Object obj = Inventory.get().checkPickups(gc.getInput());
+		if(obj != null && obj instanceof Drawable){
 			heldItem = (Drawable) obj;
 		}
 		mouseX = gc.getInput().getMouseX();

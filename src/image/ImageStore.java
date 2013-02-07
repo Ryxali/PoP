@@ -60,6 +60,9 @@ public enum ImageStore {
 	OVERLAY_CRAFTING_SLOT("res/img/CraftMenu/BG_Slot_Empty.png", null),
 	
 	INVENTORY_FRAME_SLOT("res/img/Default/Def1.png", null),
+	INVENTORY_FRAME_SLOT_IDLE("res/img/Inventory/SlotOverlay/Idle.png", null),
+	INVENTORY_FRAME_SLOT_HOVER("res/img/Inventory/SlotOverlay/Hover.png", null),
+	INVENTORY_FRAME_SLOT_PRESSED("res/img/Inventory/SlotOverlay/Pressed.png", null),
 	
 	//Machine parts (for crafting) here.
 	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
@@ -83,6 +86,8 @@ public enum ImageStore {
 	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.PNG", null),
 	
 	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.PNG", null),
+	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.PNG", null),
+	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.PNG", null),
 	
 	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.PNG", null),
 	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.PNG", null),
@@ -91,6 +96,8 @@ public enum ImageStore {
 	FOREST_BACKDROP_MID_5("res/img/Backdrops/ForestWorld/Mid/Tree_5.PNG", null),
 	FOREST_BACKDROP_MID_6("res/img/Backdrops/ForestWorld/Mid/Tree_6.PNG", null),
 	FOREST_BACKDROP_MID_7("res/img/Backdrops/ForestWorld/Mid/Tree_7.PNG", null),
+	
+	FOREST_BACKDROP_SHORT_1("res/img/Backdrops/ForestWorld/Short/Grass.PNG", null),
 	
 	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.PNG", null),
 	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.PNG", null),

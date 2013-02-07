@@ -1,5 +1,6 @@
 package gui;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 /**
@@ -11,7 +12,7 @@ import org.newdawn.slick.Input;
 public class GameInterface extends Interface{
 
 	@Override
-	public void draw() {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

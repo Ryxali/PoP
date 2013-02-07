@@ -1,16 +1,19 @@
 package gui;
 
+import org.newdawn.slick.Graphics;
+
 import machines.Machine;
 import machines.Part;
 import image.ImageStore;
 import button.StandardButton;
 
 public class InventorySlot extends StandardButton{
-	public InventorySlot(int x, int y, ImageStore idleImg, ImageStore hoverImg,
+	public InventorySlot(int x, int y, ImageStore slotImg, ImageStore idleImg, ImageStore hoverImg,
 			ImageStore pressedImg) {
 		super(x, y, idleImg, hoverImg, pressedImg);
+		this.slotImg = slotImg;
 	}
-	
+	private ImageStore slotImg;
 	private boolean isEmpty = true;
 	private Machine machine;
 	private Part part;
@@ -23,6 +26,17 @@ public class InventorySlot extends StandardButton{
 			isEmpty = false;
 		}else{
 			isEmpty = true;
+		}
+	}
+	@Override
+	public void draw(Graphics g){
+		slotImg.draw(x, y);
+		getStoredImage().draw(x, y);
+		if(machine != null){
+			machine.draw(x, y, g);
+		}
+		if(part != null){
+			part.draw(x, y, g);
 		}
 	}
 	public void put(Machine machine){

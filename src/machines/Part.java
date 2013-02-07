@@ -16,13 +16,13 @@ import priceofprogress.Weight;
 
 public abstract class Part implements Weight, Drawable{
 	private int[] possPos;
-	private ImageStore img;
+	protected ImageStore img;
 	private Machine machine;
 	
-	public Part(Machine machine, ImageStore UIImg, AnimationStore AnimImg, int possPos1, int... posPoss){
-		this.machine = machine;
+	public Part(ImageStore UIImg, AnimationStore AnimImg, int... posPoss){
+		//this.machine = machine;
 		this.img = UIImg;
-		this.possPos = toArray(possPos1, posPoss);
+		this.possPos = posPoss;
 	}
 	
 	private static int[] toArray(int i, int[] iN) {

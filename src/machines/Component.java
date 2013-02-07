@@ -1,13 +1,15 @@
 package machines;
 
+import image.ImageStore;
+
 import java.util.Arrays;
 
 public enum Component{
 	//TODO add object to represent these units
-	VACCUM("Vaccum Unit", toArray(0));
+	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, 0));
 
 	private final String title;
-	private final int[] possLocations;
+	private Part part;
 	public final int POSITION_1 = 0;
 	public final int POSITION_2 = 1;
 	public final int POSITION_3 = 2;
@@ -22,16 +24,19 @@ public enum Component{
 		return iN;
 
 	}
+	public Part getPart(){
+		return part;
+	}
 
-	private Component(String title, int[] possLocations) {
+	private Component(String title, Part part) {
 		this.title = title;
-		this.possLocations = possLocations;
+		this.part = part;
 	}
 	
 	public String getTitle(){
 		return title;
 	}
-	public int[] getValidPositions(){
+	/*public int[] getValidPositions(){
 		return possLocations;
 	}
 	public boolean canFit(int pos){
@@ -41,7 +46,7 @@ public enum Component{
 			}
 		}
 		return false;
-	}
+	}*/
 
 	
 

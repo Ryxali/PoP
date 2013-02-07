@@ -1,5 +1,6 @@
 package gui;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 import priceofprogress.Game;
@@ -38,7 +39,7 @@ public class MachineCraftInterface extends Interface {
 		
 	}
 	@Override
-	public void draw() {
+	public void draw(Graphics g) {
 		double x = (double) (Game.getGameContainer().getWidth() - ImageStore.OVERLAY_CRAFTING_BACKGROUND
 				.getImage().getWidth()) / 2d;
 		double y = (double) (Game.getGameContainer().getHeight() - ImageStore.OVERLAY_CRAFTING_BACKGROUND

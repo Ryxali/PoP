@@ -10,14 +10,14 @@ import image.ImageStore;
 
 public class PartVaccum extends Part{
 
-	public PartVaccum(Machine machine, ImageStore img, AnimationStore animImg, int possPos1, int[] posPoss) {
-		super(machine, img, animImg, possPos1, posPoss);
+	public PartVaccum(ImageStore img, AnimationStore animImg, int... posPoss) {
+		super(img, animImg, posPoss);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		img.draw(0, 0);
 		
 	}
 
@@ -37,7 +37,7 @@ public class PartVaccum extends Part{
 
 	@Override
 	public void draw(int x, int y, Graphics g) {
-		// TODO Auto-generated method stub
+		img.draw(x, y);
 		
 	}
 

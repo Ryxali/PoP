@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public enum ImageCluster {
 	BACKDROP_FOREST_FAR("forest", "far",
-			ImageStore.FOREST_BACKDROP_FAR_1
+			ImageStore.FOREST_BACKDROP_FAR_1,
+			ImageStore.FOREST_BACKDROP_FAR_2,
+			ImageStore.FOREST_BACKDROP_FAR_3
 			),
 	BACKDROP_FOREST_MID("forest", "mid",
 			ImageStore.FOREST_BACKDROP_MID_1,
@@ -15,8 +17,8 @@ public enum ImageCluster {
 			ImageStore.FOREST_BACKDROP_MID_6,
 			ImageStore.FOREST_BACKDROP_MID_7
 			),
-	BACKDROP_FOREST_SHORT("forest", "short"
-			
+	BACKDROP_FOREST_SHORT("forest", "short",
+			ImageStore.FOREST_BACKDROP_SHORT_1
 			),
 	BACKDROP_FOREST_SKY("forest", "sky",
 			ImageStore.FOREST_BACKDROP_SKY_1,
