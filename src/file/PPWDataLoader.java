@@ -32,37 +32,41 @@ public class PPWDataLoader implements Runnable{
 	 * 
 	 * @return
 	 */
-	public ArrayList<String[]> loadData(){
+	private void chooseData(){
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
         // Limit the file types that can be chosen.
         fc.setAcceptAllFileFilterUsed(false);
+        fc.changeToParentDirectory();
         int returnVal = fc.showOpenDialog(null);
         // Check if file is of right type.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File choosenFile = fc.getSelectedFile();
-            
-            if(choosenFile.getName().toLowerCase().endsWith(".PPW")){
-        		ArrayList <String[]> strs = new ArrayList<String[]>();
-        		try {
-        			Scanner indata = new Scanner(choosenFile);
-        			
-        			while(indata.hasNext()){
-        				strs.add(indata.nextLine().split("/"));
-        			}
-        		} catch (FileNotFoundException e) {
-        			
-        			e.printStackTrace();
-        		}
-        		fileData = strs;
+            if(choosenFile.getName().toLowerCase().endsWith(".ppw")){
+            	loadFile(choosenFile);
             }else{
             	System.out.println(choosenFile.getName() + " is not a PPW file.");
             }
         }else{
         	// we have not chosen anything.
         }
-        return fileData;
 	}
+	
+	private ArrayList<String[]> loadFile(File file){
+		ArrayList <String[]> strs = new ArrayList<String[]>();
+		try {
+			Scanner indata = new Scanner(file);
+			while(indata.hasNext()){
+				strs.add(indata.nextLine().split("/"));
+			}
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		fileData = strs;
+		return fileData;
+	}
+	
 	/**
 	 *
 	 *
@@ -114,8 +118,12 @@ public class PPWDataLoader implements Runnable{
 		PPWDataLoader.get().saveData(ref, newMap);
 	}
 	
-	public static ArrayList<String[]> loadTerrain(){
-		return PPWDataLoader.get().loadData();
+	public static void loadTerrain(){
+		PPWDataLoader.get().chooseData();
+	}
+	
+	public static ArrayList<String[]> loadTerrain(File file){
+		return PPWDataLoader.get().loadFile(file);
 	}
 
 	@Override

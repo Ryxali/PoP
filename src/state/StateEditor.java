@@ -36,7 +36,7 @@ public class StateEditor extends BasicGeneralState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		// start with a new map
-		createNewMap();
+		//createNewMap();
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
@@ -58,7 +58,8 @@ public class StateEditor extends BasicGeneralState {
 		// save what we has
 		if(notSaved){
 			notSaved = false;
-			saveMap();
+			//saveMap();
+			loadMap();
 		}
 	}
 	
@@ -76,8 +77,7 @@ public class StateEditor extends BasicGeneralState {
 	}
 	
 	private void loadMap(){
-		// behövs kanske int
-		// returna namn?
+		PPWDataLoader.get().loadTerrain();
 	}
 	
 	private void saveMap(){
