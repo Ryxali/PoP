@@ -20,7 +20,8 @@ public class Inventory extends Interface{
 		slots = new ArrayList<InventorySlot>();
 		int x = 8;
 		for(int i = 1; i < x; i++){
-			slots.add(new InventorySlot((int) (i*1920*Game.getWidthScale()/(double)x),
+			slots.add(new InventorySlot(
+					(int) (i*1920*Game.getWidthScale()/(double)x),
 					(int)(1200d*Game.getHeightScale()-ImageStore.INVENTORY_FRAME_SLOT.getImage().getHeight()),
 					ImageStore.INVENTORY_FRAME_SLOT,
 					ImageStore.INVENTORY_FRAME_SLOT,
@@ -36,7 +37,7 @@ public class Inventory extends Interface{
 	@Override
 	public void draw() {
 		for(int i = 0; i < slots.size(); i++){
-			slots.get(i).getButton().draw();
+			slots.get(i).draw();
 		}
 	}
 

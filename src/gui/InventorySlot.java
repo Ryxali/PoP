@@ -10,13 +10,11 @@ public class InventorySlot extends StandardButton{
 			ImageStore pressedImg) {
 		super(x, y, idleImg, hoverImg, pressedImg);
 	}
-	private StandardButton button;
+	
 	private boolean isEmpty = true;
 	private Machine machine;
 	private Part part;
-	public StandardButton getButton(){
-		return button;
-	}
+	
 	public boolean isEmpty(){
 		return isEmpty;
 	}
