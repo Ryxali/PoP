@@ -86,8 +86,12 @@ public enum ImageStore {
 	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.PNG", null),
 	
 	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.PNG", null),
-	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.PNG", null),
-	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.PNG", null),
+	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.png", null),
+	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.png", null),
+	FOREST_BACKDROP_FAR_4("res/img/Backdrops/ForestWorld/Far/Mountain_6.PNG", null),
+	FOREST_BACKDROP_FAR_5("res/img/Backdrops/ForestWorld/Far/Mountain_7.PNG", null),
+	
+	FOREST_BACKDROP_FAR_BLANK("res/img/Backdrops/ForestWorld/Far/Mountain_Blank.png", null),
 	
 	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.PNG", null),
 	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.PNG", null),
@@ -98,6 +102,10 @@ public enum ImageStore {
 	FOREST_BACKDROP_MID_7("res/img/Backdrops/ForestWorld/Mid/Tree_7.PNG", null),
 	
 	FOREST_BACKDROP_SHORT_1("res/img/Backdrops/ForestWorld/Short/Grass.PNG", null),
+	FOREST_BACKDROP_SHORT_2("res/img/Backdrops/ForestWorld/Short/Grass_1.png", null),
+	FOREST_BACKDROP_SHORT_3("res/img/Backdrops/ForestWorld/Short/Grass_2.png", null),
+	FOREST_BACKDROP_SHORT_4("res/img/Backdrops/ForestWorld/Short/Grass_3.png", null),
+	FOREST_BACKDROP_SHORT_5("res/img/Backdrops/ForestWorld/Short/Grass_4.png", null),
 	
 	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.PNG", null),
 	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.PNG", null),

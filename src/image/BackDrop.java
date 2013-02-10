@@ -41,9 +41,20 @@ public class BackDrop implements Drawable{
 	
 	public void rebuild(String name){
 		buildClouds(name);
+		buildSky(name);
 		buildFar(name);
 		buildMid(name);
 		buildShort(name);
+	}
+	
+	private void buildSky(String name){
+		Random rand = new Random();
+		int j = 0;
+		for(int i = 0; i < 2200; j++){
+			skyPalette = ImageCluster.getClusterByNameAndUsage(name, ImageCluster.SKY);
+			sky.add(rand.nextInt(skyPalette.getImages().length));
+			i += skyPalette.get(sky.get(j)).getImage().getWidth();
+		}
 	}
 	
 	private void buildClouds(String name){
@@ -82,9 +93,11 @@ public class BackDrop implements Drawable{
 	}
 	@Override
 	public void draw(Graphics g) {
+		drawTiled(skyPalette, sky, skyX);
 		drawTiled(farPalette, farDrop, farX);
 		drawTiled(midPalette, midDrop, midX);
 		drawTiled(closePalette, closeDrop, closeX);
+		
 	}
 	
 	private void drawTiled(ImageCluster cluster, ArrayList<Integer> seed, double baseX){
@@ -105,6 +118,7 @@ public class BackDrop implements Drawable{
 		//TODO add and remove slices as the game progresses forward();
 	}
 	private void moveSlices(double amount){
+		skyX += amount/4.0;
 		farX += amount/3.0;
 		midX += amount/1.5;
 		closeX += amount;

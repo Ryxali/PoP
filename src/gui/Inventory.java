@@ -35,7 +35,7 @@ public class Inventory extends Interface {
 					ImageStore.INVENTORY_FRAME_SLOT_PRESSED));
 
 		}
-		slots.get(0).put(Component.VACCUM.getPart());
+		slots.get(1).put(Component.VACCUM.getPart());
 	}
 
 	public static Inventory get() {
@@ -57,17 +57,19 @@ public class Inventory extends Interface {
 		for (int i = 0; i < slots.size(); i++) {
 			slots.get(i).buttonStateCheck(input);
 			slots.get(i).update();
-			if (!slots.get(i).isEmpty()) {
-
-			}
+			/*
+			 * if (!slots.get(i).isEmpty()) { if(slots.get(i).hasBeenClicked()
+			 * == Button.PRESSED_TRUE){ slots.get(i).take(); } }
+			 */
 		}
 
 	}
 
 	public Object checkPickups(Input input) {
 		for (int i = 0; i < slots.size(); i++) {
-			if (slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE) {
-				if (slots.get(i).isEmpty()) {
+			if (!slots.get(i).isEmpty()) {
+				if (slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE) {
+
 					return slots.get(i).take();
 				}
 			}
