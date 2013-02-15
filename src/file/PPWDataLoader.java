@@ -59,6 +59,7 @@ public class PPWDataLoader implements Runnable{
 			while(indata.hasNext()){
 				strs.add(indata.nextLine().split("/"));
 			}
+			indata.close();
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
