@@ -6,8 +6,8 @@ import priceofprogress.Game;
 public enum Option {
 	FIELD_RESOLUTION_X("SizeX:", String.valueOf(Game.getGameContainer().getScreenWidth())),
 	FIELD_RESOLUTION_Y("SizeY:", String.valueOf(Game.getGameContainer().getScreenHeight())),
-	FIELD_KEY_MOVELEFT("MvLeft:", "65"),
-	FIELD_KEY_MOVERIGHT("MvRight:", "68"),
+	FIELD_KEY_MOVELEFT("MvLeft:", "30"),
+	FIELD_KEY_MOVERIGHT("MvRight:", "32"),
 	FIELD_KEY_JUMP("Jump:", "32"),
 	FIELD_KEY_FIRE("Fire:", "0"),
 	FIELD_KEY_INTERACT("Interact:", "2"),

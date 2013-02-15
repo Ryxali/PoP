@@ -27,49 +27,53 @@ import image.ImageStore;
  * 
  */
 public class MachineCraftInterface extends Interface {
-	
+
 	private static MachineCraftInterface mc;
-	public static MachineCraftInterface get(){
-		if(mc == null){
+	private InventorySlot[] craftingSlots = new InventorySlot[4];
+
+	public static MachineCraftInterface get() {
+		if (mc == null) {
 			mc = new MachineCraftInterface();
 		}
 		return mc;
 	}
-	private MachineCraftInterface(){
+
+	private MachineCraftInterface() {
+		int ind = 0;
 		
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 2; j++) {
+				System.out.println(i + " " + j);
+				craftingSlots[ind] = new InventorySlot(
+						ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()/4*(i*2),
+						ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()/4*(j*2),
+						ImageStore.OVERLAY_CRAFTING_SLOT,
+						ImageStore.INVENTORY_FRAME_SLOT_IDLE,
+						ImageStore.INVENTORY_FRAME_SLOT,
+						ImageStore.INVENTORY_FRAME_SLOT_PRESSED);
+				ind++;
+			}
+		}
 	}
+
 	@Override
 	public void draw(Graphics g) {
 		double x = (double) (Game.getGameContainer().getWidth() - ImageStore.OVERLAY_CRAFTING_BACKGROUND
 				.getImage().getWidth()) / 2d;
 		double y = (double) (Game.getGameContainer().getHeight() - ImageStore.OVERLAY_CRAFTING_BACKGROUND
 				.getImage().getHeight()) / 2d;
-		ImageStore.OVERLAY_CRAFTING_BACKGROUND.draw((int)x, (int)y);
-		ImageStore.OVERLAY_CRAFTING_SLOT.draw(
-				(int)(x + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()*0.25 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getWidth()/2), 
-				(int)(y + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getHeight()*0.25 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getHeight()/2));
-		ImageStore.OVERLAY_CRAFTING_SLOT.draw(
-				(int)(x + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()*0.75 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getWidth()/2), 
-				(int)(y + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getHeight()*0.25 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getHeight()/2));
-		ImageStore.OVERLAY_CRAFTING_SLOT.draw(
-				(int)(x + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()*0.25 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getWidth()/2), 
-				(int)(y + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getHeight()*0.75 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getHeight()/2));
-		ImageStore.OVERLAY_CRAFTING_SLOT.draw(
-				(int)(x + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getWidth()*0.75 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getWidth()/2), 
-				(int)(y + ImageStore.OVERLAY_CRAFTING_BACKGROUND.getImage().getHeight()*0.75 
-						- ImageStore.OVERLAY_CRAFTING_SLOT.getImage().getHeight()/2));
+		ImageStore.OVERLAY_CRAFTING_BACKGROUND.draw((int) x, (int) y);
+		for(int i = 0; i < craftingSlots.length; i++){
+			craftingSlots[i].draw();
+		}
 	}
 
 	@Override
 	public void update(Input input) {
-		
+		for (int i = 0; i < craftingSlots.length; i++) {
+			craftingSlots[i].buttonStateCheck(input);
+			
+		}
 	}
 
 }

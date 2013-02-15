@@ -68,13 +68,19 @@ public class StatePlay extends BasicGameState {
 			isCrafting = false;
 		}
 		Inventory.get().update(gc.getInput());
-		Object obj = Inventory.get().checkPickups(gc.getInput());
-		if(obj != null && obj instanceof Drawable){
-			heldItem = (Drawable) obj;
-		}
+		heldItem = Inventory.get().checkPickups(gc.getInput(), heldItem);
 		mouseX = gc.getInput().getMouseX();
 		mouseY = gc.getInput().getMouseY();
 		
+	}
+	
+	
+	public Drawable getHeldPart(){
+		return heldItem;
+	}
+	
+	public void setHeldPart(Drawable dObj){
+		heldItem = dObj;
 	}
 	
 	@Override

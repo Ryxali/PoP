@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.state.StateBasedGame;
@@ -145,8 +146,8 @@ public class Game extends StateBasedGame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Save.get().loadFile("testy.txt");
-		Save.get().print();
+		System.out.println(Input.KEY_A + " " + Input.KEY_D);
+		
 		try {
 			setupAppgc();
 			appgc.start();

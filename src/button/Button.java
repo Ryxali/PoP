@@ -64,6 +64,7 @@ public abstract class Button {
 	}
 	public int hasBeenClicked(){
 		if(clicked && getState() == STATE_HOVER){
+			clicked = false;
 			return PRESSED_TRUE;
 		}
 		return PRESSED_FALSE;
