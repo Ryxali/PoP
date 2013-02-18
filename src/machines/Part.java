@@ -45,6 +45,15 @@ public abstract class Part implements Weight, Drawable{
 		return img.getImage();
 	}
 	public abstract void deviceUpdate();
+
+	public boolean canFit(int i) {
+		for (int j = 0; j < possPos.length; j++) {
+			if(possPos[j] == i){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

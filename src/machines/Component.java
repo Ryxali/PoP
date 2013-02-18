@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 public enum Component{
 	//TODO add object to represent these units
-	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, 0));
+	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, 0)),
+	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, 1, 2)),
+	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, 3));
 
 	private final String title;
 	private Part part;

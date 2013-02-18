@@ -73,4 +73,10 @@ public class StateOptionsMenu extends BasicMenuState {
 
 		return State.NO_CHANGE;
 	}
+
+	@Override
+	public void queueImagesViaImageLoader() {
+		// TODO Auto-generated method stub
+		
+	}
 }

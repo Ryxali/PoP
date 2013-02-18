@@ -37,7 +37,9 @@ public class Inventory extends Interface {
 
 		}
 		slots.get(0).put(Component.VACCUM.getPart());
-		slots.get(1).put(Component.VACCUM.getPart());
+		slots.get(1).put(Component.FURNACE.getPart());
+		slots.get(2).put(Component.FUNNEL.getPart());
+		slots.get(4).put(Component.FURNACE.getPart());
 	}
 
 	public static Inventory get() {

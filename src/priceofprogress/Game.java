@@ -1,5 +1,7 @@
 package priceofprogress;
 
+import image.ImageLoader;
+
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedWriter;
@@ -28,6 +30,7 @@ import file.Save;
 public class Game extends StateBasedGame {
 	public static long delta = 0;
 	public static long lastRunTime = 0;
+	private static float gameSpeed = 1;
 
 	public static final String GAME_NAME = "Price of Progress";
 	private static AppGameContainer appgc;
@@ -41,7 +44,11 @@ public class Game extends StateBasedGame {
 		super(gameName);
 		addStates();
 	}
-
+	
+	public static void setGameSpeed(float speed){
+		gameSpeed = speed;
+	}
+	
 	public static String[] getValidResolutions() {
 		String[] str;
 		ArrayList<String> strings = new ArrayList<String>();
@@ -89,7 +96,7 @@ public class Game extends StateBasedGame {
 	}
 
 	public static void updateDelta(long curRunTime) {
-		delta = curRunTime - lastRunTime;
+		delta = (long) ((curRunTime - lastRunTime)*gameSpeed);
 		lastRunTime = curRunTime;
 		if(delta > 200){
 			delta = 10;

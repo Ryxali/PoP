@@ -7,7 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 
-public class StateLoadgame extends BasicGameState{
+public class StateLoadgame extends BasicGeneralState{
 	public StateLoadgame(int id){
 		
 	}
@@ -36,6 +36,11 @@ public class StateLoadgame extends BasicGameState{
 	public int getID() {
 		// TODO Auto-generated method stub
 		return State.STATE_MENU_LOADGAME.getID();
+	}
+	@Override
+	public void queueImagesViaImageLoader() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -19,12 +19,13 @@ public class InventorySlot extends StandardButton {
 	}
 
 	private ImageStore slotImg;
-	private boolean isEmpty = true;
 	private Drawable storedItem = null;
 
-	public boolean isEmpty(Object heldItem) {
-
-		return true;
+	public boolean isEmpty() {
+		if(storedItem == null){
+			return true;
+		}
+		return false;
 
 	}
 
@@ -42,14 +43,18 @@ public class InventorySlot extends StandardButton {
 		slotImg.draw(x, y);
 		getStoredImage().draw(x, y);
 		if (storedItem != null) {
+			//System.out.println(x + " " + y);
 			storedItem.draw(x, y, g);
+			g.drawString("ITEM!", x, y);
 		}
 
 	}
 
 	public void put(Drawable part) {
-		this.storedItem = part;
-		part = null;
+		System.out.println("AWW YEAH " + x + " " + y);
+		storedItem = part;
+		//part = null;
+		System.out.println(storedItem.toString());
 	}
 
 	public Drawable takeItem() {

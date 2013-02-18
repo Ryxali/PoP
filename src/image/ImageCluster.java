@@ -35,7 +35,9 @@ public enum ImageCluster {
 			ImageStore.FOREST_BACKDROP_SKY_2,
 			ImageStore.FOREST_BACKDROP_SKY_3,
 			ImageStore.FOREST_BACKDROP_SKY_4,
-			ImageStore.FOREST_BACKDROP_SKY_5
+			ImageStore.FOREST_BACKDROP_SKY_5,
+			ImageStore.FOREST_BACKDROP_SKY_6,
+			ImageStore.FOREST_BACKDROP_SKY_7
 			);
 	
 	public static final String FAR = "far";
@@ -70,5 +72,10 @@ public enum ImageCluster {
 		}
 		return null;
 	}
-
+	public void reload(){
+		ImageStore [] imgs = getImages();
+		for (int i = 0; i < imgs.length; i++) {
+			imgs[i].reload();
+		}
+	}
 }

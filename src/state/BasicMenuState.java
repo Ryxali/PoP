@@ -78,6 +78,7 @@ public abstract class BasicMenuState extends BasicGeneralState{
 				enterState(sbg);
 			}
 		}
+		//State.getState(State.getNextState()).getState().queueImagesViaImageLoader();
 		return true;
 	}
 	
