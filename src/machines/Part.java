@@ -11,8 +11,8 @@ import java.util.Arrays;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import priceofprogress.Physics;
-import priceofprogress.Weight;
+import physics.Physics;
+import physics.Weight;
 
 public abstract class Part implements Weight, Drawable{
 	private int[] possPos;

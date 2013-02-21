@@ -50,7 +50,7 @@ public class BackDrop implements Drawable{
 	private void buildSky(String name){
 		Random rand = new Random();
 		int j = 0;
-		for(int i = 0; i < 2200; j++){
+		for(int i = 0; i < Game.getGameContainer().getWidth(); j++){
 			skyPalette = ImageCluster.getClusterByNameAndUsage(name, ImageCluster.SKY);
 			sky.add(rand.nextInt(skyPalette.getImages().length));
 			i += skyPalette.get(sky.get(j)).getImage().getWidth();
@@ -64,7 +64,7 @@ public class BackDrop implements Drawable{
 	private void buildFar(String name){
 		Random rand = new Random();
 		int j = 0;
-		for(int i = 0; i < 2200; j++){
+		for(int i = 0; i < Game.getGameContainer().getWidth(); j++){
 			farPalette = ImageCluster.getClusterByNameAndUsage(name, ImageCluster.FAR);
 			farDrop.add(rand.nextInt(farPalette.getImages().length));
 			i += farPalette.get(farDrop.get(j)).getImage().getWidth();
@@ -103,7 +103,9 @@ public class BackDrop implements Drawable{
 	private void drawTiled(ImageCluster cluster, ArrayList<Integer> seed, double baseX){
 		int imgWidths = 0;
 		for(int i = 0; i < seed.size(); i++){
-			cluster.get(seed.get(i)).draw((int) (imgWidths + baseX), 0);
+			if(imgWidths + baseX + cluster.get(0).getImage().getWidth() > 0){
+				cluster.get(seed.get(i)).draw((int) (imgWidths + baseX), 0);
+			}
 			imgWidths += cluster.get(seed.get(i)).getImage().getWidth();
 		}
 	}
@@ -119,9 +121,22 @@ public class BackDrop implements Drawable{
 	}
 	private void moveSlices(double amount){
 		skyX += amount/4.0;
+		sliceBoundsCheck(skyX, sky, skyPalette);
 		farX += amount/3.0;
+		sliceBoundsCheck(farX, farDrop, farPalette);
 		midX += amount/1.5;
+		sliceBoundsCheck(midX, midDrop, midPalette);
 		closeX += amount;
+		sliceBoundsCheck(closeX, closeDrop, closePalette);
+	}
+	
+	private void sliceBoundsCheck(double x, ArrayList<Integer> seedList, ImageCluster seedSrc){
+		//System.out.println(x);
+		if(-x+Game.getGameContainer().getWidth() > seedList.size()*seedSrc.get(0).getImage().getWidth()){
+			//System.out.println("Slice ADDED!");
+			Random r = new Random();
+			seedList.add(r.nextInt(seedSrc.getImages().length));
+		}
 	}
 	
 	private ImageStore getRandomTile(String name, String usage){

@@ -51,10 +51,10 @@ public class InventorySlot extends StandardButton {
 	}
 
 	public void put(Drawable part) {
-		System.out.println("AWW YEAH " + x + " " + y);
+		//System.out.println("AWW YEAH " + x + " " + y);
 		storedItem = part;
 		//part = null;
-		System.out.println(storedItem.toString());
+		//System.out.println(storedItem.toString());
 	}
 
 	public Drawable takeItem() {

@@ -4,8 +4,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import image.Drawable;
-import priceofprogress.Physics;
-import priceofprogress.Weight;
+import physics.Physics;
+import physics.Weight;
 
 public class Machine implements Weight, Physics, Drawable{
 	
@@ -27,12 +27,6 @@ public class Machine implements Weight, Physics, Drawable{
 		for(int i = 0; i < 4; i++){
 			parts[i].update();
 		}
-	}
-
-	@Override
-	public int getWeight() {
-		return parts[0].getWeight() + parts[1].getWeight()
-				+ parts[2].getWeight() + parts[3].getWeight();
 	}
 
 	@Override

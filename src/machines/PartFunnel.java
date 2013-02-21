@@ -12,11 +12,6 @@ public class PartFunnel extends Part{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void draw(Graphics g) {

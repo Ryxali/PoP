@@ -5,12 +5,13 @@ import java.util.HashMap;
 
 import org.newdawn.slick.Input;
 
+import physics.Physics;
+import physics.Weight;
 import priceofprogress.Game;
-import priceofprogress.Physics;
 import image.AnimatedImage;
 import image.ImageStore;
 
-public abstract class Entity implements Physics{
+public abstract class Entity implements Physics, Weight{
 	/**
 	 * Keys:
 	 * <ul>
@@ -25,18 +26,18 @@ public abstract class Entity implements Physics{
 	private double x;
 	private double y;
 	private double weight;
+	private boolean grounded = false;
+	private double fallSpeed;
 	public Entity(int x, int y, HashMap<String, AnimatedImage> animImgs){
 		this.x = x;
 		this.y = y;
-		weight = setWeight();
 		this.animImgs = animImgs;
 	}
 	public void setCurrentAnimation(String key){
 		curAnimation = key;
 	}
-	protected abstract void setAnimations();
 	
-	protected abstract double setWeight();
+	protected abstract void setAnimations();
 	
 	public void draw(){
 		try{
@@ -54,7 +55,7 @@ public abstract class Entity implements Physics{
 		return animImgs;
 	}
 	public void doPhysics(){
-		
+		//TODO something in the line of if(y + falldist < groundheight){y = groundheight}
 	}
 	public void moveEntity(double speedX, double speedY){
 		this.x += speedX*Game.getDelta()/1000d;

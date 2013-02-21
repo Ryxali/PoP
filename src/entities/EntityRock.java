@@ -32,11 +32,6 @@ public class EntityRock extends AIEntity{
 		
 	}
 
-	@Override
-	protected double setWeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void update(Input input) {

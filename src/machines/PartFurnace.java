@@ -13,12 +13,6 @@ public class PartFurnace extends Part{
 	}
 
 	@Override
-	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
