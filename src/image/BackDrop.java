@@ -111,10 +111,10 @@ public class BackDrop implements Drawable{
 	}
 	public void update(Input input){
 		if(Characters.MAIN_CHAR.getCharacter().getX() < (double)Game.getGameContainer().getWidth()*0.25){
-			moveSlices(Game.getGameContainer().getWidth()*0.25-Characters.MAIN_CHAR.getCharacter().getX());
+			moveSlices((double)Game.getGameContainer().getWidth()*0.25-Characters.MAIN_CHAR.getCharacter().getX());
 			Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.25);
-		}else if(Game.getGameContainer().getWidth()*0.75 < Characters.MAIN_CHAR.getCharacter().getX()){
-			moveSlices(Game.getGameContainer().getWidth()*0.75-Characters.MAIN_CHAR.getCharacter().getX());
+		}else if((double)Game.getGameContainer().getWidth()*0.75 < Characters.MAIN_CHAR.getCharacter().getX()){
+			moveSlices((double)Game.getGameContainer().getWidth()*0.75-Characters.MAIN_CHAR.getCharacter().getX());
 			Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.75);
 		}
 		//TODO add and remove slices as the game progresses forward();

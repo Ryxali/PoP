@@ -15,9 +15,14 @@ import physics.Physics;
 import physics.Weight;
 
 public abstract class Part implements Weight, Drawable{
+	
 	private int[] possPos;
 	protected ImageStore img;
 	private Machine machine;
+	public static final int POSITION_1 = 0;
+	public static final int POSITION_2 = 1;
+	public static final int POSITION_3 = 2;
+	public static final int POSITION_4 = 3;
 	
 	public Part(ImageStore UIImg, AnimationStore AnimImg, int... posPoss){
 		//this.machine = machine;

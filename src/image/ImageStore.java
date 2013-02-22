@@ -67,6 +67,15 @@ public enum ImageStore {
 	//Machine parts (for crafting) here.
 	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
 	
+	CRAFTING_PART_COG_ICON("res/img/CraftMenu/Parts/CogWheel64.png", null),
+	CRAFTING_PART_COG_ITEM("res/img/CraftMenu/Parts/CogWheel16.png", null),
+	
+	CRAFTING_PART_DUST_ICON("res/img/CraftMenu/Parts/Dust64.png", null),
+	CRAFTING_PART_DUST_ITEM("res/img/CraftMenu/Parts/Dust16.png", null),
+	
+	CRAFTING_PART_STICK_ICON("res/img/CraftMenu/Parts/Stick64.png", null),
+	CRAFTING_PART_STICK_ITEM("res/img/CraftMenu/Parts/Stick16.png", null),
+	
 	//Character and Entity animation sheets below:
 	CHAR_ANIM_SHEET_WALK_LEFT("res/img/Entities/Character/WalkLeftAniMainchar.png", null),
 	CHAR_ANIM_SHEET_WALK_RIGHT("res/img/Entities/Character/WalkRightAniMainchar.png", null),

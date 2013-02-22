@@ -1,21 +1,23 @@
 package machines;
 
+import image.AnimationStore;
 import image.ImageStore;
 
 import java.util.Arrays;
 
 public enum Component{
 	//TODO add object to represent these units
-	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, 0)),
-	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, 1, 2)),
-	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, 3));
+	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_1)),
+	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3)),
+	STICK("Ballistics Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3)),
+	DUST("Volatition Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3)),
+	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3)),
+	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4)),
+	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4));
 
 	private final String title;
 	private Part part;
-	public final int POSITION_1 = 0;
-	public final int POSITION_2 = 1;
-	public final int POSITION_3 = 2;
-	public final int POSITION_4 = 3;
+	
 	
 	private static int[] toArray(int i, int... iN) {
 		iN = Arrays.copyOf(iN, iN.length + 1);
