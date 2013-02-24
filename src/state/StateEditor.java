@@ -35,17 +35,17 @@ public class StateEditor extends BasicGeneralState {
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-		// start with a new map
-		//createNewMap();
+		
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		//backdrop
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		//draws all blocks 
-		for (int i = 0; i < Terrain.get().size(); i++) {
-			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
-				Terrain.get().getBlock(i, j).getRef().draw(Terrain.get().getBlock(i, j).getXPos(), Terrain.get().getBlock(i, j).getYPos());
+		for (int y = 0; y < Terrain.get().size(); y++) {
+			for (int x = 0; x < Terrain.get().rowSize(y); x++) {
+				Terrain.get().getBlock(x, y).getRef().draw(Terrain.get().getBlock(x, y).getXPos(), Terrain.get().getBlock(x, y).getYPos());
+				System.out.println("x: "+Terrain.get().getBlock(x, y).getXPos()+" y: "+ Terrain.get().getBlock(x, y).getYPos());
 			}
 		}
 	}
@@ -59,7 +59,8 @@ public class StateEditor extends BasicGeneralState {
 		if(notSaved){
 			notSaved = false;
 			//saveMap();
-			loadMap();
+			//loadMap();
+			createNewMap();
 		}
 	}
 	
@@ -67,24 +68,24 @@ public class StateEditor extends BasicGeneralState {
 		// Create an empty map
 		Terrain.get();
 		// Make a default map
+		ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 		for (int i = 0; i < 6; i++) {
-			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
+			currentBlockRow.clear();
 			for (int j = 0; j < defaultBlockLength; j++) {
-				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-i*64));
+				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-(i+1)*64));
+				//System.out.println("x: "+j*64+" y: "+ (1200-(i+1)*64));
 			}
 			Terrain.get().addBlockRow(currentBlockRow);
 		}
 	}
-	
 	private void loadMap(){
-		PPWDataLoader.get().loadTerrain();
+		mapRef = PPWDataLoader.get().loadTerrain();
 	}
-	
 	private void saveMap(){
 		if(mapRef == "maps/defaultMapRef.PPW"){
-			PPWDataLoader.saveTerrain(mapRef, true);
+			PPWDataLoader.get().saveTerrain(mapRef, true);
 		}else{
-			PPWDataLoader.saveTerrain(mapRef, false);
+			PPWDataLoader.get().saveTerrain(mapRef, false);
 		}
 		
 	}

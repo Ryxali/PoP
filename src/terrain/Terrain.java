@@ -21,16 +21,22 @@ public class Terrain {
 		col.add(blockRow);
 	}
 	
-	public ArrayList<Block> getRow(int colN){
-		return col.get(colN);
+	public ArrayList<Block> getRow(int rowN){
+		return col.get(rowN);
 	}
 	
-	public Block getBlock(ArrayList<Block> row, int rowN){
-		return row.get(rowN);
+	public Block getBlock(int colN, ArrayList<Block> row){
+		return row.get(colN);
 	}
-	
+	/**
+	 * Fetch the block at a specified position.
+	 * 
+	 * @param colN the column of the block (block x should be colN*64).
+	 * @param rowN the row of the block (block y should be 1200-rowN*64).
+	 * @return the block at the specified position.
+	 */
 	public Block getBlock(int colN, int rowN){
-		return col.get(colN).get(rowN);
+		return col.get(rowN).get(colN);
 	}
 	/**
 	 * Returns the number rows of blocks in the current map.

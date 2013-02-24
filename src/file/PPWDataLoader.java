@@ -7,13 +7,14 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import state.StateEditor;
 import terrain.Block;
+import terrain.Blocks;
 import terrain.Terrain;
 
 public class PPWDataLoader implements Runnable{
 	private static PPWDataLoader datLoad;
 	private static ArrayList<String[]> fileData;
+	private String mapRef = "maps/defaultMapRef.PPW";
 	
 	public static PPWDataLoader get(){
 		if(datLoad != null){
@@ -30,9 +31,9 @@ public class PPWDataLoader implements Runnable{
 	/**
 	 * 
 	 * 
-	 * @return
+	 * @return the loaded version of the chosen file with the last array containing the file path.
 	 */
-	private void chooseData(){
+	private ArrayList<String[]> chooseData(){
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
         // Limit the file types that can be chosen.
@@ -43,15 +44,26 @@ public class PPWDataLoader implements Runnable{
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File choosenFile = fc.getSelectedFile();
             if(choosenFile.getName().toLowerCase().endsWith(".ppw")){
-            	loadFile(choosenFile);
+            	String[] filePath = new String[1];
+            	filePath[0] = choosenFile.getAbsolutePath();
+            	ArrayList<String[]> loadedFile = loadFile(choosenFile);
+            	loadedFile.add(filePath);
+            	return loadedFile;
             }else{
             	System.out.println(choosenFile.getName() + " is not a PPW file.");
+            	return new ArrayList<String[]>();
             }
         }else{
         	// we have not chosen anything.
+        	return new ArrayList<String[]>();
         }
 	}
-	
+	/**
+	 * 
+	 * 
+	 * @param file the file to be loaded.
+	 * @return
+	 */
 	private ArrayList<String[]> loadFile(File file){
 		ArrayList <String[]> strs = new ArrayList<String[]>();
 		try {
@@ -59,6 +71,7 @@ public class PPWDataLoader implements Runnable{
 			while(indata.hasNext()){
 				strs.add(indata.nextLine().split("/"));
 			}
+			indata.close();
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
@@ -82,7 +95,8 @@ public class PPWDataLoader implements Runnable{
 		
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tempRow = new ArrayList<String>();
-		for (int i = 0; i < Terrain.get().size(); i++) {
+		// highest row first.
+		for (int i = Terrain.get().size()-1; i >= 0; i--) {
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {
@@ -114,16 +128,59 @@ public class PPWDataLoader implements Runnable{
 		}
 	}
 	
-	public static void saveTerrain(String ref, boolean newMap){
-		PPWDataLoader.get().saveData(ref, newMap);
+	public void saveTerrain(String ref, boolean newMap){
+		saveData(ref, newMap);
 	}
 	
-	public static void loadTerrain(){
-		PPWDataLoader.get().chooseData();
+	public String loadTerrain(){
+		ArrayList<String[]> loadedMap = chooseData();
+		if(loadedMap == new ArrayList<String[]>()){
+			// map is empty
+		}else{
+			// get the file path.
+			mapRef = loadedMap.get(loadedMap.size()-1)[0];
+			loadedMap.remove(loadedMap.size()-1);
+			
+			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
+			// lowest row first.
+			for (int i = loadedMap.size()-1; i >= 0; i--) {
+				currentBlockRow.clear();
+				for (int j = 0; j < loadedMap.get(i).length; j++) {
+					if(loadedMap.get(i)[j].equals("1")){
+						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						//System.out.println("x: "+j*64+" y: "+ (1200 - loadedMap.size()*64 + i*64));
+					}
+					// add em other blocksis
+				}
+				Terrain.get().addBlockRow(currentBlockRow);
+			}
+		}
+		return mapRef;
 	}
 	
-	public static ArrayList<String[]> loadTerrain(File file){
-		return PPWDataLoader.get().loadFile(file);
+	public String loadTerrain(File file){
+		ArrayList<String[]> loadedMap = loadFile(file);
+		if(loadedMap == new ArrayList<String[]>()){
+			// map is empty
+		}else{
+			// get the file path.
+			mapRef = loadedMap.get(loadedMap.size()-1)[0];
+			loadedMap.remove(loadedMap.size()-1);
+			
+			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
+			// lowest row first.
+			for (int i = loadedMap.size()-1; i >= 0; i--) {
+				currentBlockRow.clear();
+				for (int j = 0; j < loadedMap.get(i).length; j++) {
+					if(loadedMap.get(i)[j].equals("1")){
+						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+					}
+					// add em other blocksis
+				}
+				Terrain.get().addBlockRow(currentBlockRow);
+			}
+		}
+		return mapRef;
 	}
 
 	@Override
