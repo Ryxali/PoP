@@ -9,10 +9,10 @@ public enum ImageCluster {
 			ImageStore.FOREST_BACKDROP_FAR_3,
 			ImageStore.FOREST_BACKDROP_FAR_4,
 			ImageStore.FOREST_BACKDROP_FAR_5,
-			ImageStore.FOREST_BACKDROP_FAR_BLANK,
-			ImageStore.FOREST_BACKDROP_FAR_BLANK,
-			ImageStore.FOREST_BACKDROP_FAR_BLANK,
-			ImageStore.FOREST_BACKDROP_FAR_BLANK
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK
 			),
 	BACKDROP_FOREST_MID("forest", "mid",
 			ImageStore.FOREST_BACKDROP_MID_1,

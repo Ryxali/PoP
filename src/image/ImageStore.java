@@ -94,13 +94,13 @@ public enum ImageStore {
 	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.png", null),
 	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.png", null),
 	
+	BACKDROP_BLANK("res/img/Backdrops/ForestWorld/Far/Mountain_Blank.png", null),
+	
 	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.png", null),
 	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.png", null),
 	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.png", null),
 	FOREST_BACKDROP_FAR_4("res/img/Backdrops/ForestWorld/Far/Mountain_6.png", null),
 	FOREST_BACKDROP_FAR_5("res/img/Backdrops/ForestWorld/Far/Mountain_7.png", null),
-	
-	FOREST_BACKDROP_FAR_BLANK("res/img/Backdrops/ForestWorld/Far/Mountain_Blank.png", null),
 	
 	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.png", null),
 	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.png", null),
