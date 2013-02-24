@@ -76,20 +76,39 @@ public abstract class Button {
 	public int getState(){
 		return state;
 	}
+	/**
+	 * Set the current state of this button.
+	 * @param STATE_IDLE, STATE_HOVER or STATE_PRESSED
+	 */
 	public void setState(int state){
 		this.state = state;
 	}
-	
+	/**
+	 * Creates and returns an identical copy of this object.
+	 * @return the copy of this button.
+	 */
 	public abstract Button copy();
-	
+	/**
+	 * Draws this button onto the screen.
+	 * @param g the graphics context
+	 */
 	public abstract void draw(Graphics g);
-	
+	/**
+	 * checks the state of this button.
+	 * @param input the current input
+	 */
 	public abstract void buttonStateCheck(Input input);
 	
 	public abstract int getType();
-	
+	/**
+	 * 
+	 * @return the appropriate image to be used for rendering
+	 */
 	public abstract ImageStore getStoredImage();
-	
+	/**
+	 * 
+	 * @return true of this button has been pressed
+	 */
 	public boolean isClicked(){
 		return clicked;
 	}
@@ -97,6 +116,10 @@ public abstract class Button {
 	public void setClicked(boolean value){
 		clicked = value;
 	}
+	/**
+	 * check whether this button has been clicked.
+	 * @return PRESSED_TRUE or PRESSED_FALSE
+	 */
 	public int hasBeenClicked(){
 		if(clicked && getState() == STATE_HOVER){
 			clicked = false;
