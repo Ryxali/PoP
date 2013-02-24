@@ -7,7 +7,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 
-public class StateKeyconfigMenu extends BasicGameState {
+public class StateKeyconfigMenu extends BasicGeneralState {
 	public StateKeyconfigMenu(int state) {
 
 	}
@@ -34,5 +34,11 @@ public class StateKeyconfigMenu extends BasicGameState {
 	@Override
 	public int getID() {
 		return State.STATE_MENU_KEYCONFIG.getID();
+	}
+
+	@Override
+	public void queueImagesViaImageLoader() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -30,11 +30,6 @@ public class EntityCharacter extends Entity {
 	}
 
 	@Override
-	protected double setWeight() {
-		return 0;
-	}
-
-	@Override
 	public void update(Input input) {
 		if (input.isKeyDown(Input.KEY_SPACE)) {
 			if(input.isKeyDown(OptionsFile.get().fetchIntegerFromOptions(

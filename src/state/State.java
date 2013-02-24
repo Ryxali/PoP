@@ -18,7 +18,7 @@ public enum State {
 	/**
 	 * The state itself
 	 */
-	private final BasicGameState state;
+	private final BasicGeneralState state;
 	/**
 	 * the state the game opts to go into next
 	 */
@@ -30,7 +30,7 @@ public enum State {
 	 * @param id the id of the state
 	 * @param state the state itself
 	 */
-	private State(int id, BasicGameState state){
+	private State(int id, BasicGeneralState state){
 		this.id = id;
 		this.state = state;
 	}
@@ -41,11 +41,21 @@ public enum State {
 	public int getID(){
 		return id;
 	}
+	
+	public static State getState(int id){
+		State[] states = values();
+		for (int i = 0; i < states.length; i++) {
+			if(states[i].id == id){
+				return states[i];
+			}
+		}
+		return STATE_MENU_MAIN;
+	}
 	/**
 	 * 
 	 * @return the state
 	 */
-	public BasicGameState getState(){
+	public BasicGeneralState getState(){
 		return state;
 	}
 	/**

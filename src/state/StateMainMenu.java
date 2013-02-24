@@ -2,6 +2,8 @@ package state;
 
 
 import image.AnimationStore;
+import image.ImageLoader;
+import image.ImageStore;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,6 +70,17 @@ public class StateMainMenu extends BasicMenuState {
 	@Override
 	public int getID() {
 		return State.STATE_MENU_MAIN.getID();
+	}
+
+
+
+	@Override
+	public void queueImagesViaImageLoader() {
+		ImageLoader.get().queue(
+				AnimationStore.MENU_ANIMATION, AnimationStore.MENU_FIRE,
+				AnimationStore.MENU_LIGHT, AnimationStore.MENU_MAIN_CLUTTER,
+				ImageStore.BUTTON_EXIT_IDLE, ImageStore.BUTTON_LOADGAME_IDLE,
+				ImageStore.BUTTON_OPTIONS_IDLE, ImageStore.BUTTON_PLAY_IDLE);
 	}
 
 

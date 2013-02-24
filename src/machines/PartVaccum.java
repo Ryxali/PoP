@@ -30,12 +30,6 @@ public class PartVaccum extends Part{
 	}
 
 	@Override
-	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void draw(int x, int y, Graphics g) {
 		img.draw(x, y);
 		

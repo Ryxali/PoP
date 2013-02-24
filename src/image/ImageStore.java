@@ -67,12 +67,21 @@ public enum ImageStore {
 	//Machine parts (for crafting) here.
 	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
 	
+	CRAFTING_PART_COG_ICON("res/img/CraftMenu/Parts/CogWheel64.png", null),
+	CRAFTING_PART_COG_ITEM("res/img/CraftMenu/Parts/CogWheel16.png", null),
+	
+	CRAFTING_PART_DUST_ICON("res/img/CraftMenu/Parts/Dust64.png", null),
+	CRAFTING_PART_DUST_ITEM("res/img/CraftMenu/Parts/Dust16.png", null),
+	
+	CRAFTING_PART_STICK_ICON("res/img/CraftMenu/Parts/Stick64.png", null),
+	CRAFTING_PART_STICK_ITEM("res/img/CraftMenu/Parts/Stick16.png", null),
+	
 	//Character and Entity animation sheets below:
-	CHAR_ANIM_SHEET_WALK_LEFT("res/img/Entities/Character/WalkLeftAniMainChar.png", null),
-	CHAR_ANIM_SHEET_WALK_RIGHT("res/img/Entities/Character/WalkRightAniMainChar.png", null),
+	CHAR_ANIM_SHEET_WALK_LEFT("res/img/Entities/Character/WalkLeftAniMainchar.png", null),
+	CHAR_ANIM_SHEET_WALK_RIGHT("res/img/Entities/Character/WalkRightAniMainchar.png", null),
 	CHAR_ANIM_SHEET_IDLE("res/img/Entities/Character/StandAnimation.png", null),
-	CHAR_ANIM_SHEET_JUMP_RIGHT("res/img/Entities/Character/JumpRightAniMainChar.png", null),
-	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainChar.png", null),
+	CHAR_ANIM_SHEET_JUMP_RIGHT("res/img/Entities/Character/JumpRightAniMainchar.png", null),
+	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainchar.png", null),
 	
 	//Blocks for world building
 	BLOCK_EARTH("res/img/blocks/EarthBlock.png", null),
@@ -82,28 +91,38 @@ public enum ImageStore {
 	
 	
 	//Backdrop images
-	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.PNG", null),
-	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.PNG", null),
+	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.png", null),
+	ASTRAL_MOON("res/img/BackDrops/Astronomical/MoonSprite.png", null),
 	
-	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.PNG", null),
-	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.PNG", null),
-	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.PNG", null),
+	BACKDROP_BLANK("res/img/Backdrops/ForestWorld/Far/Mountain_Blank.png", null),
 	
-	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.PNG", null),
-	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.PNG", null),
-	FOREST_BACKDROP_MID_3("res/img/Backdrops/ForestWorld/Mid/Tree_3.PNG", null),
-	FOREST_BACKDROP_MID_4("res/img/Backdrops/ForestWorld/Mid/Tree_4.PNG", null),
-	FOREST_BACKDROP_MID_5("res/img/Backdrops/ForestWorld/Mid/Tree_5.PNG", null),
-	FOREST_BACKDROP_MID_6("res/img/Backdrops/ForestWorld/Mid/Tree_6.PNG", null),
-	FOREST_BACKDROP_MID_7("res/img/Backdrops/ForestWorld/Mid/Tree_7.PNG", null),
+	FOREST_BACKDROP_FAR_1("res/img/Backdrops/ForestWorld/Far/Mountain_1.png", null),
+	FOREST_BACKDROP_FAR_2("res/img/Backdrops/ForestWorld/Far/Mountain_2.png", null),
+	FOREST_BACKDROP_FAR_3("res/img/Backdrops/ForestWorld/Far/Mountain_3.png", null),
+	FOREST_BACKDROP_FAR_4("res/img/Backdrops/ForestWorld/Far/Mountain_6.png", null),
+	FOREST_BACKDROP_FAR_5("res/img/Backdrops/ForestWorld/Far/Mountain_7.png", null),
 	
-	FOREST_BACKDROP_SHORT_1("res/img/Backdrops/ForestWorld/Short/Grass.PNG", null),
+	FOREST_BACKDROP_MID_1("res/img/Backdrops/ForestWorld/Mid/Tree_1.png", null),
+	FOREST_BACKDROP_MID_2("res/img/Backdrops/ForestWorld/Mid/Tree_2.png", null),
+	FOREST_BACKDROP_MID_3("res/img/Backdrops/ForestWorld/Mid/Tree_3.png", null),
+	FOREST_BACKDROP_MID_4("res/img/Backdrops/ForestWorld/Mid/Tree_4.png", null),
+	FOREST_BACKDROP_MID_5("res/img/Backdrops/ForestWorld/Mid/Tree_5.png", null),
+	FOREST_BACKDROP_MID_6("res/img/Backdrops/ForestWorld/Mid/Tree_6.png", null),
+	FOREST_BACKDROP_MID_7("res/img/Backdrops/ForestWorld/Mid/Tree_7.png", null),
 	
-	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.PNG", null),
-	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.PNG", null),
-	FOREST_BACKDROP_SKY_3("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_3.PNG", null),
-	FOREST_BACKDROP_SKY_4("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_4.PNG", null),
-	FOREST_BACKDROP_SKY_5("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_5.PNG", null);
+	FOREST_BACKDROP_SHORT_1("res/img/Backdrops/ForestWorld/Short/Grass.png", null),
+	FOREST_BACKDROP_SHORT_2("res/img/Backdrops/ForestWorld/Short/Grass_1.png", null),
+	FOREST_BACKDROP_SHORT_3("res/img/Backdrops/ForestWorld/Short/Grass_2.png", null),
+	FOREST_BACKDROP_SHORT_4("res/img/Backdrops/ForestWorld/Short/Grass_3.png", null),
+	FOREST_BACKDROP_SHORT_5("res/img/Backdrops/ForestWorld/Short/Grass_4.png", null),
+	
+	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.png", null),
+	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.png", null),
+	FOREST_BACKDROP_SKY_3("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_3.png", null),
+	FOREST_BACKDROP_SKY_4("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_4.png", null),
+	FOREST_BACKDROP_SKY_5("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_5.png", null),
+	FOREST_BACKDROP_SKY_6("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_6.png", null),
+	FOREST_BACKDROP_SKY_7("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_7.png", null);
 	
 	/**
 	 * The String reference to the image location on disk

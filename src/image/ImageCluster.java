@@ -6,7 +6,13 @@ public enum ImageCluster {
 	BACKDROP_FOREST_FAR("forest", "far",
 			ImageStore.FOREST_BACKDROP_FAR_1,
 			ImageStore.FOREST_BACKDROP_FAR_2,
-			ImageStore.FOREST_BACKDROP_FAR_3
+			ImageStore.FOREST_BACKDROP_FAR_3,
+			ImageStore.FOREST_BACKDROP_FAR_4,
+			ImageStore.FOREST_BACKDROP_FAR_5,
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK,
+			ImageStore.BACKDROP_BLANK
 			),
 	BACKDROP_FOREST_MID("forest", "mid",
 			ImageStore.FOREST_BACKDROP_MID_1,
@@ -18,14 +24,20 @@ public enum ImageCluster {
 			ImageStore.FOREST_BACKDROP_MID_7
 			),
 	BACKDROP_FOREST_SHORT("forest", "short",
-			ImageStore.FOREST_BACKDROP_SHORT_1
+			ImageStore.FOREST_BACKDROP_SHORT_1,
+			ImageStore.FOREST_BACKDROP_SHORT_2,
+			ImageStore.FOREST_BACKDROP_SHORT_3,
+			ImageStore.FOREST_BACKDROP_SHORT_4,
+			ImageStore.FOREST_BACKDROP_SHORT_5
 			),
 	BACKDROP_FOREST_SKY("forest", "sky",
 			ImageStore.FOREST_BACKDROP_SKY_1,
 			ImageStore.FOREST_BACKDROP_SKY_2,
 			ImageStore.FOREST_BACKDROP_SKY_3,
 			ImageStore.FOREST_BACKDROP_SKY_4,
-			ImageStore.FOREST_BACKDROP_SKY_5
+			ImageStore.FOREST_BACKDROP_SKY_5,
+			ImageStore.FOREST_BACKDROP_SKY_6,
+			ImageStore.FOREST_BACKDROP_SKY_7
 			);
 	
 	public static final String FAR = "far";
@@ -60,5 +72,10 @@ public enum ImageCluster {
 		}
 		return null;
 	}
-
+	public void reload(){
+		ImageStore [] imgs = getImages();
+		for (int i = 0; i < imgs.length; i++) {
+			imgs[i].reload();
+		}
+	}
 }

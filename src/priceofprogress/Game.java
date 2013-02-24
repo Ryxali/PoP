@@ -1,5 +1,7 @@
 package priceofprogress;
 
+import image.ImageLoader;
+
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedWriter;
@@ -15,6 +17,7 @@ import java.util.Scanner;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.muffin.FileMuffin;
 import org.newdawn.slick.state.StateBasedGame;
@@ -27,6 +30,7 @@ import file.Save;
 public class Game extends StateBasedGame {
 	public static long delta = 0;
 	public static long lastRunTime = 0;
+	private static float gameSpeed = 1;
 
 	public static final String GAME_NAME = "Price of Progress";
 	private static AppGameContainer appgc;
@@ -40,7 +44,11 @@ public class Game extends StateBasedGame {
 		super(gameName);
 		addStates();
 	}
-
+	
+	public static void setGameSpeed(float speed){
+		gameSpeed = speed;
+	}
+	
 	public static String[] getValidResolutions() {
 		String[] str;
 		ArrayList<String> strings = new ArrayList<String>();
@@ -88,7 +96,7 @@ public class Game extends StateBasedGame {
 	}
 
 	public static void updateDelta(long curRunTime) {
-		delta = curRunTime - lastRunTime;
+		delta = (long) ((curRunTime - lastRunTime)*gameSpeed);
 		lastRunTime = curRunTime;
 		if(delta > 200){
 			delta = 10;
@@ -145,8 +153,8 @@ public class Game extends StateBasedGame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Save.get().loadFile("testy.txt");
-		Save.get().print();
+		System.out.println(Input.KEY_A + " " + Input.KEY_D);
+		
 		try {
 			setupAppgc();
 			appgc.start();

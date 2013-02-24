@@ -41,9 +41,20 @@ public class BackDrop implements Drawable{
 	
 	public void rebuild(String name){
 		buildClouds(name);
+		buildSky(name);
 		buildFar(name);
 		buildMid(name);
 		buildShort(name);
+	}
+	
+	private void buildSky(String name){
+		Random rand = new Random();
+		int j = 0;
+		for(int i = 0; i < Game.getGameContainer().getWidth(); j++){
+			skyPalette = ImageCluster.getClusterByNameAndUsage(name, ImageCluster.SKY);
+			sky.add(rand.nextInt(skyPalette.getImages().length));
+			i += skyPalette.get(sky.get(j)).getImage().getWidth();
+		}
 	}
 	
 	private void buildClouds(String name){
@@ -53,7 +64,7 @@ public class BackDrop implements Drawable{
 	private void buildFar(String name){
 		Random rand = new Random();
 		int j = 0;
-		for(int i = 0; i < 2200; j++){
+		for(int i = 0; i < Game.getGameContainer().getWidth(); j++){
 			farPalette = ImageCluster.getClusterByNameAndUsage(name, ImageCluster.FAR);
 			farDrop.add(rand.nextInt(farPalette.getImages().length));
 			i += farPalette.get(farDrop.get(j)).getImage().getWidth();
@@ -82,32 +93,50 @@ public class BackDrop implements Drawable{
 	}
 	@Override
 	public void draw(Graphics g) {
+		drawTiled(skyPalette, sky, skyX);
 		drawTiled(farPalette, farDrop, farX);
 		drawTiled(midPalette, midDrop, midX);
 		drawTiled(closePalette, closeDrop, closeX);
+		
 	}
 	
 	private void drawTiled(ImageCluster cluster, ArrayList<Integer> seed, double baseX){
 		int imgWidths = 0;
 		for(int i = 0; i < seed.size(); i++){
-			cluster.get(seed.get(i)).draw((int) (imgWidths + baseX), 0);
+			if(imgWidths + baseX + cluster.get(0).getImage().getWidth() > 0){
+				cluster.get(seed.get(i)).draw((int) (imgWidths + baseX), 0);
+			}
 			imgWidths += cluster.get(seed.get(i)).getImage().getWidth();
 		}
 	}
 	public void update(Input input){
 		if(Characters.MAIN_CHAR.getCharacter().getX() < (double)Game.getGameContainer().getWidth()*0.25){
-			moveSlices(Game.getGameContainer().getWidth()*0.25-Characters.MAIN_CHAR.getCharacter().getX());
+			moveSlices((double)Game.getGameContainer().getWidth()*0.25-Characters.MAIN_CHAR.getCharacter().getX());
 			Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.25);
-		}else if(Game.getGameContainer().getWidth()*0.75 < Characters.MAIN_CHAR.getCharacter().getX()){
-			moveSlices(Game.getGameContainer().getWidth()*0.75-Characters.MAIN_CHAR.getCharacter().getX());
+		}else if((double)Game.getGameContainer().getWidth()*0.75 < Characters.MAIN_CHAR.getCharacter().getX()){
+			moveSlices((double)Game.getGameContainer().getWidth()*0.75-Characters.MAIN_CHAR.getCharacter().getX());
 			Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.75);
 		}
 		//TODO add and remove slices as the game progresses forward();
 	}
 	private void moveSlices(double amount){
+		skyX += amount/4.0;
+		sliceBoundsCheck(skyX, sky, skyPalette);
 		farX += amount/3.0;
+		sliceBoundsCheck(farX, farDrop, farPalette);
 		midX += amount/1.5;
+		sliceBoundsCheck(midX, midDrop, midPalette);
 		closeX += amount;
+		sliceBoundsCheck(closeX, closeDrop, closePalette);
+	}
+	
+	private void sliceBoundsCheck(double x, ArrayList<Integer> seedList, ImageCluster seedSrc){
+		//System.out.println(x);
+		if(-x+Game.getGameContainer().getWidth() > seedList.size()*seedSrc.get(0).getImage().getWidth()){
+			//System.out.println("Slice ADDED!");
+			Random r = new Random();
+			seedList.add(r.nextInt(seedSrc.getImages().length));
+		}
 	}
 	
 	private ImageStore getRandomTile(String name, String usage){

@@ -1,5 +1,6 @@
 package gui;
 
+import image.Drawable;
 import image.ImageStore;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class Inventory extends Interface {
 
 		}
 		slots.get(0).put(Component.VACCUM.getPart());
+		slots.get(1).put(Component.FURNACE.getPart());
+		slots.get(2).put(Component.FUNNEL.getPart());
+		slots.get(4).put(Component.FURNACE.getPart());
 	}
 
 	public static Inventory get() {
@@ -57,21 +61,25 @@ public class Inventory extends Interface {
 		for (int i = 0; i < slots.size(); i++) {
 			slots.get(i).buttonStateCheck(input);
 			slots.get(i).update();
-			if (!slots.get(i).isEmpty()) {
-
-			}
+			/*
+			 * if (!slots.get(i).isEmpty()) { if(slots.get(i).hasBeenClicked()
+			 * == Button.PRESSED_TRUE){ slots.get(i).take(); } }
+			 */
 		}
 
 	}
 
-	public Object checkPickups(Input input) {
+	public Drawable checkPickups(Input input, Drawable heldItem) {
 		for (int i = 0; i < slots.size(); i++) {
-			if (slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE) {
-				if (slots.get(i).isEmpty()) {
-					return slots.get(i).take();
-				}
+			if(slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE){
+				return slots.get(i).slotContainCheck(heldItem);
 			}
 		}
-		return null;
+		/*
+		 * if (!slots.get(i).isEmpty(heldItem)) { if
+		 * (slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE) { return
+		 * slots.get(i).take(); } }
+		 */
+		return heldItem;
 	}
 }

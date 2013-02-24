@@ -35,4 +35,7 @@ public abstract class BasicGeneralState extends BasicGameState{
 		}
 		init(gc, sbg);
 	}
+	
+	public abstract void queueImagesViaImageLoader();
+	
 }
