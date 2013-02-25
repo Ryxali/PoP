@@ -127,19 +127,25 @@ public abstract class Button {
 		}
 		return PRESSED_FALSE;
 	}
-	
+	/**
+	 * Retrieve the dropdown list of this button (if any).
+	 * @return the DropDown list object associated with this button.
+	 */
 	public DropdownList getDList(){
 		return null;
 	}
-	
 	public boolean pointContains(int lBound, int point, int rBound){
 		if(lBound <= point && point <= rBound){
 			return true;
 		}
 		return false;
 	}
-	
+	/**
+	 * unloads all the Image-based resources used by this object.
+	 */
 	public abstract void unload();
-	
+	/**
+	 * reloads all the Image-based resources used by this object.
+	 */
 	public abstract void reload();
 }

@@ -10,7 +10,11 @@ import javax.swing.JOptionPane;
 import state.StateEditor;
 import terrain.Block;
 import terrain.Terrain;
-
+/**
+ * 
+ * @author Niklas Lindblad
+ * @author Lukas Wahlquist
+ */
 public class PPWDataLoader implements Runnable{
 	private static PPWDataLoader datLoad;
 	private static ArrayList<String[]> fileData;
