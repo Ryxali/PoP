@@ -42,6 +42,7 @@ public class StatePlay extends BasicGeneralState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		System.out.println("Building PlayState");
 		BackDrop.get().rebuild(ImageCluster.FOREST);
 	}
 

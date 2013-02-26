@@ -25,7 +25,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import state.State;
 
 import file.OptionsFile;
-import file.Save;
+import file.SaveLoader;
 
 public class Game extends StateBasedGame {
 	public static long delta = 0;
@@ -184,7 +184,8 @@ public class Game extends StateBasedGame {
 	public void initStatesList(GameContainer gc) throws SlickException {
 		State[] states = State.values();
 		for (int i = 0; i < states.length; i++) {
-			this.getState(states[i].getID()).init(gc, this);
+			System.out.println(i);
+			//this.getState(states[i].getID()).init(gc, this);
 		}
 		enterDefaultState();
 	}

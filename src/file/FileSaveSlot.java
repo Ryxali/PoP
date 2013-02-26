@@ -1,19 +1,18 @@
 package file;
 
 
-
-public enum FileSaveSlot {
-	SLOT_1(null, "saves/slot_1", "Slot 1"),
-	SLOT_2(null, "saves/slot_2", "Slot 2"),
-	SLOT_3(null, "saves/slot_3", "Slot 3"),
-	SLOT_4(null, "saves/slot_4", "Slot 4");
+/**
+ * I am hesitant this will even be used in the end.
+ * @author Pani
+ *
+ */
+public class FileSaveSlot {
 	
 	private String filePath;
-	private PPWDataLoader data;
+	private PPWDataLoader lastMapData;
 	private String name;
-	private FileSaveSlot(PPWDataLoader data, String filePath, String name){
+	private FileSaveSlot(String filePath, String name){
 		this.filePath = filePath;
-		this.data = data;
 		this.name = name;
 	}
 	
@@ -22,10 +21,10 @@ public enum FileSaveSlot {
 	}
 	
 	public PPWDataLoader getData(){
-		return data;
+		return lastMapData;
 	}
 	
-	public FileSaveSlot getSlotByName(String name){
+	/*public FileSaveSlot getSlotByName(String name){
 		FileSaveSlot [] s = values();
 		for(int i = 0; i < s.length; i++){
 			if(s[i].name.equals(name)){
@@ -33,5 +32,5 @@ public enum FileSaveSlot {
 			}
 		}
 		return null;
-	}
+	}*/
 }

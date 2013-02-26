@@ -11,6 +11,7 @@ public class StateLoadgame extends BasicGeneralState{
 	public StateLoadgame(int id){
 		
 	}
+
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
@@ -33,14 +34,15 @@ public class StateLoadgame extends BasicGeneralState{
 	}
 
 	@Override
-	public int getID() {
-		// TODO Auto-generated method stub
-		return State.STATE_MENU_LOADGAME.getID();
-	}
-	@Override
 	public void queueImagesViaImageLoader() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 3;
 	}
 
 }
