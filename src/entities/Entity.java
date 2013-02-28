@@ -22,12 +22,14 @@ public abstract class Entity implements Physics, Weight{
 	 * <li>Interract</li>
 	 */
 	private HashMap<String, AnimatedImage> animImgs;
-	private String curAnimation;
+	private String curAnimation = "";
 	private double x;
 	private double y;
-	private double weight;
-	private boolean grounded = false;
-	private double fallSpeed;
+	
+	private boolean falling = false;
+	private double yForce = 0;
+	
+	
 	public Entity(int x, int y, HashMap<String, AnimatedImage> animImgs){
 		this.x = x;
 		this.y = y;
@@ -35,6 +37,7 @@ public abstract class Entity implements Physics, Weight{
 	}
 	public void setCurrentAnimation(String key){
 		curAnimation = key;
+		animImgs.get(curAnimation).setCurrentFrame(0);
 	}
 	
 	protected abstract void setAnimations();
@@ -52,11 +55,37 @@ public abstract class Entity implements Physics, Weight{
 	
 	public abstract void update(Input input);
 	public HashMap<String, AnimatedImage> getAnimations(){
+		
 		return animImgs;
 	}
-	public void doPhysics(){
-		//TODO something in the line of if(y + falldist < groundheight){y = groundheight}
+	public void changeYForce(double addForce){
+		yForce =+ addForce;
 	}
+	public void doPhysics(){
+		doGravity();
+	}
+	public void setFalling(boolean set){
+		falling = set;
+	}
+	public boolean isFalling(){
+		return falling;
+	}
+	
+	private void doGravity(){
+		if(falling){
+			//System.out.println(yForce);
+			yForce -= getMass()*(4)*Game.getDelta()/100d;//(9.81*9.81)
+			if(y - yForce * Game.getDelta()/1000d <= 600){
+				y -= yForce * Game.getDelta()/1000d;
+			}else{
+				falling = false;
+				y = 600;
+			}
+		}
+	}
+	
+	public abstract double getMass();
+	
 	public void moveEntity(double speedX, double speedY){
 		this.x += speedX*Game.getDelta()/1000d;
 		this.y += speedY*Game.getDelta()/1000d;

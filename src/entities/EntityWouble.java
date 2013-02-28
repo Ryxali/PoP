@@ -45,5 +45,11 @@ public class EntityWouble extends AIEntity{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public double getMass() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
