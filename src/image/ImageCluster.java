@@ -2,7 +2,7 @@ package image;
 
 import java.util.ArrayList;
 
-public enum ImageCluster {
+public enum ImageCluster implements Loadable{
 	BACKDROP_FOREST_FAR("forest", "far",
 			ImageStore.FOREST_BACKDROP_FAR_1,
 			ImageStore.FOREST_BACKDROP_FAR_2,
@@ -76,6 +76,13 @@ public enum ImageCluster {
 		ImageStore [] imgs = getImages();
 		for (int i = 0; i < imgs.length; i++) {
 			imgs[i].reload();
+		}
+	}
+	@Override
+	public void unload() {
+		ImageStore [] imgs = getImages();
+		for (int i = 0; i < imgs.length; i++) {
+			imgs[i].unload();
 		}
 	}
 }

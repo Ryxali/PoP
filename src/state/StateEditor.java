@@ -8,6 +8,7 @@ import java.util.Scanner;
 import file.PPWDataLoader;
 import image.ImageLoader;
 import image.ImageStore;
+import image.Loadable;
 
 import javax.swing.JFileChooser;
 
@@ -99,5 +100,15 @@ public class StateEditor extends BasicGeneralState {
 	public void queueImagesViaImageLoader() {
 		//TODO add needed resources here
 		ImageLoader.get().queue(null);
+	}
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setStateChange(boolean isChanging) {
+		// TODO Auto-generated method stub
+		
 	}
 }

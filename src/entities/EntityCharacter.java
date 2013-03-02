@@ -20,6 +20,8 @@ public class EntityCharacter extends Entity {
 	 */
 	private byte facing = 3;
 	private long fallTime = 0;
+	private final int JUMP_CD = 100;
+	private int timeSinceJump = 0;
 
 	public EntityCharacter(int x, int y, HashMap<String, AnimatedImage> animImgs) {
 		super(x, y, animImgs);
@@ -60,9 +62,11 @@ public class EntityCharacter extends Entity {
 	private void checkInput(Input input) {
 		if (isFalling()) {
 			fallInputCheck(input);
-		} else if (input.isKeyDown(Input.KEY_SPACE)) {// Jump Triggered
+			return;
+		} else if (input.isKeyDown(Input.KEY_SPACE) && timeSinceJump >= JUMP_CD) {// Jump Triggered
 			changeYForce(1000);
 			setFalling(true);
+			timeSinceJump = 0;
 		} else if (input.isKeyDown(OptionsFile.get().fetchIntegerFromOptions(
 				Option.FIELD_KEY_MOVERIGHT.getName()))) {// Right move action
 			facing = 1;
@@ -71,8 +75,10 @@ public class EntityCharacter extends Entity {
 			facing = -1;
 		} else {// Idle otherwise
 			facing = 0;
-			fallTime = 0;
+			
 		}
+		fallTime = 0;
+		timeSinceJump += Game.getDelta();
 
 	}
 
@@ -85,7 +91,28 @@ public class EntityCharacter extends Entity {
 	}
 
 	private void setProperFallingAnimation() {
-		if (facing == -1 && isFalling()) {
+		if (facing == -1) {
+			if (fallTime <= 600) {
+				if (!getCurrentAnimation().equals(Characters.JUMP_LEFT)) {
+					setCurrentAnimation(Characters.JUMP_LEFT);
+				}
+				return;
+			}
+			if (!getCurrentAnimation().equals(Characters.IDLE)) {
+				setCurrentAnimation(Characters.IDLE);
+			}
+			return;
+		}
+		if (fallTime <= 600) {
+			if (!getCurrentAnimation().equals(Characters.JUMP_RIGHT)) {
+				setCurrentAnimation(Characters.JUMP_RIGHT);
+			}
+			return;
+		}
+		if (!getCurrentAnimation().equals(Characters.IDLE)) {
+			setCurrentAnimation(Characters.IDLE);
+		}
+		/*if (facing == -1 && isFalling()) {
 			if (fallTime <= 600) {
 				if (!getCurrentAnimation().equals(Characters.JUMP_LEFT)) {
 					setCurrentAnimation(Characters.JUMP_LEFT);
@@ -107,22 +134,31 @@ public class EntityCharacter extends Entity {
 					setCurrentAnimation(Characters.IDLE);
 				}
 			}
-		}
+		}*/
 	}
 
 	private void setProperAnimation() {
 		if (isFalling()) {
 			setProperFallingAnimation();
-		} else if (facing == 0
-				&& !getCurrentAnimation().equals(Characters.IDLE)) {
-			setCurrentAnimation(Characters.IDLE);
-		} else if (facing == 1
-				&& !getCurrentAnimation().equals(Characters.WALK_RIGHT)) {
-			setCurrentAnimation(Characters.WALK_RIGHT);
-		} else if (facing == -1
-				&& !getCurrentAnimation().equals(Characters.WALK_LEFT)) {
-			setCurrentAnimation(Characters.WALK_LEFT);
+			return;
 		}
+
+		if (facing == 1) {
+			if (!getCurrentAnimation().equals(Characters.WALK_RIGHT)) {
+				setCurrentAnimation(Characters.WALK_RIGHT);
+			}
+			return;
+		}
+		if (facing == -1) {
+			if (!getCurrentAnimation().equals(Characters.WALK_LEFT)) {
+				setCurrentAnimation(Characters.WALK_LEFT);
+			}
+			return;
+		}
+		if (!getCurrentAnimation().equals(Characters.IDLE)) {
+			setCurrentAnimation(Characters.IDLE);
+		}
+		return;
 	}
 
 	@Override

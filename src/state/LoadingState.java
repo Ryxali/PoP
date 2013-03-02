@@ -1,4 +1,5 @@
 package state;
+
 import image.Loadable;
 
 import java.util.ArrayList;
@@ -6,15 +7,9 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-
-
-public class StateLoadgame extends BasicGeneralState{
-	public StateLoadgame(int id){
-		
-	}
+public class LoadingState extends BasicGeneralState{
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
@@ -46,13 +41,13 @@ public class StateLoadgame extends BasicGeneralState{
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public ArrayList<Loadable> getUsedResources() {
-		ArrayList<Loadable> usd = new ArrayList<Loadable>();
-		return usd;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

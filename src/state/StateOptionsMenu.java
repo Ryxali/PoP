@@ -1,7 +1,10 @@
 package state;
 
+import java.util.ArrayList;
+
 import file.OptionsFile;
 import image.AnimationStore;
+import image.Loadable;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,6 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import priceofprogress.Game;
 
+import button.Button;
 import button.ButtonStore;
 import button.ListButton;
 
@@ -24,9 +28,13 @@ public class StateOptionsMenu extends BasicMenuState {
 	@Override
 	public void initialize(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		AnimationStore.MENU_OPTIONS_CLUTTER.reload();
-		AnimationStore.MENU_OPTIONS_CLUTTER.setDir(AnimationStore.DIR_REVERSE);
-		AnimationStore.MENU_OPTIONS_CLUTTER.getAnimation().setLooping(false);
+		// System.out.println("initue!");
+		/*
+		 * AnimationStore.MENU_OPTIONS_CLUTTER.reload();
+		 * AnimationStore.MENU_OPTIONS_CLUTTER
+		 * .setDir(AnimationStore.DIR_REVERSE);
+		 * AnimationStore.MENU_OPTIONS_CLUTTER.getAnimation().setLooping(false);
+		 */
 		addButton(ButtonStore.RESOLUTION);
 		addButton(ButtonStore.VOLUME_MUSIC);
 		addButton(ButtonStore.VOLUME_SOUND);
@@ -59,9 +67,10 @@ public class StateOptionsMenu extends BasicMenuState {
 	public int checkButtonStates(Input input) {
 		int checkResChange = ButtonStore.RESOLUTION.getButton()
 				.hasBeenClicked();
-		if(checkResChange != -1){
-			int[] r = ((ListButton) ButtonStore.RESOLUTION.getButton()).getDList().getResValues(checkResChange);
-			
+		if (checkResChange != -1) {
+			int[] r = ((ListButton) ButtonStore.RESOLUTION.getButton())
+					.getDList().getResValues(checkResChange);
+
 			try {
 				Game.getGameContainer().setDisplayMode(r[0], r[1], true);
 				reloadUsedResources();
@@ -70,6 +79,11 @@ public class StateOptionsMenu extends BasicMenuState {
 				e.printStackTrace();
 			}
 		}
+		if (ButtonStore.BACK.getButton().hasBeenClicked() == Button.PRESSED_TRUE) {
+			System.out.println("!");
+			return State.STATE_MENU_MAIN.getID();
+			
+		}
 
 		return State.NO_CHANGE;
 	}
@@ -77,6 +91,22 @@ public class StateOptionsMenu extends BasicMenuState {
 	@Override
 	public void queueImagesViaImageLoader() {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public void setObjectsToLoad(ArrayList<Loadable> objs) {
+
+	}
+
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		ArrayList<Loadable> usd = new ArrayList<Loadable>();
+		usd.add(ButtonStore.RESOLUTION.getButton());
+		usd.add(ButtonStore.VOLUME_MUSIC.getButton());
+		usd.add(ButtonStore.VOLUME_SOUND.getButton());
+		usd.add(ButtonStore.KEY_CONFIG.getButton());
+		usd.add(ButtonStore.BACK.getButton());
+		usd.add(AnimationStore.MENU_OPTIONS_CLUTTER);
+		return usd;
 	}
 }
