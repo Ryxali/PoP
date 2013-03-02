@@ -197,8 +197,10 @@ public class PPWDataLoader implements Runnable{
 				ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 				for (int j = 0; j < loadedMap.get(i).length; j++) {
 					if(loadedMap.get(i)[j].equals("1")){
+						System.out.println("jord");
 						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("2")){
+						System.out.println("gräs");
 						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("3")){
 						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));

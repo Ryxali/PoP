@@ -85,9 +85,9 @@ public enum ImageStore {
 	
 	//Blocks for world building
 	BLOCK_EARTH("res/img/blocks/EarthBlock.png", null),
-	BLOCK_GRASS("res/img/blocks/EarthBlock.png", null),
-	BLOCK_GRAVEL("res/img/blocks/EarthBlock.png", null),
-	BLOCK_ROCK("res/img/blocks/EarthBlock.png", null),
+	BLOCK_GRASS("res/img/blocks/GrassBlock.png", null),
+	BLOCK_GRAVEL("res/img/blocks/GravelBlock.png", null),
+	BLOCK_ROCK("res/img/blocks/RockBlock.png", null),
 	
 	
 	//Backdrop images
