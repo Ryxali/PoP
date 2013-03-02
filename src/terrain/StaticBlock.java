@@ -31,7 +31,7 @@ public class StaticBlock extends Block{
 	 */
 	@Override
 	public Block clone(int x, int y) {
-		return new StaticBlock(getID(), x, y, getRef());
+		return new StaticBlock(getID(), x, y, getImage());
 	}
 	
 }

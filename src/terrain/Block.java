@@ -32,7 +32,7 @@ public abstract class Block {
 		return this.y;
 	}
 	
-	public ImageStore getRef(){
+	public ImageStore getImage(){
 		return this.ref;
 	}
 	

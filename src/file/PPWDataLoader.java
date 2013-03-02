@@ -19,6 +19,15 @@ public class PPWDataLoader implements Runnable{
 	private static PPWDataLoader datLoad;
 	private static ArrayList<String[]> fileData;
 	private String mapRef = "maps/defaultMapRef.PPW";
+	private Thread thread;
+	/** The type of task that shall be performed. True represents save and false load. */
+	public boolean task;
+	/** True if the next map that shall be saved is a new one. */
+	private boolean newSaveMap = false;
+	/** The file that shall be loaded. */
+	private File fileToBeLoaded = null;
+	/** True while no task is assigned. */
+	private boolean threadResting = true;
 	
 	public static PPWDataLoader get(){
 		if(datLoad != null){
@@ -30,46 +39,57 @@ public class PPWDataLoader implements Runnable{
 	}
 	
 	public PPWDataLoader(){
-		run();
+		thread = new Thread(this);
+		thread.start();
 	}
 	/**
 	 * 
 	 * 
-	 * @return the loaded version of the chosen file with the last array containing the file path.
+	 * @return the reference to the current map.
 	 */
-	private ArrayList<String[]> chooseData(){
+	public String getMapRef(){
+		return this.mapRef;
+	}
+	/**
+	 * 
+	 * 
+	 * @return the chosen file.
+	 */
+	private File chooseData(){
 		// Create a file chooser
         JFileChooser fc = new JFileChooser();
         // Limit the file types that can be chosen.
         fc.setAcceptAllFileFilterUsed(false);
         fc.changeToParentDirectory();
-        int returnVal = fc.showOpenDialog(null);
-        // Check if file is of right type.
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File choosenFile = fc.getSelectedFile();
-            if(choosenFile.getName().toLowerCase().endsWith(".ppw")){
-            	String[] filePath = new String[1];
-            	filePath[0] = choosenFile.getAbsolutePath();
-            	ArrayList<String[]> loadedFile = loadFile(choosenFile);
-            	loadedFile.add(filePath);
-            	return loadedFile;
-            }else{
-            	System.out.println(choosenFile.getName() + " is not a PPW file.");
-            	return new ArrayList<String[]>();
-            }
-        }else{
-        	// we have not chosen anything.
-        	return new ArrayList<String[]>();
+        boolean choosingFile = true;
+        while(choosingFile){
+	        int returnVal = fc.showOpenDialog(null);
+	        // Check if file is of right type.
+	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File choosenFile = fc.getSelectedFile();
+	            if(choosenFile.getName().toLowerCase().endsWith(".ppw")){
+	            	return choosenFile;
+	            }else{
+	            	System.out.println(choosenFile.getName() + " is not a PPW file.");
+	            }
+	        }else{
+	        	// we have not chosen anything.
+	        	choosingFile = false;
+	        }
         }
+        return null;
 	}
 	/**
 	 * 
 	 * 
 	 * @param file the file to be loaded.
-	 * @return
+	 * @return a list of all lines in the loaded file. The first list contains only the file path.
 	 */
 	private ArrayList<String[]> loadFile(File file){
+		String[] filePath = new String[1];
+    	filePath[0] = file.getAbsolutePath();
 		ArrayList <String[]> strs = new ArrayList<String[]>();
+		strs.add(filePath);
 		try {
 			Scanner indata = new Scanner(file);
 			while(indata.hasNext()){
@@ -90,11 +110,11 @@ public class PPWDataLoader implements Runnable{
 	 * @param ref
 	 * @param newMap
 	 */
-	public void saveData(String ref, boolean newMap){
-		System.out.println("saving");
+	public void saveData(boolean newMap){
 		if(newMap){
 			String mapName = JOptionPane.showInputDialog("What shall this map be called?");
-			ref = "maps/" + mapName + ".PPW";
+			mapRef = "maps/" + mapName + ".PPW";
+			//check if it already exist???
 		}
 		
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
@@ -104,7 +124,7 @@ public class PPWDataLoader implements Runnable{
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {
-					tempRow.add(Terrain.get().getBlock(i, j).getID() + "");
+					tempRow.add(Terrain.get().getBlock(j, i).getID() + "");
 				} catch (IndexOutOfBoundsException e){
 					tempRow.add("0");
 				}
@@ -113,7 +133,7 @@ public class PPWDataLoader implements Runnable{
 		}
 			
 		try {
-			PrintWriter utdata = new PrintWriter(new BufferedWriter(new FileWriter(ref)));
+			PrintWriter utdata = new PrintWriter(new BufferedWriter(new FileWriter(mapRef)));
 			String nextSaveLine = "";
 			for (int row = 0; row < tempList.size(); row++) {
 				nextSaveLine = "";
@@ -131,64 +151,92 @@ public class PPWDataLoader implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	
-	public void saveTerrain(String ref, boolean newMap){
-		saveData(ref, newMap);
+	/**
+	 * Causes the thread of the data loader to save the current map.
+	 * 
+	 * @param newSaveMap true if the map that shall be saved is a new one.
+	 */
+	public void saveTerrain(boolean newSaveMap){
+		task = true;
+		this.newSaveMap = newSaveMap;
+		this.threadResting = false;
 	}
-	
-	public String loadTerrain(){
-		ArrayList<String[]> loadedMap = chooseData();
-		if(loadedMap == new ArrayList<String[]>()){
-			// map is empty
-		}else{
-			// get the file path.
-			mapRef = loadedMap.get(loadedMap.size()-1)[0];
-			loadedMap.remove(loadedMap.size()-1);
-			
-			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
-			// lowest row first.
-			for (int i = loadedMap.size()-1; i >= 0; i--) {
-				currentBlockRow.clear();
-				for (int j = 0; j < loadedMap.get(i).length; j++) {
-					if(loadedMap.get(i)[j].equals("1")){
-						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
-						//System.out.println("x: "+j*64+" y: "+ (1200 - loadedMap.size()*64 + i*64));
-					}
-					// add em other blocksis
-				}
-				Terrain.get().addBlockRow(currentBlockRow);
-			}
-		}
-		return mapRef;
+	/**
+	 * Causes the thread of the data loader to load a map that will be choosen by the user.
+	 */
+	public void loadTerrain(){
+		task = false;
+		this.fileToBeLoaded = null;
+		this.threadResting = false;
 	}
-	
-	public String loadTerrain(File file){
+	/**
+	 * Causes the thread of the data loader to load a map.
+	 * 
+	 * @param file the file to be loaded.
+	 */
+	public void loadTerrain(File file){
+		task = false;
+		this.fileToBeLoaded = file;
+		this.threadResting = false;
+	}
+	/**
+	 * Loads a map and store it as a Terrain containing blocks based on the content of the file.
+	 * 
+	 * @param file the file to be loaded and stored.
+	 */
+	public void storeLoadedTerrain(File file){
 		ArrayList<String[]> loadedMap = loadFile(file);
-		if(loadedMap == new ArrayList<String[]>()){
+		// get the file path.
+		mapRef = loadedMap.get(loadedMap.size()-1)[0];
+		loadedMap.remove(loadedMap.size()-1);
+		if(loadedMap.isEmpty()){
 			// map is empty
 		}else{
-			// get the file path.
-			mapRef = loadedMap.get(loadedMap.size()-1)[0];
-			loadedMap.remove(loadedMap.size()-1);
-			
-			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 			// lowest row first.
 			for (int i = loadedMap.size()-1; i >= 0; i--) {
-				currentBlockRow.clear();
+				ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 				for (int j = 0; j < loadedMap.get(i).length; j++) {
 					if(loadedMap.get(i)[j].equals("1")){
 						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+					}else if(loadedMap.get(i)[j].equals("2")){
+						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+					}else if(loadedMap.get(i)[j].equals("3")){
+						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+					}else if(loadedMap.get(i)[j].equals("4")){
+						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}
-					// add em other blocksis
 				}
 				Terrain.get().addBlockRow(currentBlockRow);
 			}
 		}
-		return mapRef;
 	}
-
+	
 	@Override
 	public void run() {
-		
+		try {
+			thread.sleep(10);
+			
+			if(!threadResting){
+				if(task){
+					System.out.println("Hejfel");
+					saveData(newSaveMap);
+					
+				}else if(!task){
+					if(this.fileToBeLoaded == null){
+						File fileToBeStored = chooseData();
+						if(fileToBeStored != null){
+							storeLoadedTerrain(fileToBeStored);
+						}
+						
+					}else{
+						storeLoadedTerrain(fileToBeLoaded);
+						
+					}
+				}
+				threadResting = true;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -25,6 +25,7 @@ public enum Blocks {
 	public int getId(){
 		return this.id;
 	}
+	
 	public Block clone(int x, int y){
 		return this.getBlock().clone(x, y);
 	}
