@@ -1,5 +1,7 @@
 package state;
 
+import java.util.ArrayList;
+
 import gui.Interface;
 import gui.Inventory;
 import gui.MachineCraftInterface;
@@ -9,6 +11,7 @@ import image.Drawable;
 import image.ImageCluster;
 import image.ImageLoader;
 import image.ImageStore;
+import image.Loadable;
 
 import machines.Machine;
 import machines.Part;
@@ -42,7 +45,6 @@ public class StatePlay extends BasicGeneralState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		System.out.println("Building PlayState");
 		BackDrop.get().rebuild(ImageCluster.FOREST);
 	}
 
@@ -112,5 +114,17 @@ public class StatePlay extends BasicGeneralState {
 				ImageCluster.BACKDROP_FOREST_SHORT,
 				ImageCluster.BACKDROP_FOREST_SKY);
 
+	}
+
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		ArrayList<Loadable> usd = new ArrayList<Loadable>();
+		return usd;
+	}
+
+	@Override
+	public void setStateChange(boolean isChanging) {
+		// TODO Auto-generated method stub
+		
 	}
 }

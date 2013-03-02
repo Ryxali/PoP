@@ -1,5 +1,7 @@
 package state;
 
+import image.ImageLoader;
+
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -70,6 +72,7 @@ public enum State {
 	 * @param state the next game state to go into
 	 */
 	public static void setNextState(int state){
+		//getState(state).getState().setStateChange(true);
 		nextState = state;
 	}
 	/**

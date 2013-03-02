@@ -3,6 +3,7 @@ package button;
 
 
 import image.ImageStore;
+import image.Loadable;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,7 +13,7 @@ import priceofprogress.Game;
 
 
 
-public abstract class Button {
+public abstract class Button implements Loadable{
 	protected int x;
 	protected int y;
 	
