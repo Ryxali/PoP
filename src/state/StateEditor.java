@@ -25,10 +25,10 @@ import terrain.StaticBlock;
 import terrain.Terrain;
 
 public class StateEditor extends BasicGeneralState {
-	/** The URL of the current map. */
-	private String mapRef = "maps/defaultMapRef.PPW";
 	/** The default number of blocks created in an horizontal line when a new map is created */
 	int defaultBlockLength = 30;
+	/** The default number of blocks created in an vertical line when a new map is created */
+	int defaultBlockHeight = 6;
 	
 	public boolean notSaved = true;
 	
@@ -46,8 +46,8 @@ public class StateEditor extends BasicGeneralState {
 		//draws all blocks 
 		for (int y = 0; y < Terrain.get().size(); y++) {
 			for (int x = 0; x < Terrain.get().rowSize(y); x++) {
-				Terrain.get().getBlock(x, y).getRef().draw(Terrain.get().getBlock(x, y).getXPos(), Terrain.get().getBlock(x, y).getYPos());
-				System.out.println("x: "+Terrain.get().getBlock(x, y).getXPos()+" y: "+ Terrain.get().getBlock(x, y).getYPos());
+				Terrain.get().getBlock(x, y).getImage().draw(Terrain.get().getBlock(x, y).getXPos(), Terrain.get().getBlock(x, y).getYPos());
+				//System.out.println("x: "+Terrain.get().getBlock(x, y).getXPos()+" y: "+ Terrain.get().getBlock(x, y).getYPos());
 			}
 		}
 	}
@@ -55,24 +55,20 @@ public class StateEditor extends BasicGeneralState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		//System.out.println("update");
 		
 		// save what we has
 		if(notSaved){
 			notSaved = false;
+			//createNewMap();
+			loadMap();
 			//saveMap();
-			//loadMap();
-			createNewMap();
 		}
 	}
 	
 	private void createNewMap(){
-		// Create an empty map
-		Terrain.get();
 		// Make a default map
-		ArrayList<Block> currentBlockRow = new ArrayList<Block>();
-		for (int i = 0; i < 6; i++) {
-			currentBlockRow.clear();
+		for (int i = 0; i < defaultBlockHeight; i++) {
+			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 			for (int j = 0; j < defaultBlockLength; j++) {
 				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-(i+1)*64));
 				//System.out.println("x: "+j*64+" y: "+ (1200-(i+1)*64));
@@ -80,14 +76,17 @@ public class StateEditor extends BasicGeneralState {
 			Terrain.get().addBlockRow(currentBlockRow);
 		}
 	}
+	
 	private void loadMap(){
-		mapRef = PPWDataLoader.get().loadTerrain();
+		PPWDataLoader.get().loadTerrain();
+		//this.notify();
 	}
+	
 	private void saveMap(){
-		if(mapRef == "maps/defaultMapRef.PPW"){
-			PPWDataLoader.get().saveTerrain(mapRef, true);
+		if(PPWDataLoader.get().getMapRef() == "maps/defaultMapRef.PPW"){
+			PPWDataLoader.get().saveTerrain(true);
 		}else{
-			PPWDataLoader.get().saveTerrain(mapRef, false);
+			PPWDataLoader.get().saveTerrain(false);
 		}
 		
 	}
@@ -98,7 +97,6 @@ public class StateEditor extends BasicGeneralState {
 	}
 	@Override
 	public void queueImagesViaImageLoader() {
-		//TODO add needed resources here
 		ImageLoader.get().queue(null);
 	}
 	@Override
