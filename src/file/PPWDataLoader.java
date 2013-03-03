@@ -124,7 +124,7 @@ public class PPWDataLoader implements Runnable{
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tempRow = new ArrayList<String>();
 		// highest row first.
-		for (int i = Terrain.get().terrainSize()-1; i >= 0; i--) {
+		for (int i = Terrain.get().size()-1; i >= 0; i--) {
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {

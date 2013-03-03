@@ -8,6 +8,7 @@ import java.util.Scanner;
 import file.PPWDataLoader;
 import image.ImageLoader;
 import image.ImageStore;
+import image.Loadable;
 
 import javax.swing.JFileChooser;
 
@@ -61,7 +62,7 @@ public class StateEditor extends BasicGeneralState {
 		//backdrop
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		//draws all blocks 
-		for (int y = 0; y < Terrain.get().terrainSize(); y++) {
+		for (int y = 0; y < Terrain.get().size(); y++) {
 			for (int x = 0; x < Terrain.get().rowSize(y); x++) {
 				Block block = Terrain.get().getBlock(x, y);
 				if(block.getID() != 0){
@@ -176,5 +177,15 @@ public class StateEditor extends BasicGeneralState {
 	@Override
 	public void queueImagesViaImageLoader() {
 		ImageLoader.get().queue(null);
+	}
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setStateChange(boolean isChanging) {
+		// TODO Auto-generated method stub
+		
 	}
 }

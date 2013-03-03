@@ -90,6 +90,7 @@ public class StandardButton extends Button {
 	}
 	@Override
 	public void reload() {
+		System.out.println("Reloaded");
 		idleImg.reload();
 		hoverImg.reload();
 		pressedImg.reload();

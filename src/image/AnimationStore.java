@@ -14,15 +14,15 @@ import org.newdawn.slick.SlickException;
  * @author Niklas Lindblad
  *
  */
-public enum AnimationStore {
+public enum AnimationStore implements Loadable {
 	DEFAULT(new AnimatedImage("res/img/Default/", "Def", ".png", 1, 1000, false, 1),
 			"res/img/Default/", "Def", ".png", 1, 1000, false),
 	MENU_ANIMATION(null, "res/img/MenuAnimation/", "Menu", ".png", 20, 10, true),
 	MENU_FIRE(null, "res/img/FireAni/", "Layer3_", ".png", 10, 100, true),
 	MENU_LIGHT(null, "res/img/LightAni/", "Layer6_", ".png", 10, 100, true),
-	MENU_MAIN_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 5, 80, true),
-	MENU_OPTIONS_CLUTTER(null, "res/img/Blueprint_Options/", "Blueprintclutter2_", ".png", 5, 80, true),
-	MENU_KEYCONFIG_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 6, 80, true),
+	MENU_MAIN_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 5, 80, false),
+	MENU_OPTIONS_CLUTTER(null, "res/img/Blueprint_Options/", "Blueprintclutter2_", ".png", 5, 80, false),
+	MENU_KEYCONFIG_CLUTTER(null, "res/img/Blueprint_Menu/", "Blueprintclutter1_", ".png", 6, 80, false),
 	TEST(null, "res/img/testAnim/", "test_", ".png", 7, 500, true),
 	WOUBLE_WALK_LEFT(null, "res/img/Entities/Character/WalkLeft/", "Character_Walk_L_", ".png", 5, 80, true),
 	WOUBLE_WALK_RIGHT(null, "res/img/Entities/Character/WalkRight/", "Character_Walk_R_", ".png", 5, 80, true),

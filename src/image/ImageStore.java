@@ -18,7 +18,7 @@ import priceofprogress.Game;
  * @author Niklas Lindblad
  *
  */
-public enum ImageStore {
+public enum ImageStore implements Loadable {
 	DEFAULT("res/img/Default/Def1.png", fetchImg("res/img/Default/Def1.png")),
 	COMPANY_LOGO("res/img/companyLogo.png", null),
 	

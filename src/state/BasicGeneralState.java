@@ -3,6 +3,7 @@ package state;
 
 import image.AnimationStore;
 import image.ImageStore;
+import image.Loadable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,5 +38,9 @@ public abstract class BasicGeneralState extends BasicGameState{
 	}
 	
 	public abstract void queueImagesViaImageLoader();
+	
+	public abstract ArrayList<Loadable> getUsedResources();
+	
+	public abstract void setStateChange(boolean isChanging);
 	
 }
