@@ -10,8 +10,8 @@ import image.ImageStore;
 
 public class PartVaccum extends Part{
 
-	public PartVaccum(ImageStore img, AnimationStore animImg, int... posPoss) {
-		super(img, animImg, posPoss);
+	public PartVaccum(int iD, ImageStore img, AnimationStore animImg, int... posPoss) {
+		super(iD, img, animImg, posPoss);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,5 +34,8 @@ public class PartVaccum extends Part{
 		img.draw(x, y);
 		
 	}
-
+	@Override
+	public Part clone(int position) {
+		return new PartFunnel(getID(), getImageStore(), getAnimationStore(), position);
+	}
 }

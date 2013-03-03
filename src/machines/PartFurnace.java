@@ -7,8 +7,8 @@ import image.ImageStore;
 
 public class PartFurnace extends Part{
 
-	public PartFurnace(ImageStore UIImg, AnimationStore AnimImg, int... posPoss) {
-		super(UIImg, AnimImg, posPoss);
+	public PartFurnace(int iD, ImageStore UIImg, AnimationStore AnimImg, int... posPoss) {
+		super(iD, UIImg, AnimImg, posPoss);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,5 +29,8 @@ public class PartFurnace extends Part{
 		// TODO Auto-generated method stub
 		
 	}
-
+	@Override
+	public Part clone(int position) {
+		return new PartFunnel(getID(), getImageStore(), getAnimationStore(), position);
+	}
 }
