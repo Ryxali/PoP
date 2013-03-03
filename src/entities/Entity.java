@@ -8,6 +8,7 @@ import org.newdawn.slick.Input;
 import physics.Physics;
 import physics.Weight;
 import priceofprogress.Game;
+import terrain.Terrain;
 import image.AnimatedImage;
 import image.ImageStore;
 
@@ -75,11 +76,11 @@ public abstract class Entity implements Physics, Weight{
 		if(falling){
 			//System.out.println(yForce);
 			yForce -= getMass()*(4)*Game.getDelta()/100d;//(9.81*9.81)
-			if(y - yForce * Game.getDelta()/1000d <= 600){
+			if(y - yForce * Game.getDelta()/1000d <= Terrain.get().getTopBlock((int)x).getYPos()){
 				y -= yForce * Game.getDelta()/1000d;
 			}else{
 				falling = false;
-				y = 600;
+				y =  Terrain.get().getTopBlock((int)x).getYPos();
 			}
 		}
 	}

@@ -1,7 +1,9 @@
 package state;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import file.PPWDataLoader;
 import gui.Interface;
 import gui.Inventory;
 import gui.MachineCraftInterface;
@@ -24,6 +26,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import priceofprogress.Game;
+import terrain.Terrain;
 
 import entities.Characters;
 import entities.Entities;
@@ -46,13 +49,16 @@ public class StatePlay extends BasicGeneralState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		BackDrop.get().rebuild(ImageCluster.FOREST);
+		PPWDataLoader.get().loadTerrain(new File("maps/op.PPW"));
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
+		
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		BackDrop.get().draw(g);
+		Terrain.get().draw();
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
 		Inventory.get().draw(g);
@@ -64,14 +70,24 @@ public class StatePlay extends BasicGeneralState {
 		}
 	}
 	
+	private void terrainUpdate(Input input){
+		if(Characters.MAIN_CHAR.getCharacter().getX() < (double)Game.getGameContainer().getWidth()*0.25){
+			Terrain.get().move((double)Game.getGameContainer().getWidth()*0.25-Characters.MAIN_CHAR.getCharacter().getX(), 0d);
+			//Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.25);
+		}else if((double)Game.getGameContainer().getWidth()*0.75 < Characters.MAIN_CHAR.getCharacter().getX()){
+			Terrain.get().move((double)Game.getGameContainer().getWidth()*0.75-Characters.MAIN_CHAR.getCharacter().getX(), 0d);
+			//Characters.MAIN_CHAR.getCharacter().setX(Game.getGameContainer().getWidth()*0.75);
+		}
+	}
 	
-
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Game.updateDelta(gc.getTime());
 		Characters.MAIN_CHAR.getCharacter().update(gc.getInput());
+		terrainUpdate(gc.getInput());
 		BackDrop.get().update(gc.getInput());
+		
 		Entities.WOUBLE.getEntity().update();
 		if (gc.getInput().isKeyDown(Input.KEY_E)) {
 			Game.setGameSpeed(0.5f);
