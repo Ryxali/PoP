@@ -7,13 +7,13 @@ import java.util.Arrays;
 
 public enum Component{
 	//TODO add object to represent these units
-	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_1), 1),
-	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3), 2),
-	STICK("Ballistics Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3), 3),
-	DUST("Volatition Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3), 4),
-	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3), 5),
-	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4), 6),
-	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4), 7);
+	VACCUM("Vaccum Unit", new PartVaccum(1, ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_1), 1),
+	FURNACE("Furnace Unit", new PartFurnace(2, ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3), 2),
+	STICK("Ballistics Enhancer", new PartFurnace(3, ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3), 3),
+	DUST("Volatition Enhancer", new PartFurnace(4, ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3), 4),
+	COG("Particle Accellery", new PartFurnace(5, ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3), 5),
+	FUNNEL("Funnel Unit", new PartFurnace(6, ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4), 6),
+	FUSE("Ignition Unit", new PartFurnace(7, null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4), 7);
 
 	private final String title;
 	private Part part;
