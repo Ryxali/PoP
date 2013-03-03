@@ -7,8 +7,8 @@ import image.ImageStore;
 
 public class PartFunnel extends Part{
 
-	public PartFunnel(ImageStore UIImg, AnimationStore AnimImg, int... posPoss) {
-		super(UIImg, AnimImg, posPoss);
+	public PartFunnel(int iD, ImageStore UIImg, AnimationStore AnimImg, int... posPoss) {
+		super(iD, UIImg, AnimImg, posPoss);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,6 +29,11 @@ public class PartFunnel extends Part{
 	public void deviceUpdate() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Part clone(int position) {
+		return new PartFunnel(getID(), getImageStore(), getAnimationStore(), position);
 	}
 
 }

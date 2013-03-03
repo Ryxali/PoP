@@ -7,16 +7,17 @@ import java.util.Arrays;
 
 public enum Component{
 	//TODO add object to represent these units
-	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_1)),
-	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3)),
-	STICK("Ballistics Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3)),
-	DUST("Volatition Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3)),
-	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3)),
-	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4)),
-	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4));
+	VACCUM("Vaccum Unit", new PartVaccum(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_1), 1),
+	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3), 2),
+	STICK("Ballistics Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3), 3),
+	DUST("Volatition Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3), 4),
+	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3), 5),
+	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4), 6),
+	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4), 7);
 
 	private final String title;
 	private Part part;
+	private int id;
 	
 	
 	private static int[] toArray(int i, int... iN) {
@@ -32,9 +33,10 @@ public enum Component{
 		return part;
 	}
 
-	private Component(String title, Part part) {
+	private Component(String title, Part part, int id) {
 		this.title = title;
 		this.part = part;
+		this.id = id;
 	}
 	
 	public String getTitle(){
@@ -52,7 +54,9 @@ public enum Component{
 		return false;
 	}*/
 
-	
+	public Part clone(int position){
+		return this.getPart().clone(position);
+	}
 
 	
 }

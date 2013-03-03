@@ -88,7 +88,7 @@ public enum ImageStore {
 	BLOCK_GRASS("res/img/blocks/GrassBlock.png", null),
 	BLOCK_GRAVEL("res/img/blocks/GravelBlock.png", null),
 	BLOCK_ROCK("res/img/blocks/RockBlock.png", null),
-	
+	MARKED_BLOCK_BORDER("res/img/blocks/MarkedBlockBorder", null),
 	
 	//Backdrop images
 	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.png", null),

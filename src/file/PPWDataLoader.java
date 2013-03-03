@@ -7,9 +7,13 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import priceofprogress.Game;
+
 import terrain.Block;
 import terrain.Blocks;
 import terrain.Terrain;
+import machines.Component;
+import machines.Machine;
 /**
  * 
  * @author Niklas Lindblad
@@ -120,7 +124,7 @@ public class PPWDataLoader implements Runnable{
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tempRow = new ArrayList<String>();
 		// highest row first.
-		for (int i = Terrain.get().size()-1; i >= 0; i--) {
+		for (int i = Terrain.get().terrainSize()-1; i >= 0; i--) {
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {
@@ -162,7 +166,7 @@ public class PPWDataLoader implements Runnable{
 		this.threadResting = false;
 	}
 	/**
-	 * Causes the thread of the data loader to load a map that will be choosen by the user.
+	 * Causes the thread of the data loader to load a map that will be chosen by the user.
 	 */
 	public void loadTerrain(){
 		task = false;
@@ -180,7 +184,7 @@ public class PPWDataLoader implements Runnable{
 		this.threadResting = false;
 	}
 	/**
-	 * Loads a map and store it as a Terrain containing blocks based on the content of the file.
+	 * Loads a map and store it as a Terrain containing blocks and machines based on the content of the file.
 	 * 
 	 * @param file the file to be loaded and stored.
 	 */
@@ -196,16 +200,41 @@ public class PPWDataLoader implements Runnable{
 			for (int i = loadedMap.size()-1; i >= 0; i--) {
 				ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 				for (int j = 0; j < loadedMap.get(i).length; j++) {
-					if(loadedMap.get(i)[j].equals("1")){
-						System.out.println("jord");
-						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+					if(loadedMap.get(i)[j].equals("0")){
+						currentBlockRow.add(Blocks.AIR_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+					}else if(loadedMap.get(i)[j].equals("1")){
+						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("2")){
-						System.out.println("gräs");
-						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("3")){
-						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("4")){
-						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+					}else if(loadedMap.get(i)[j].charAt(0) == '{'){
+						Component[] parts = new Component[4];
+						int l = 0;
+						for(int k = 1; k < loadedMap.get(i)[j].length()-1; k++){
+							if(loadedMap.get(i)[j].charAt(k) == '1'){
+								parts[l] = Component.VACCUM;
+							}else if(loadedMap.get(i)[j].charAt(k) == '2'){
+								parts[l] = Component.FURNACE;
+							}else if(loadedMap.get(i)[j].charAt(k) == '3'){
+								parts[l] = Component.STICK;
+							}else if(loadedMap.get(i)[j].charAt(k) == '4'){
+								parts[l] = Component.DUST;
+							}else if(loadedMap.get(i)[j].charAt(k) == '5'){
+								parts[l] = Component.COG;
+							}else if(loadedMap.get(i)[j].charAt(k) == '6'){
+								parts[l] = Component.FUNNEL;
+							}else if(loadedMap.get(i)[j].charAt(k) == '7'){
+								parts[l] = Component.FUSE;
+							}else if(loadedMap.get(i)[j].charAt(k) == ' ' || loadedMap.get(i)[j].charAt(k) == ','){
+								l--;
+							}
+							l++;
+						}
+						Terrain.get().addMachine(new Machine(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64,
+								parts[0].clone(0), parts[1].clone(1), parts[2].clone(2), parts[3].clone(3)));
 					}
 				}
 				Terrain.get().addBlockRow(currentBlockRow);

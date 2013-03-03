@@ -8,6 +8,7 @@ import image.ImageStore;
 
 import java.util.Arrays;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -16,16 +17,19 @@ import physics.Weight;
 
 public abstract class Part implements Weight, Drawable{
 	
+	private int iD;
 	private int[] possPos;
 	protected ImageStore img;
+	protected AnimationStore ani;
 	private Machine machine;
 	public static final int POSITION_1 = 0;
 	public static final int POSITION_2 = 1;
 	public static final int POSITION_3 = 2;
 	public static final int POSITION_4 = 3;
 	
-	public Part(ImageStore UIImg, AnimationStore AnimImg, int... posPoss){
+	public Part(int iD, ImageStore UIImg, AnimationStore AnimImg, int... posPoss){
 		//this.machine = machine;
+		this.iD = iD;
 		this.img = UIImg;
 		this.possPos = posPoss;
 	}
@@ -42,12 +46,23 @@ public abstract class Part implements Weight, Drawable{
 	public void update(){
 		deviceUpdate();
 	}
-	
+	public int getID(){
+		return this.iD;
+	}
 	public Machine getMachine(){
 		return machine;
 	}
 	public Image getImage(){
 		return img.getImage();
+	}
+	public Animation getAnimation(){
+		return ani.getAnimation();
+	}
+	public ImageStore getImageStore(){
+		return img;
+	}
+	public AnimationStore getAnimationStore(){
+		return  ani;
 	}
 	public abstract void deviceUpdate();
 
@@ -60,6 +75,5 @@ public abstract class Part implements Weight, Drawable{
 		return false;
 	}
 	
-	
-	
+	public abstract Part clone(int position);
 }

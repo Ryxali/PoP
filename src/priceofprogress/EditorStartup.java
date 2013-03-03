@@ -22,7 +22,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import file.OptionsFile;
 
 import state.State;
-
+/**
+ * 
+ * @author Lukas
+ *
+ */
 public class EditorStartup extends Game{
 
 	public static final String EDITOR_NAME = "Price of Progress Editor 1.00";

@@ -15,7 +15,9 @@ public class Machine implements Weight, Physics, Drawable{
 	private int x;
 	private int y;
 	
-	public Machine(Part p1, Part p2, Part p3, Part p4){
+	public Machine(int x, int y, Part p1, Part p2, Part p3, Part p4){
+		this.x = x;
+		this.y = y;
 		parts[0] = p1;
 		parts[1] = p2;
 		parts[2] = p3;
