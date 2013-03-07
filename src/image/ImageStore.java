@@ -128,8 +128,10 @@ public enum ImageStore implements Loadable {
 	FOREST_BACKDROP_SKY_4("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_4.png", null),
 	FOREST_BACKDROP_SKY_5("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_5.png", null),
 	FOREST_BACKDROP_SKY_6("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_6.png", null),
-	FOREST_BACKDROP_SKY_7("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_7.png", null);
+	FOREST_BACKDROP_SKY_7("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_7.png", null),
 	
+	// editor backdrop
+	EDITOR_BACKDROP("res/img/Backdrops/EditorBackground.png", null);
 	/**
 	 * The String reference to the image location on disk
 	 */

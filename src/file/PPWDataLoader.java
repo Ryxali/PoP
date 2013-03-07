@@ -18,14 +18,21 @@ import terrain.Block;
 import terrain.Blocks;
 import terrain.Terrain;
 /**
+ * Handles saving and loading of ppw maps.
+ * Stores loaded maps as Terrain.
+ * 
+ * Block ID is currently bugged and all blocks are therefore saved as earth blocks.
  * 
  * @author Niklas Lindblad
  * @author Lukas Wahlquist
  */
 public class PPWDataLoader implements Runnable{
+	/** An object containing this PPWDataLoader. */
 	private static PPWDataLoader datLoad;
+	/** A list of all data loaded from a file. */
 	private static ArrayList<String[]> fileData;
 	private String mapRef = "maps/defaultMapRef.PPW";
+	/** The thread used by the data loader to work apart from the main systems. */
 	private Thread thread;
 	/** The type of task that shall be performed. True represents save and false load. */
 	public boolean task;
@@ -37,7 +44,11 @@ public class PPWDataLoader implements Runnable{
 	private boolean threadResting = true;
 	/** The height of the screen. */
 	private int screenHeight = 0;
-	
+	/**
+	 * Makes a new object containing this PPWDataLoader or returns the one that already exist.
+	 * 
+	 * @return an object containing this PPWDataLoader.
+	 */
 	public static PPWDataLoader get(){
 		if(datLoad != null){
 			return datLoad;
@@ -46,21 +57,24 @@ public class PPWDataLoader implements Runnable{
 			return datLoad;
 		}
 	}
-	
+	/**
+	 * Starts this PPWDataLoader.
+	 */
 	public PPWDataLoader(){
 		thread = new Thread(this);
 		thread.start();
 	}
 	/**
+	 * Fetch the path of the current map.
 	 * 
-	 * 
-	 * @return the reference to the current map.
+	 * @return the path to the current map.
 	 */
 	public String getMapRef(){
 		return this.mapRef;
 	}
 	/**
-	 * 
+	 * Lets the user choose a file to be loaded.
+	 * If it's not a ppw file, we will kindly ask them to choose again.
 	 * 
 	 * @return the chosen file.
 	 */
@@ -89,7 +103,7 @@ public class PPWDataLoader implements Runnable{
         return null;
 	}
 	/**
-	 * 
+	 * Loads a specified ppw map file.
 	 * 
 	 * @param file the file to be loaded.
 	 * @return a list of all lines in the loaded file. The first list contains only the file path.
@@ -112,18 +126,17 @@ public class PPWDataLoader implements Runnable{
 		fileData = strs;
 		return fileData;
 	}
-	
 	/**
+	 * Saves the active map as a ppw map file with numbers representing the
+	 * different kinds of blocks.
 	 *
-	 *
-	 * @param ref
-	 * @param newMap
+	 * @param newMap determines if the user will choose a name for the ppw-file.
 	 */
 	public void saveData(boolean newMap){
 		if(newMap){
 			String mapName = JOptionPane.showInputDialog("What shall this map be called?");
 			mapRef = "maps/" + mapName + ".PPW";
-			//check if it already exist???
+			// here we should check if it already exist but doesn't yet.
 		}
 		
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
@@ -133,6 +146,8 @@ public class PPWDataLoader implements Runnable{
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {
+					// this is supposed to get the ID but it seems that all blocks have ID 1 (they are saved as earth blocks).
+					System.out.println("ID: "+(Terrain.get().getBlock(j, i).getID()));
 					tempRow.add(Terrain.get().getBlock(j, i).getID() + "");
 				} catch (IndexOutOfBoundsException e){
 					tempRow.add("0");
@@ -147,6 +162,7 @@ public class PPWDataLoader implements Runnable{
 			for (int row = 0; row < tempList.size(); row++) {
 				nextSaveLine = "";
 				for (int col = 0; col < tempList.get(row).size(); col++) {
+					System.out.println("va: "+tempList.get(row).get(col));
 					if(col == tempList.get(row).size() - 1){
 						nextSaveLine = nextSaveLine + tempList.get(row).get(col);
 					}else{

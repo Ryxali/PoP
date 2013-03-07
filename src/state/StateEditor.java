@@ -55,7 +55,7 @@ public class StateEditor extends BasicMenuState {
 	private int mouseY;
 	/** The height of the screen. */
 	private int screenHeight;
-	/**  */
+	/** The id value of the type of block that is used if other block should be changed. */
 	private int activeBlockTypeID = 0;
 	/** The block that the mouse is currently hovering over. */
 	private Block blockHovered = null;
@@ -113,16 +113,17 @@ public class StateEditor extends BasicMenuState {
 	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 		//backdrop
-		ImageStore.COMPANY_LOGO.draw(0, 0);
+		ImageStore.EDITOR_BACKDROP.draw(0, 0);
 		//draws all blocks 
-		for (int y = 0; y < Terrain.get().size(); y++) {
+		Terrain.get().draw();
+		/**for (int y = 0; y < Terrain.get().size(); y++) {
 			for (int x = 0; x < Terrain.get().rowSize(y); x++) {
 				Block block = Terrain.get().getBlock(x, y);
 				if(block.getID() != 0){
 					block.getImage().draw(screenPosX + block.getXPos(), screenPosY + block.getYPos());
 				}
 			}
-		}
+		}*/
 		//draw all machines
 		for (int i = 0; i < Terrain.get().mashinesSize(); i++) {
 			Terrain.get().getMachine(i).draw(g);
@@ -239,7 +240,9 @@ public class StateEditor extends BasicMenuState {
 		}
 	}
 	/**
+	 * Lowers a value until it is divideable by 64 (the block length and width);
 	 * 
+	 * @return a modified version of the value that is divideable by 64.
 	 */
 	private int makeDivideableBy64(int number){
 		while(number % 64 != 0){
@@ -259,19 +262,19 @@ public class StateEditor extends BasicMenuState {
 			int height =  makeDivideableBy64(screenHeight);
 			if(iD == 0){
 				Terrain.get().setBlock(blockMarked.getXPos()/64, (height-blockMarked.getYPos())/64,
-						new VoidBlock(0, blockMarked.getXPos(), blockMarked.getYPos()));
+						Blocks.AIR_BLOCK.clone(blockMarked.getXPos(),  blockMarked.getYPos()));
 			}else if(iD == 1){
 				Terrain.get().setBlock(blockMarked.getXPos()/64, (height-blockMarked.getYPos())/64,
-						new StaticBlock(0, blockMarked.getXPos(), blockMarked.getYPos(), ImageStore.BLOCK_EARTH));
+						Blocks.EARTH_BLOCK.clone(blockMarked.getXPos(),  blockMarked.getYPos()));
 			}else if(iD == 2){
 				Terrain.get().setBlock(blockMarked.getXPos()/64, (height-blockMarked.getYPos())/64,
-						new StaticBlock(0, blockMarked.getXPos(), blockMarked.getYPos(), ImageStore.BLOCK_GRASS));
+						Blocks.GRASS_BLOCK.clone(blockMarked.getXPos(),  blockMarked.getYPos()));
 			}else if(iD == 3){
 				Terrain.get().setBlock(blockMarked.getXPos()/64, (height-blockMarked.getYPos())/64,
-						new StaticBlock(0, blockMarked.getXPos(), blockMarked.getYPos(), ImageStore.BLOCK_GRAVEL));
+						Blocks.GRAVEL_BLOCK.clone(blockMarked.getXPos(),  blockMarked.getYPos()));
 			}else if(iD == 4){
 				Terrain.get().setBlock(blockMarked.getXPos()/64, (height-blockMarked.getYPos())/64,
-						new StaticBlock(0, blockMarked.getXPos(), blockMarked.getYPos(), ImageStore.BLOCK_ROCK));
+						Blocks.ROCK_BLOCK.clone(blockMarked.getXPos(),  blockMarked.getYPos()));
 			}
 		}
 	}
@@ -288,9 +291,11 @@ public class StateEditor extends BasicMenuState {
 		// mouse y values starts at the bottom and graphic y values start at the top.
 		screenPosX -= dx;
 		screenPosY += dy;
+		Terrain.get().move((double) -dx, (double) dy);
 	}
 	/**
-	 * Generates a new map based on the default length (30 blocks) and the default land height (6 blocks).
+	 * Generates a new map based on the default length (30 blocks) and the default land height (6 blocks)
+	 * and fills the rest of the sky (14 blocks) with air blocks.
 	 * The new map is stored in Terrain.
 	 */
 	private void createDefaultMap(){
@@ -320,7 +325,7 @@ public class StateEditor extends BasicMenuState {
 		
 	}
 	/**
-	 * 
+	 * Call the data loader to load a ppw map.
 	 */
 	private void loadMap(){
 		//if map already exist we should handle that first (will add this later).
@@ -328,7 +333,8 @@ public class StateEditor extends BasicMenuState {
 		PPWDataLoader.get().loadTerrain();
 	}
 	/**
-	 * 
+	 * Call the data loader to save the current map.
+	 * If the map is new, the user will decide it's name.
 	 */
 	private void saveMap(){
 		if(PPWDataLoader.get().getMapRef() == "maps/defaultMapRef.PPW"){
