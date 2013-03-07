@@ -1,6 +1,5 @@
 package state;
 
-import gui.Interface;
 import gui.Inventory;
 import gui.MachineCraftInterface;
 import image.AnimationStore;
@@ -9,19 +8,19 @@ import image.Drawable;
 import image.ImageCluster;
 import image.ImageLoader;
 import image.ImageStore;
+import image.Loadable;
 
-import machines.Machine;
+import java.util.ArrayList;
+
 import machines.Part;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import priceofprogress.Game;
-
 import entities.Characters;
 import entities.Entities;
 
@@ -112,5 +111,17 @@ public class StatePlay extends BasicGeneralState {
 				ImageCluster.BACKDROP_FOREST_SHORT,
 				ImageCluster.BACKDROP_FOREST_SKY);
 
+	}
+
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStateChange(boolean isChanging) {
+		// TODO Auto-generated method stub
+		
 	}
 }

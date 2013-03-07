@@ -1,9 +1,9 @@
 package machines;
 
-import org.newdawn.slick.Graphics;
-
 import image.AnimationStore;
 import image.ImageStore;
+
+import org.newdawn.slick.Graphics;
 
 public class PartFurnace extends Part{
 

@@ -1,6 +1,8 @@
 package entities;
 
-import java.util.ArrayList;
+import image.AnimatedImage;
+import image.ImageStore;
+
 import java.util.HashMap;
 
 import org.newdawn.slick.Input;
@@ -9,8 +11,6 @@ import physics.Physics;
 import physics.Weight;
 import priceofprogress.Game;
 import terrain.Terrain;
-import image.AnimatedImage;
-import image.ImageStore;
 
 public abstract class Entity implements Physics, Weight{
 	/**

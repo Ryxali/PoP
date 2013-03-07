@@ -1,12 +1,11 @@
 package machines;
 
+import image.AnimationStore;
+import image.ImageStore;
+
 import org.newdawn.slick.Graphics;
 
 import terrain.Terrain;
-
-import image.AnimatedImage;
-import image.AnimationStore;
-import image.ImageStore;
 
 public class PartVaccum extends Part{
 

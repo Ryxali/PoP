@@ -1,19 +1,22 @@
 package file;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import machines.Component;
+import machines.Machine;
 import priceofprogress.Game;
-
 import terrain.Block;
 import terrain.Blocks;
 import terrain.Terrain;
-import machines.Component;
-import machines.Machine;
 /**
  * 
  * @author Niklas Lindblad
@@ -32,6 +35,8 @@ public class PPWDataLoader implements Runnable{
 	private File fileToBeLoaded = null;
 	/** True while no task is assigned. */
 	private boolean threadResting = true;
+	/** The height of the screen. */
+	private int screenHeight = 0;
 	
 	public static PPWDataLoader get(){
 		if(datLoad != null){
@@ -169,6 +174,7 @@ public class PPWDataLoader implements Runnable{
 	 * Causes the thread of the data loader to load a map that will be chosen by the user.
 	 */
 	public void loadTerrain(){
+		checkScreenHeight();
 		task = false;
 		this.fileToBeLoaded = null;
 		this.threadResting = false;
@@ -179,9 +185,23 @@ public class PPWDataLoader implements Runnable{
 	 * @param file the file to be loaded.
 	 */
 	public void loadTerrain(File file){
+		checkScreenHeight();
 		task = false;
 		this.fileToBeLoaded = file;
 		this.threadResting = false;
+	}
+	/**
+	 * If the screen height has not been checked it is fetched and stored.
+	 */
+	private void checkScreenHeight(){
+		if(screenHeight == 0){
+			if(Game.getGameContainer().isFullscreen()){
+				//screenHeight = Game.getGameContainer().getScreenHeight();
+				screenHeight = 1200;
+			}else{
+				screenHeight = (int) (Game.getHeightScale()*Game.getGameContainer().getScreenHeight());
+			}
+		}
 	}
 	/**
 	 * Loads a map and store it as a Terrain containing blocks and machines based on the content of the file.
@@ -201,15 +221,15 @@ public class PPWDataLoader implements Runnable{
 				ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 				for (int j = 0; j < loadedMap.get(i).length; j++) {
 					if(loadedMap.get(i)[j].equals("0")){
-						currentBlockRow.add(Blocks.AIR_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.AIR_BLOCK.clone(j*64, screenHeight - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("1")){
-						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, screenHeight - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("2")){
-						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, screenHeight - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("3")){
-						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, screenHeight - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("4")){
-						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64));
+						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, screenHeight - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].charAt(0) == '{'){
 						Component[] parts = new Component[4];
 						int l = 0;
@@ -233,7 +253,7 @@ public class PPWDataLoader implements Runnable{
 							}
 							l++;
 						}
-						Terrain.get().addMachine(new Machine(j*64, (int) Game.getHeightScale()*1200 - loadedMap.size()*64 + i*64,
+						Terrain.get().addMachine(new Machine(j*64, screenHeight - loadedMap.size()*64 + i*64,
 								parts[0].clone(0), parts[1].clone(1), parts[2].clone(2), parts[3].clone(3)));
 					}
 				}
@@ -246,10 +266,8 @@ public class PPWDataLoader implements Runnable{
 	public void run() {
 		try {
 			thread.sleep(10);
-			
 			if(!threadResting){
 				if(task){
-					System.out.println("Hejfel");
 					saveData(newSaveMap);
 					
 				}else if(!task){

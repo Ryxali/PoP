@@ -1,9 +1,9 @@
 package machines;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-
 import image.Drawable;
+
+import org.newdawn.slick.Graphics;
+
 import physics.Physics;
 import physics.Weight;
 
@@ -14,6 +14,15 @@ public class Machine implements Weight, Physics, Drawable{
 	
 	private int x;
 	private int y;
+	
+	public Machine(Part p1, Part p2, Part p3, Part p4){
+		this.x = 0;
+		this.y = 0;
+		parts[0] = p1;
+		parts[1] = p2;
+		parts[2] = p3;
+		parts[3] = p4;
+	}
 	
 	public Machine(int x, int y, Part p1, Part p2, Part p3, Part p4){
 		this.x = x;

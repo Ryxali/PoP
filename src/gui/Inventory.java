@@ -6,16 +6,12 @@ import image.ImageStore;
 import java.util.ArrayList;
 
 import machines.Component;
-import machines.PartVaccum;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Rectangle;
-
-import button.Button;
-import button.StandardButton;
 
 import priceofprogress.Game;
+import button.Button;
 
 public class Inventory extends Interface {
 

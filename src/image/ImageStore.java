@@ -1,6 +1,5 @@
 package image;
 
-import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -51,6 +50,12 @@ public enum ImageStore implements Loadable {
 	BUTTON_SLIDER_BUTTON("res/img/Sliders/SliderButton.png", null),
 	BUTTON_LIST_ITEM_RESOLUTION("res/img/LoadGameButton/LoadGameHover.png", null),
 	
+	// Editor Button
+	BUTTON_EDITOR_SAVE("res/img/EditorButtons/EditorSaveButton.png", null),
+	BUTTON_EDITOR_LOAD("res/img/EditorButtons/EditorLoadButton.png", null),
+	BUTTON_EDITOR_EDIT("res/img/EditorButtons/EditorEditButton.png", null),
+	BUTTON_EDITOR_NEW("res/img/EditorButtons/EditorNewButton.png", null),
+	
 	//Menu Items
 	BACKGROUND_MENU_MAIN_STATIC("res/img/MenuStatic.png", null),
 	BACKGROUND_MENU_LIGHT_STATIC("res/img/StaticLight.png", null),
@@ -84,11 +89,12 @@ public enum ImageStore implements Loadable {
 	CHAR_ANIM_SHEET_JUMP_LEFT("res/img/Entities/Character/JumpLeftAniMainchar.png", null),
 	
 	//Blocks for world building
+	BLOCK_BLANC("res/img/blocks/BlancBlock.png", null),
 	BLOCK_EARTH("res/img/blocks/EarthBlock.png", null),
 	BLOCK_GRASS("res/img/blocks/GrassBlock.png", null),
 	BLOCK_GRAVEL("res/img/blocks/GravelBlock.png", null),
 	BLOCK_ROCK("res/img/blocks/RockBlock.png", null),
-	MARKED_BLOCK_BORDER("res/img/blocks/MarkedBlockBorder", null),
+	BLOCK_MARKER("res/img/blocks/BlockMarker.png", null),
 	
 	//Backdrop images
 	ASTRAL_SUN("res/img/BackDrops/Astronomical/SunSprite.png", null),

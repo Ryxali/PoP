@@ -1,27 +1,10 @@
 package priceofprogress;
 
-import java.awt.DisplayMode;
-import java.awt.GraphicsEnvironment;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Scanner;
-
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.muffin.FileMuffin;
-import org.newdawn.slick.state.StateBasedGame;
-
-import file.OptionsFile;
 
 import state.State;
+import file.OptionsFile;
 /**
  * 
  * @author Lukas
@@ -44,8 +27,7 @@ public class EditorStartup extends Game{
 			getGameContainer().setDisplayMode(
 					OptionsFile.get().fetchIntegerFromOptions("SizeX:"),
 					OptionsFile.get().fetchIntegerFromOptions("SizeY:"),
-					OptionsFile.get()
-							.fetchBooleanFromOptions("FullScreen:"));
+					OptionsFile.get().fetchBooleanFromOptions("FullScreen:"));
 		} else {
 			getGameContainer().setDisplayMode(getGameContainer().getScreenWidth(),
 					getGameContainer().getScreenHeight(), true);

@@ -4,18 +4,14 @@ package state;
 import image.AnimationStore;
 import image.ImageLoader;
 import image.ImageStore;
+import image.Loadable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import org.newdawn.slick.BigImage;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
 
 import button.Button;
 import button.ButtonStore;
@@ -81,6 +77,22 @@ public class StateMainMenu extends BasicMenuState {
 				AnimationStore.MENU_LIGHT, AnimationStore.MENU_MAIN_CLUTTER,
 				ImageStore.BUTTON_EXIT_IDLE, ImageStore.BUTTON_LOADGAME_IDLE,
 				ImageStore.BUTTON_OPTIONS_IDLE, ImageStore.BUTTON_PLAY_IDLE);
+	}
+
+
+
+	@Override
+	public ArrayList<Loadable> getUsedResources() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void setStateChange(boolean isChanging) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -1,7 +1,5 @@
 package terrain;
 
-import image.ImageStore;
-
 import org.newdawn.slick.Graphics;
 
 public class VoidBlock extends Block{

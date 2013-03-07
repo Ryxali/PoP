@@ -1,6 +1,5 @@
 package state;
 
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 

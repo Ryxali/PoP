@@ -9,10 +9,8 @@ import image.ImageStore;
 import java.util.Arrays;
 
 import org.newdawn.slick.Animation;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import physics.Physics;
 import physics.Weight;
 
 public abstract class Part implements Weight, Drawable{

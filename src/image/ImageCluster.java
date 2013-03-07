@@ -1,6 +1,5 @@
 package image;
 
-import java.util.ArrayList;
 
 public enum ImageCluster implements Loadable{
 	BACKDROP_FOREST_FAR("forest", "far",

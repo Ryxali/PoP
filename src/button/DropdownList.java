@@ -4,13 +4,10 @@ package button;
 
 import image.ImageStore;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 import priceofprogress.Game;
 

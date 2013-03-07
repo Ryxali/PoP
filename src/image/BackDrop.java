@@ -6,9 +6,8 @@ import java.util.Random;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import entities.Characters;
-
 import priceofprogress.Game;
+import entities.Characters;
 
 public class BackDrop implements Drawable{
 	

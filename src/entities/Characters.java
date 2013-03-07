@@ -1,9 +1,9 @@
 package entities;
 
-import java.util.HashMap;
-
 import image.AnimatedImage;
 import image.AnimationStore;
+
+import java.util.HashMap;
 
 public enum Characters {
 	//note that the number of strings must match the number of animated images.

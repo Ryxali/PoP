@@ -1,16 +1,15 @@
 package gui;
 
+import image.Drawable;
+import image.ImageStore;
 import machines.Machine;
 import machines.Part;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import button.Button;
-
 import priceofprogress.Game;
-import image.Drawable;
-import image.ImageStore;
+import button.Button;
 
 /**
  * This is the special gui used to combine machines. It needs to contain the

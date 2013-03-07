@@ -1,16 +1,15 @@
 package entities;
 
+import file.Option;
+import file.OptionsFile;
+import image.AnimatedImage;
+import image.AnimationStore;
+
 import java.util.HashMap;
 
 import org.newdawn.slick.Input;
 
 import priceofprogress.Game;
-
-import file.Option;
-import file.OptionsFile;
-
-import image.AnimatedImage;
-import image.AnimationStore;
 
 public class EntityCharacter extends Entity {
 

@@ -1,14 +1,10 @@
 package gui;
 
-import org.newdawn.slick.Graphics;
-
-import state.State;
-
-import machines.Machine;
-import machines.Part;
 import image.Drawable;
 import image.ImageStore;
-import button.Button;
+
+import org.newdawn.slick.Graphics;
+
 import button.StandardButton;
 
 public class InventorySlot extends StandardButton {

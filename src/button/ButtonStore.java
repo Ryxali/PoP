@@ -4,10 +4,6 @@ package button;
 import file.Option;
 import image.ImageStore;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
-
 /**
  * Contains all the static buttons used by the game.
  * This excludes inventory slots.
