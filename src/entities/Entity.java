@@ -76,11 +76,11 @@ public abstract class Entity implements Physics, Weight{
 		if(falling){
 			//System.out.println(yForce);
 			yForce -= getMass()*(4)*Game.getDelta()/100d;//(9.81*9.81)
-			if(y - yForce * Game.getDelta()/1000d <= Terrain.get().getTopBlock((int)x).getYPos()){
+			if(y - yForce * Game.getDelta()/1000d <= 600){//Terrain.get().getTopBlock((int)x).getYPos()
 				y -= yForce * Game.getDelta()/1000d;
 			}else{
 				falling = false;
-				y =  Terrain.get().getTopBlock((int)x).getYPos();
+				y =  600;//Terrain.get().getTopBlock((int)x).getYPos()
 			}
 		}
 	}

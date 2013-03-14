@@ -36,18 +36,12 @@ public class SaveLoader implements Runnable {
 	private String[] saveFiles;
 	private StandardButton[] saveFileButtons;
 	private Thread thread;
+	private boolean isDone;
+	private int stage = 0;
+	public static int STAGE_MAX = 20;
 
 	private SaveLoader() {
-		File f = new File("saves");
-		saveFiles = f.list();
-		for (int i = 0; i < saveFiles.length; i++) {
-			saveFileButtons[i] = new StandardButton(Game.getGameContainer()
-					.getWidth() / 4, Game.getGameContainer().getHeight() / 4
-					+ ImageStore.BUTTON_LOADGAME_IDLE.getImage().getHeight()
-					* i, ImageStore.BUTTON_LOADGAME_IDLE,
-					ImageStore.BUTTON_LOADGAME_HOVER, 
-					ImageStore.BUTTON_LOADGAME_PRESSED);
-		}
+		
 		thread = new Thread(this);
 	}
 
@@ -76,12 +70,35 @@ public class SaveLoader implements Runnable {
 	private void loadCharacterPosition(Scanner indata) {
 
 	}
+	
+	public void setFileToLoad(String ref){
+		saveRef = ref;
+	}
+	
+	public boolean isRunning(){
+		return !thread.isInterrupted();
+	}
+	
+	public int getStage(){
+		return stage;
+	}
+	
+	public boolean isDone(){
+		boolean b = isDone;
+		isDone = false;
+		return b;
+	}
 
-	public void loadSaveFile(String ref) {
-		if (!thread.isInterrupted()) {
-			saveRef = ref;
+	public void loadSaveFile() {
+		System.out.println("LES GO");
+		if(saveRef == null){
+			throw new NullPointerException();
+		}
+		if (!thread.isAlive()) {
 			thread.start();
-		} else {
+		} else if(!thread.isInterrupted()){
+			thread.run();
+		}else{
 			System.err.println(this.getClass().toString()
 					+ " is already in use!");
 		}
@@ -92,17 +109,12 @@ public class SaveLoader implements Runnable {
 	}
 
 	public void draw(Graphics g) {
-		for (int i = 0; i < saveFileButtons.length; i++) {
-			saveFileButtons[i].draw();
-			g.drawString(saveFiles[i], 
-					saveFileButtons[i].getX()
-					+saveFileButtons[i].getStoredImage()
-					.getImage().getWidth()/2
-					-g.getFont().getWidth(saveFiles[i])/2, 
-					saveFileButtons[i].getY()
-					+saveFileButtons[i].getStoredImage()
-					.getImage().getHeight()/2
-					-g.getFont().getHeight(saveFiles[i])/2);
+		ImageStore.LOADING_SCREEN.draw(0, 0);
+		for(int i = 0; i < stage; i++){
+			ImageStore.LOADING_BAR.draw(
+					(int)(350*Game.getWidthScale()
+							+ ImageStore.LOADING_BAR.getImage().getWidth()*i),
+							(int)(1125*Game.getHeightScale()));
 		}
 	}
 
@@ -115,15 +127,33 @@ public class SaveLoader implements Runnable {
 	@Override
 	public void run() {
 		try {
-			Scanner indata = new Scanner(new File(saveRef));
-			loadOldMapReferences(indata);
-			loadCurrentMap(indata);
-			loadInventory(indata);
-			loadCharacterPosition(indata);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			//Scanner indata = new Scanner(new File(saveRef));
+			//loadOldMapReferences(indata);
+			Thread.sleep(1000);
+			System.out.println("PROGRESS");
+			stage++;
+			//loadCurrentMap(indata);
+			Thread.sleep(1000);
+			System.out.println("PROGRESS");
+			stage++;
+			//loadInventory(indata);
+			Thread.sleep(1000);
+			System.out.println("PROGRESS");
+			stage++;
+			//loadCharacterPosition(indata);
+			Thread.sleep(1000);
+			System.out.println("PROGRESS");
+			stage++;
+			for(;stage < STAGE_MAX; stage++){
+				Thread.sleep(400);
+			}
+		//} catch (FileNotFoundException e) {
+		//	e.printStackTrace();
+		} catch(InterruptedException ex) {
+			
 		}
+		isDone = true;
+		stage = 0;
 		thread.interrupt();
 	}
 }

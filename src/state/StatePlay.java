@@ -58,7 +58,7 @@ public class StatePlay extends BasicGeneralState {
 		
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		BackDrop.get().draw(g);
-		Terrain.get().draw();
+		//Terrain.get().draw();
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
 		Inventory.get().draw(g);
@@ -85,7 +85,7 @@ public class StatePlay extends BasicGeneralState {
 			throws SlickException {
 		Game.updateDelta(gc.getTime());
 		Characters.MAIN_CHAR.getCharacter().update(gc.getInput());
-		terrainUpdate(gc.getInput());
+		//terrainUpdate(gc.getInput());
 		BackDrop.get().update(gc.getInput());
 		
 		Entities.WOUBLE.getEntity().update();

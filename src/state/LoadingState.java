@@ -1,5 +1,7 @@
 package state;
 
+import file.SaveLoader;
+import image.ImageStore;
 import image.Loadable;
 
 import java.util.ArrayList;
@@ -11,24 +13,35 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class LoadingState extends BasicGeneralState{
 
+	public LoadingState(int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
-		
+		ImageStore.COMPANY_LOGO.draw(0, 0);
+		SaveLoader.get().draw(arg2);
 	}
 
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		if(SaveLoader.get().isDone()){
+			State.enterState(arg1, State.STATE_PLAY_MAIN.getID());
+		}
+		if(!SaveLoader.get().isRunning()){
+			//SaveLoader.get().loadSaveFile();
+		}
 		
 	}
 

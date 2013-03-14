@@ -11,6 +11,7 @@ public enum State {
 	STATE_MENU_OPTIONS(1, new StateOptionsMenu(1)),
 	STATE_MENU_KEYCONFIG(2, new StateKeyconfigMenu(2)),
 	STATE_MENU_LOADGAME(3, new StateLoadgame(3)),
+	STATE_LOADING(4, new LoadingState(4)),
 	STATE_PLAY_MAIN(5, new StatePlay(5)),
 	STATE_EDITOR(11, new StateEditor(11));
 	/**
