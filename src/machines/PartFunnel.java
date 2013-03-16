@@ -12,13 +12,6 @@ public class PartFunnel extends Part{
 		// TODO Auto-generated constructor stub
 	}
 
-
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void draw(int x, int y, Graphics g) {
 		// TODO Auto-generated method stub
@@ -28,6 +21,12 @@ public class PartFunnel extends Part{
 	@Override
 	public void deviceUpdate() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		draw(0, 0, g);
 		
 	}
 

@@ -12,7 +12,8 @@ import org.newdawn.slick.Input;
  * Contains all the static buttons used by the game.
  * This excludes inventory slots.
  * @author Niklas Lindblad
- *
+ * @see button.Button
+ * @see image.ImageStore
  */
 public enum ButtonStore {
 	NEW_GAME(new StandardButton(247, 333,
@@ -66,8 +67,13 @@ public enum ButtonStore {
 	
 	private ButtonStore(Button button){
 		this.button = button;
+		
 	}
 	
+	/**
+	 * get the button object
+	 * @return button
+	 */
 	public Button getButton(){
 		return button;
 	}

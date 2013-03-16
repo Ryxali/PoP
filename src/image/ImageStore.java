@@ -57,7 +57,8 @@ public enum ImageStore implements Loadable {
 	BACKGROUND_MENU_SHADOW_STATIC("res/img/StaticShadow.png", null),
 	
 	LOADING_SCREEN("res/img/LoadingScreen/LoadingScreen.png", null),
-	LOADING_BAR("res/img/LoadingScreen/Barpiece.png", null),
+	LOADING_BAR_FILL("res/img/LoadingScreen/Barpiece.png", null),
+	LOADING_BAR_FRAME("res/img/LoadingScreen/OverBarPiece.png", null),
 	
 	OVERLAY_CRAFTING_BACKGROUND("res/img/CraftMenu/BG.png", null),
 	OVERLAY_CRAFTING_SLOT("res/img/CraftMenu/BG_Slot_Empty.png", null),

@@ -1,6 +1,7 @@
 package state;
 
 import file.SaveLoader;
+import gui.LoadingInterface;
 import image.ImageStore;
 import image.Loadable;
 
@@ -27,16 +28,18 @@ public class LoadingState extends BasicGeneralState{
 	
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
+	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g)
 			throws SlickException {
-		ImageStore.COMPANY_LOGO.draw(0, 0);
-		SaveLoader.get().draw(arg2);
+		
+		//SaveLoader.get().draw(arg2);
+		LoadingInterface.get().draw();
 	}
 
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		if(SaveLoader.get().isDone()){
+		if(LoadingInterface.get().isDone()){
+			LoadingInterface.get().stageReset();
 			State.enterState(arg1, State.STATE_PLAY_MAIN.getID());
 		}
 		if(!SaveLoader.get().isRunning()){

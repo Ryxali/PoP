@@ -6,10 +6,13 @@ import org.newdawn.slick.SlickException;
 
 /**
  * This class appears to be utterly useless since we can't load images outside
- * the '<init>' sequence of a state or during the game loop. This will stick
+ * the 'init' sequence of a state or during the game loop. This will stick
  * around though in-case we find a workaround.
  * 
  * @author Niklas L
+ * 
+ * @deprecated images can't be loaded outside of the <b>init()</b> or <b>
+ * render()</b> part of a state and therefore this class is useless.
  * 
  */
 public class ImageLoader implements Runnable {

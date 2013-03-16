@@ -7,6 +7,7 @@ import state.State;
 import machines.Machine;
 import machines.Part;
 import image.Drawable;
+import image.DrawableXYG;
 import image.ImageStore;
 import button.Button;
 import button.StandardButton;
@@ -19,7 +20,7 @@ public class InventorySlot extends StandardButton {
 	}
 
 	private ImageStore slotImg;
-	private Drawable storedItem = null;
+	private DrawableXYG storedItem = null;
 
 	public boolean isEmpty() {
 		if(storedItem == null){
@@ -50,15 +51,15 @@ public class InventorySlot extends StandardButton {
 
 	}
 
-	public void put(Drawable part) {
+	public void put(DrawableXYG part) {
 		//System.out.println("AWW YEAH " + x + " " + y);
 		storedItem = part;
 		//part = null;
 		//System.out.println(storedItem.toString());
 	}
 
-	public Drawable takeItem() {
-		Drawable obj;
+	public DrawableXYG takeItem() {
+		DrawableXYG obj;
 		if (storedItem != null) {
 			obj = storedItem;
 			storedItem = null;
@@ -67,13 +68,13 @@ public class InventorySlot extends StandardButton {
 		return null;
 	}
 
-	public Drawable slotContainCheck(Drawable heldItem) {
+	public DrawableXYG slotContainCheck(DrawableXYG heldItem) {
 		if (heldItem != null) {
 			if (storedItem == null) {
 				put(heldItem);
 				return null;
 			} else {
-				Drawable obj = storedItem;
+				DrawableXYG obj = storedItem;
 				storedItem = heldItem;
 				return obj;
 			}

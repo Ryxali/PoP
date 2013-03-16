@@ -2,6 +2,7 @@ package button;
 
 
 
+import image.DrawableG;
 import image.ImageStore;
 import image.Loadable;
 
@@ -12,12 +13,32 @@ import org.newdawn.slick.Input;
 import priceofprogress.Game;
 
 
-
-public abstract class Button implements Loadable{
+/**
+ * The base button object that all other buttons are based on.
+ * @author Niklas L
+ * @see button.StandardButton
+ * @see button.ListButton
+ * @see button.SliderButton
+ * @see image.ImageStore
+ * @see image.Loadable
+ * @see image.DrawableG
+ */
+public abstract class Button implements Loadable, DrawableG{
+	/**
+	 * The absolute x position of this object
+	 */
 	protected int x;
+	/**
+	 * The absolute y position of this object
+	 */
 	protected int y;
-	
+	/**
+	 * The state of this button (eg. pressed, idle, hovered)
+	 */
 	private int state = 0;
+	/**
+	 * True if this button has been both hovered and clicked.
+	 */
 	private boolean clicked = false;
 	
 	/**
@@ -99,7 +120,10 @@ public abstract class Button implements Loadable{
 	 * @param input the current input
 	 */
 	public abstract void buttonStateCheck(Input input);
-	
+	/**
+	 * @return MODE_REGULAR, MODE_DROPDOWN, MODE_SLIDER as found in ButtonStore
+	 * @see button.ButtonStore
+	 */
 	public abstract int getType();
 	/**
 	 * 
@@ -113,7 +137,10 @@ public abstract class Button implements Loadable{
 	public boolean isClicked(){
 		return clicked;
 	}
-	
+	/**
+	 * Set the clicked value to true or false.
+	 * @param value true if this button has been both hovered and clicked, false if not.
+	 */
 	public void setClicked(boolean value){
 		clicked = value;
 	}
@@ -135,7 +162,14 @@ public abstract class Button implements Loadable{
 	public DropdownList getDList(){
 		return null;
 	}
-	public boolean pointContains(int lBound, int point, int rBound){
+	/**
+	 * Checks if a certain point is within another point
+	 * @param lBound the left bound
+	 * @param point the point to check
+	 * @param rBound the right bound
+	 * @return true if point is between lBound and rBound
+	 */
+	public static boolean pointContains(int lBound, int point, int rBound){
 		if(lBound <= point && point <= rBound){
 			return true;
 		}

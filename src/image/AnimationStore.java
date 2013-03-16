@@ -12,6 +12,9 @@ import org.newdawn.slick.SlickException;
  * multiple instances (e.g. creatures) to prevent them from
  * walking in unison.</p>
  * @author Niklas Lindblad
+ * 
+ * @see image.AnimatedImage
+ * @see image.ImageStore
  *
  */
 public enum AnimationStore implements Loadable {

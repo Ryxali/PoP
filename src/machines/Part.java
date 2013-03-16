@@ -4,6 +4,8 @@ package machines;
 
 import image.AnimationStore;
 import image.Drawable;
+import image.DrawableG;
+import image.DrawableXYG;
 import image.ImageStore;
 
 import java.util.Arrays;
@@ -14,7 +16,7 @@ import org.newdawn.slick.Image;
 import physics.Physics;
 import physics.Weight;
 
-public abstract class Part implements Weight, Drawable{
+public abstract class Part implements Weight, DrawableG, DrawableXYG{
 	
 	private int[] possPos;
 	protected ImageStore img;

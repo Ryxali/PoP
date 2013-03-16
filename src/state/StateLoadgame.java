@@ -51,6 +51,7 @@ public class StateLoadgame extends BasicGeneralState{
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2)
 			throws SlickException {
+		ImageStore.COMPANY_LOGO.draw(0, 0);
 		for (int i = 0; i < saveFileButtons.length; i++) {
 			saveFileButtons[i].draw(arg2);
 		}

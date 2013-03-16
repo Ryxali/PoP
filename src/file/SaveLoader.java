@@ -1,5 +1,6 @@
 package file;
 
+import gui.LoadingInterface;
 import image.ImageStore;
 
 import java.io.File;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 import org.newdawn.slick.Graphics;
 
 import priceofprogress.Game;
+import terrain.Terrain;
 
 import button.StandardButton;
 
@@ -37,11 +39,11 @@ public class SaveLoader implements Runnable {
 	private StandardButton[] saveFileButtons;
 	private Thread thread;
 	private boolean isDone;
-	private int stage = 0;
+	private float stage = 0f;
 	public static int STAGE_MAX = 20;
 
 	private SaveLoader() {
-		
+
 		thread = new Thread(this);
 	}
 
@@ -52,38 +54,39 @@ public class SaveLoader implements Runnable {
 		return save;
 	}
 
-	private void loadOldMapReferences(Scanner indata) {
-
+	private void loadOldMapReferences() {
+		
 	}
 
-	private void loadCurrentMap(Scanner indata) {
+	private void loadCurrentMap() {
+		PPWDataLoader.get().loadTerrain(new File(saveRef + "/"));
 		/*
 		 * while (indata.hasNext()) { ArrayList<String[]> strs = null;
 		 * strs.add(indata.nextLine().split("/")); }
 		 */
 	}
 
-	private void loadInventory(Scanner indata) {
+	private void loadInventory() {
 
 	}
 
-	private void loadCharacterPosition(Scanner indata) {
+	private void loadCharacterPosition() {
 
 	}
-	
-	public void setFileToLoad(String ref){
+
+	public void setFileToLoad(String ref) {
 		saveRef = ref;
 	}
-	
-	public boolean isRunning(){
+
+	public boolean isRunning() {
 		return !thread.isInterrupted();
 	}
-	
-	public int getStage(){
+
+	public float getStage() {
 		return stage;
 	}
-	
-	public boolean isDone(){
+
+	public boolean isDone() {
 		boolean b = isDone;
 		isDone = false;
 		return b;
@@ -91,14 +94,14 @@ public class SaveLoader implements Runnable {
 
 	public void loadSaveFile() {
 		System.out.println("LES GO");
-		if(saveRef == null){
+		if (saveRef == null) {
 			throw new NullPointerException();
 		}
 		if (!thread.isAlive()) {
 			thread.start();
-		} else if(!thread.isInterrupted()){
+		} else if (!thread.isInterrupted()) {
 			thread.run();
-		}else{
+		} else {
 			System.err.println(this.getClass().toString()
 					+ " is already in use!");
 		}
@@ -107,15 +110,21 @@ public class SaveLoader implements Runnable {
 		 * strs;
 		 */
 	}
-
+	/**
+	 * 
+	 * @param g
+	 * @deprecated
+	 */
 	public void draw(Graphics g) {
 		ImageStore.LOADING_SCREEN.draw(0, 0);
-		for(int i = 0; i < stage; i++){
-			ImageStore.LOADING_BAR.draw(
-					(int)(350*Game.getWidthScale()
-							+ ImageStore.LOADING_BAR.getImage().getWidth()*i),
-							(int)(1125*Game.getHeightScale()));
+		
+		for (int i = 0; i * ImageStore.LOADING_BAR_FILL.getImage().getWidth() < stage
+				* ImageStore.LOADING_BAR_FRAME.getImage().getWidth(); i++) {
+			ImageStore.LOADING_BAR_FILL.draw(
+					(int) (274 + ImageStore.LOADING_BAR_FILL.getImage()
+							.getWidth() * i), (int) (989));
 		}
+		ImageStore.LOADING_BAR_FRAME.draw(274, 989);
 	}
 
 	/*
@@ -127,33 +136,30 @@ public class SaveLoader implements Runnable {
 	@Override
 	public void run() {
 		try {
-			//Scanner indata = new Scanner(new File(saveRef));
-			//loadOldMapReferences(indata);
-			Thread.sleep(1000);
-			System.out.println("PROGRESS");
-			stage++;
-			//loadCurrentMap(indata);
-			Thread.sleep(1000);
-			System.out.println("PROGRESS");
-			stage++;
-			//loadInventory(indata);
-			Thread.sleep(1000);
-			System.out.println("PROGRESS");
-			stage++;
-			//loadCharacterPosition(indata);
-			Thread.sleep(1000);
-			System.out.println("PROGRESS");
-			stage++;
-			for(;stage < STAGE_MAX; stage++){
-				Thread.sleep(400);
+			for(int i = 0; i < 101; i++){
+				LoadingInterface.get().stageIncrement(1);
+				Thread.sleep(100);
 			}
-		//} catch (FileNotFoundException e) {
-		//	e.printStackTrace();
-		} catch(InterruptedException ex) {
-			
+			// Scanner indata = new Scanner(new File(saveRef));
+			/*LoadingInterface.get().stageIncrement(0.2);
+			loadOldMapReferences();
+			Thread.sleep(1000);
+			LoadingInterface.get().stageIncrement(0.2);
+			loadCurrentMap();
+			Thread.sleep(1000);
+			LoadingInterface.get().stageIncrement(0.2);
+			loadInventory();
+			Thread.sleep(1000);
+			LoadingInterface.get().stageIncrement(0.2);
+			loadCharacterPosition();
+			Thread.sleep(1000);
+			LoadingInterface.get().stageIncrement(0.2);
+			Thread.sleep(300);*/
+			// } catch (FileNotFoundException e) {
+			// e.printStackTrace();
+		} catch (InterruptedException ex) {
+
 		}
-		isDone = true;
-		stage = 0;
 		thread.interrupt();
 	}
 }

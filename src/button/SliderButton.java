@@ -10,7 +10,15 @@ import org.newdawn.slick.Input;
 
 import priceofprogress.Game;
 
-
+/**
+ * A button that can be subject to one-dimensional movement.
+ * The button movement is restricted by an internal slider bar
+ * and will store its position as a percentage value.
+ * @author Niklas L
+ * @see button.Button
+ * @see button.ButtonStore
+ * 
+ */
 public class SliderButton extends Button {
 
 	private ImageStore sliderImg;
@@ -24,6 +32,15 @@ public class SliderButton extends Button {
 	public static final boolean ALIGN_VERTICAL = false;
 	private boolean renderBounds = false;
 
+	/**
+	 * Creates a new SliderButton
+	 * @param x the absolute x position of the button
+	 * @param y the absolute y position of the button
+	 * @param sliderImg the image of the slider button
+	 * @param sliderBar the image of the slider bar
+	 * @param facing true if it slides horizontally, false if vertically
+	 * @param sliderVal the value of the slider
+	 */
 	public SliderButton(int x, int y, ImageStore sliderImg,
 			ImageStore sliderBar, boolean facing, String sliderVal) {
 		super(x, y);
@@ -35,6 +52,10 @@ public class SliderButton extends Button {
 		refreshImgPos();
 	}
 
+	/**
+	 * refreshes the position of the slider image
+	 * based on the percentage value
+	 */
 	private void refreshImgPos() {
 		if (facing == ALIGN_HORIZONTAL) {
 			imgX = x
@@ -52,7 +73,7 @@ public class SliderButton extends Button {
 					//- sliderImg.getImage().getHeight();
 		}
 	}
-
+	
 	@Override
 	public Button copy() {
 		return new SliderButton(getX(), getY(), sliderImg, sliderBar, facing,

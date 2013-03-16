@@ -8,7 +8,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 
-
+/**
+ * A special kind of buttons that cannot be clicked itself but instead
+ * reveals a set number of buttons upon being hovered. These buttons
+ * can be clicked.
+ * <p>Not that this class is considered highly unfinished and therefore
+ * subject to change</p>
+ * @author Niklas L
+ * @see button.DropdownList
+ * @see button.ButtonStore
+ */
 public class ListButton extends Button {
 	private ImageStore idleImg;
 	private ImageStore hoverImg;

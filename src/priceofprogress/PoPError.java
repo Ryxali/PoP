@@ -2,7 +2,7 @@ package priceofprogress;
 
 import javax.swing.JOptionPane;
 
-public class Error implements Runnable{
+public class PoPError implements Runnable{
 	public void exitWithPrompt(String message){
 		JOptionPane.showConfirmDialog(null, message);
 		System.exit(0);
@@ -17,14 +17,14 @@ public class Error implements Runnable{
 		System.exit(0);
 	}
 	
-	private static Error err;
-	private Error(){
+	private static PoPError err;
+	private PoPError(){
 		
 	}
 	
-	public static Error get(){
+	public static PoPError get(){
 		if(err == null){
-			err = new Error();
+			err = new PoPError();
 			err.run();
 		}
 		return err;

@@ -92,7 +92,7 @@ public class BackDrop implements Drawable{
 		}
 	}
 	@Override
-	public void draw(Graphics g) {
+	public void draw() {
 		drawTiled(skyPalette, sky, skyX);
 		drawTiled(farPalette, farDrop, farX);
 		drawTiled(midPalette, midDrop, midX);
@@ -143,12 +143,6 @@ public class BackDrop implements Drawable{
 		Random rand = new Random();
 		ImageCluster cluster = ImageCluster.getClusterByNameAndUsage(name, usage);
 		return cluster.get(rand.nextInt(cluster.getImages().length));
-	}
-
-	@Override
-	public void draw(int x, int y, Graphics g) {
-		
-		
 	}
 	
 	private static ArrayList<ImageStore> getImages(ImageStore... imgs){

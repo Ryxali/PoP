@@ -2,6 +2,7 @@ package button;
 
 
 
+import image.DrawableXYG;
 import image.ImageStore;
 
 import org.newdawn.slick.Graphics;
@@ -10,7 +11,7 @@ import org.newdawn.slick.Input;
 
 
 
-public class StandardButton extends Button {
+public class StandardButton extends Button implements DrawableXYG{
 	private ImageStore idleImg;
 	private ImageStore hoverImg;
 	private ImageStore pressedImg;

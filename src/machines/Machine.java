@@ -4,10 +4,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import image.Drawable;
+import image.DrawableXYG;
 import physics.Physics;
 import physics.Weight;
 
-public class Machine implements Weight, Physics, Drawable{
+public class Machine implements Weight, Physics, Drawable, DrawableXYG{
 	
 	private Part[] parts = new Part[4];
 	private boolean isDeployed;
@@ -50,12 +51,6 @@ public class Machine implements Weight, Physics, Drawable{
 	}
 
 	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void draw(int x, int y, Graphics g) {
 		parts[0].draw(x, y, g);
 		parts[1].draw(
@@ -71,6 +66,12 @@ public class Machine implements Weight, Physics, Drawable{
 		for (int i = 0; i < parts.length; i++) {
 			parts[i].draw(x, y, g);
 		}
+		
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
 		
 	}
 }

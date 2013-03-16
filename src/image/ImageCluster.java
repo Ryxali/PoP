@@ -1,7 +1,16 @@
 package image;
 
 import java.util.ArrayList;
-
+/**
+ * This is an enum containing sets of preset arrays of images
+ * along with a <b>name</b> tag and a <b>use</b> tag. Its
+ * core usage currently is within the BackDrop class.
+ * @author Niklas L
+ * 
+ * @see image.ImageStore
+ * @see image.BackDrop
+ *
+ */
 public enum ImageCluster implements Loadable{
 	BACKDROP_FOREST_FAR("forest", "far",
 			ImageStore.FOREST_BACKDROP_FAR_1,

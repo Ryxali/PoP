@@ -10,6 +10,7 @@ import gui.MachineCraftInterface;
 import image.AnimationStore;
 import image.BackDrop;
 import image.Drawable;
+import image.DrawableXYG;
 import image.ImageCluster;
 import image.ImageLoader;
 import image.ImageStore;
@@ -39,7 +40,7 @@ public class StatePlay extends BasicGeneralState {
 	private int mouseY = 0;
 	
 
-	private Drawable heldItem;
+	private DrawableXYG heldItem;
 
 	public StatePlay(int state) {
 
@@ -57,7 +58,7 @@ public class StatePlay extends BasicGeneralState {
 			throws SlickException {
 		
 		ImageStore.COMPANY_LOGO.draw(0, 0);
-		BackDrop.get().draw(g);
+		BackDrop.get().draw();
 		//Terrain.get().draw();
 		Characters.MAIN_CHAR.getCharacter().draw();
 		Entities.WOUBLE.getEntity().draw();
@@ -108,11 +109,11 @@ public class StatePlay extends BasicGeneralState {
 
 	}
 
-	public Drawable getHeldPart() {
+	public DrawableXYG getHeldPart() {
 		return heldItem;
 	}
 
-	public void setHeldPart(Drawable dObj) {
+	public void setHeldPart(DrawableXYG dObj) {
 		heldItem = dObj;
 	}
 

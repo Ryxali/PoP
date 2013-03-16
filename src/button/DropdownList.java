@@ -17,7 +17,11 @@ import priceofprogress.Game;
 
 
 
-
+/**
+ * A list of buttons that contain different string values.
+ * @author Niklas L
+ * @see button.ListButton
+ */
 public enum DropdownList {
 	RESOLUTION(Game.getValidResolutions(), 
 			new StandardButton(
@@ -33,8 +37,6 @@ public enum DropdownList {
 	 * The background image used as a frame for the list items.
 	 * This will loop according to amount of list items.
 	 */
-	//private final StandardButton[] listBg;
-	
 	private ArrayList<StandardButton> bgButtons = new ArrayList<StandardButton>();
 	/**
 	 * 
@@ -69,7 +71,10 @@ public enum DropdownList {
 		strings[0] = str1;
 		return strings;
 	}
-	
+	/**
+	 * get the maxmimum number of list items that are allowed to be drawn at any given time
+	 * @return listDispLength
+	 */
 	public int getDisplayLength(){
 		if(listDispLength > items.length){
 			return items.length;

@@ -1,6 +1,7 @@
 package gui;
 
 import image.Drawable;
+import image.DrawableXYG;
 import image.ImageStore;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class Inventory extends Interface {
 
 	}
 
-	public Drawable checkPickups(Input input, Drawable heldItem) {
+	public DrawableXYG checkPickups(Input input, DrawableXYG heldItem) {
 		for (int i = 0; i < slots.size(); i++) {
 			if(slots.get(i).hasBeenClicked() == Button.PRESSED_TRUE){
 				return slots.get(i).slotContainCheck(heldItem);

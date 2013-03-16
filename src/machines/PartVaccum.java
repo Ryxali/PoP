@@ -16,12 +16,6 @@ public class PartVaccum extends Part{
 	}
 
 	@Override
-	public void draw(Graphics g) {
-		img.draw(0, 0);
-		
-	}
-
-	@Override
 	public void deviceUpdate() {
 		if(getMachine().isDeployed()){
 			Terrain.get().getBlock(0, 0);//getMachine().getBlockPos();
@@ -32,6 +26,12 @@ public class PartVaccum extends Part{
 	@Override
 	public void draw(int x, int y, Graphics g) {
 		img.draw(x, y);
+		
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		draw(0, 0, g);
 		
 	}
 

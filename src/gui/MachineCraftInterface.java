@@ -10,6 +10,7 @@ import button.Button;
 
 import priceofprogress.Game;
 import image.Drawable;
+import image.DrawableXYG;
 import image.ImageStore;
 
 /**
@@ -109,7 +110,7 @@ public class MachineCraftInterface extends Interface {
 					(Part)craftingSlots[2].takeItem(), (Part)craftingSlots[3].takeItem()));
 		}
 	}
-	public Drawable checkPickups(Input input, Part heldItem) {
+	public DrawableXYG checkPickups(Input input, Part heldItem) {
 		for (int i = 0; i < craftingSlots.length; i++) {
 			if(craftingSlots[i].hasBeenClicked() == Button.PRESSED_TRUE){
 				if(heldItem == null){
