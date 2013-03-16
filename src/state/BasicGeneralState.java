@@ -19,6 +19,11 @@ import priceofprogress.Game;
 
 public abstract class BasicGeneralState extends BasicGameState{
 	/**
+	 * renders objects onto the screen.
+	 */
+	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics g)
+			throws SlickException;
+	/**
 	 * 
 	 */
 	public void setResolution(int newResWidth, int newResHeight,
