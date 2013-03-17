@@ -1,48 +1,31 @@
 package terrain;
 
+
+
+import image.DrawableXYG;
 import image.ImageStore;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
-public abstract class Block {
+public abstract class Block implements DrawableXYG{
 	
-	private int iD;
-	private int x;
-	private int y;
-	private ImageStore ref;
-	
-	public Block( int iD, int xPos, int yPos, ImageStore ref){
-		this.iD = iD;
-		this.x = xPos;
-		this.y = yPos;
-		this.ref = ref;
+	private final int id;
+	private final ImageStore image;
+	/**
+	 * @param id
+	 * @param image
+	 */
+	public Block(int id, ImageStore image){
+		this.id = id;
+		this.image = image;
 	}
-	
-	public abstract void draw(Graphics g);
 	
 	public int getID(){
-		return this.iD;
-	}
-	
-	public int getXPos(){
-		return this.x;
-	}
-	
-	public int getYPos(){
-		return this.y;
+		return id;
 	}
 	
 	public ImageStore getImage(){
-		return this.ref;
+		return image;
 	}
-	
-	public void setXPos(int x){
-		this.x = x;
-	}
-	
-	public void setYPos(int y){
-		this.y = y;
-	}
-	
-	public abstract Block clone(int x, int y);
 }

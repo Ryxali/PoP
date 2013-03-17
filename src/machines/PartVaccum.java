@@ -18,7 +18,7 @@ public class PartVaccum extends Part{
 	@Override
 	public void deviceUpdate() {
 		if(getMachine().isDeployed()){
-			Terrain.get().getBlock(0, 0);//getMachine().getBlockPos();
+			//Terrain.get().getBlock(0, 0);//getMachine().getBlockPos();
 		}
 		
 	}

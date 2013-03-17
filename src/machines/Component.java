@@ -11,9 +11,10 @@ public enum Component{
 	FURNACE("Furnace Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_2, Part.POSITION_3)),
 	STICK("Ballistics Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_STICK_ICON, AnimationStore.PART_STICK, Part.POSITION_2, Part.POSITION_3)),
 	DUST("Volatition Enhancer", new PartFurnace(ImageStore.CRAFTING_PART_DUST_ICON, AnimationStore.PART_DUST, Part.POSITION_2, Part.POSITION_3)),
-	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_2, Part.POSITION_3)),
+	COG("Particle Accellery", new PartFurnace(ImageStore.CRAFTING_PART_COG_ICON, AnimationStore.PART_COG, Part.POSITION_1, Part.POSITION_2)),
 	FUNNEL("Funnel Unit", new PartFurnace(ImageStore.CRAFTING_PART_VACCUM, null, Part.POSITION_4)),
-	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4));
+	FUSE("Ignition Unit", new PartFurnace(null, null, Part.POSITION_2, Part.POSITION_3, Part.POSITION_4)),
+	GUN("Propulsion Unit", new PartFurnace(ImageStore.CRAFTING_PART_GUN_ICON, null, Part.POSITION_4));
 
 	private final String title;
 	private Part part;

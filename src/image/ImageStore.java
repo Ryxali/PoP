@@ -63,10 +63,11 @@ public enum ImageStore implements Loadable {
 	OVERLAY_CRAFTING_BACKGROUND("res/img/CraftMenu/BG.png", null),
 	OVERLAY_CRAFTING_SLOT("res/img/CraftMenu/BG_Slot_Empty.png", null),
 	
-	INVENTORY_FRAME_SLOT("res/img/Default/Def1.png", null),
-	INVENTORY_FRAME_SLOT_IDLE("res/img/Inventory/SlotOverlay/Idle.png", null),
-	INVENTORY_FRAME_SLOT_HOVER("res/img/Inventory/SlotOverlay/Hover.png", null),
-	INVENTORY_FRAME_SLOT_PRESSED("res/img/Inventory/SlotOverlay/Pressed.png", null),
+	INVENTORY_FRAME("res/img/Inventory/Buttonholder.png", null),
+	INVENTORY_FRAME_SLOT("res/img/Inventory/InvButtonFrame.png", null),
+	INVENTORY_FRAME_SLOT_IDLE("res/img/Inventory/InvButtonFrame.png", null),
+	INVENTORY_FRAME_SLOT_HOVER("res/img/Inventory/InvButtonFrame.png", null),
+	INVENTORY_FRAME_SLOT_PRESSED("res/img/Inventory/InvButtonFrame.png", null),
 	
 	//Machine parts (for crafting) here.
 	CRAFTING_PART_VACCUM("res/img/CraftMenu/Parts/Vaccum.png", null),
@@ -79,6 +80,9 @@ public enum ImageStore implements Loadable {
 	
 	CRAFTING_PART_STICK_ICON("res/img/CraftMenu/Parts/Stick64.png", null),
 	CRAFTING_PART_STICK_ITEM("res/img/CraftMenu/Parts/Stick16.png", null),
+	
+	CRAFTING_PART_GUN_ICON("res/img/CraftMenu/Parts/GunPart64.png", null),
+	CRAFTING_PART_GUN_ITEM("res/img/CraftMenu/Parts/GunPart16.png", null),
 	
 	//Character and Entity animation sheets below:
 	CHAR_ANIM_SHEET_WALK_LEFT("res/img/Entities/Character/WalkLeftAniMainchar.png", null),
@@ -120,6 +124,7 @@ public enum ImageStore implements Loadable {
 	FOREST_BACKDROP_SHORT_4("res/img/Backdrops/ForestWorld/Short/Grass_3.png", null),
 	FOREST_BACKDROP_SHORT_5("res/img/Backdrops/ForestWorld/Short/Grass_4.png", null),
 	
+	FOREST_BACKDROP_SKY("res/img/Backdrops/ForestWorld/Sky/Sky.png", null),
 	FOREST_BACKDROP_SKY_1("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_1.png", null),
 	FOREST_BACKDROP_SKY_2("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_2.png", null),
 	FOREST_BACKDROP_SKY_3("res/img/Backdrops/ForestWorld/Sky/BackgroundSlice_3.png", null),

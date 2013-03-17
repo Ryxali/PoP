@@ -39,8 +39,8 @@ public class LoadingState extends BasicGeneralState{
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
 		if(LoadingInterface.get().isDone()){
-			LoadingInterface.get().stageReset();
 			State.enterState(arg1, State.STATE_PLAY_MAIN.getID());
+			LoadingInterface.get().stageReset();
 		}
 		if(!SaveLoader.get().isRunning()){
 			//SaveLoader.get().loadSaveFile();

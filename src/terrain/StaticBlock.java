@@ -1,37 +1,35 @@
 package terrain;
 
+
+
 import image.ImageStore;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
+import priceofprogress.Game;
 
 public class StaticBlock extends Block{
-
-	public StaticBlock( int iD, int xPos, int yPos, ImageStore ref) {
-		super(iD, xPos, yPos, ref);
+	
+	public StaticBlock(int id, ImageStore image){
+		super(id, image);
 	}
 	
-	public void addPoses(int xPos, int yPos){
-		setXPos(xPos);
-		setYPos(yPos);
-	}
+	
 
 	@Override
-	public void draw(Graphics g) {
-		
+	public void draw(int x, int y, Graphics g) {
+		//System.out.println(x + " " + y);
+		//System.out.println(":" + x*Game.getWidthScale() + " " + y*Game.getHeightScale() + ":");
+		if(getImage().equals(ImageStore.BLOCK_EARTH)){
+			g.setColor(Color.black);
+			g.fillRect(x*Game.getWidthScale(), y*Game.getHeightScale(), Blocks.getBlockXDimension(), Blocks.getBlockYDimension());
+			return;
+		}
+		getImage().draw(x, y);//
+		//g.drawString(String.valueOf(y*Game.getHeightScale()), x*Game.getWidthScale(), y*Game.getHeightScale());
 	}
 
-	/**
-	 * Creates and returns a new static block with the desired positions
-	 * and the same block-subclass as this one (StaticBlock).
-	 * 
-	 * @param x the horizontal position of the new block.
-	 * @param y the vertical position of the new block.
-	 * 
-	 * @return the new block.
-	 */
-	@Override
-	public Block clone(int x, int y) {
-		return new StaticBlock(getID(), x, y, getImage());
-	}
 	
 }

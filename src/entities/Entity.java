@@ -45,7 +45,7 @@ public abstract class Entity implements Physics, Weight{
 	
 	public void draw(){
 		try{
-			animImgs.get(curAnimation).draw(getX(), getY());
+			animImgs.get(curAnimation).draw(getX()-animImgs.get(curAnimation).getWidth()/2, getY());
 		}catch(NullPointerException e){
 			ImageStore.DEFAULT.draw(getX(), getY());
 		}
@@ -54,7 +54,23 @@ public abstract class Entity implements Physics, Weight{
 		return curAnimation;
 	}
 	
-	public abstract void update(Input input);
+	protected abstract void update(Input input);
+	
+	public void upd(Input input){
+		update(input);
+		try{
+			//System.out.println(y + " " + (Terrain.get().getTopBlockY((int) x)-animImgs.get(curAnimation).getCurrentFrame().getHeight()));
+			if(y < Terrain.get().getTopBlockY((int) x)-animImgs.get(curAnimation).getCurrentFrame().getHeight()){
+				falling = true;
+				//System.out.println("!");
+			}
+			
+		}catch(Exception e){
+			
+		}
+		
+	}
+	
 	public HashMap<String, AnimatedImage> getAnimations(){
 		
 		return animImgs;
@@ -76,11 +92,12 @@ public abstract class Entity implements Physics, Weight{
 		if(falling){
 			//System.out.println(yForce);
 			yForce -= getMass()*(4)*Game.getDelta()/100d;//(9.81*9.81)
-			if(y - yForce * Game.getDelta()/1000d <= 600){//Terrain.get().getTopBlock((int)x).getYPos()
+			if(y - yForce * Game.getDelta()/1000d <= Terrain.get().getTopBlockY((int)x)-animImgs.get(curAnimation).getCurrentFrame().getHeight()){//Terrain.get().getTopBlock((int)x).getYPos()
 				y -= yForce * Game.getDelta()/1000d;
 			}else{
 				falling = false;
-				y =  600;//Terrain.get().getTopBlock((int)x).getYPos()
+				yForce = 0;
+				y =  Terrain.get().getTopBlockY((int) (x))-animImgs.get(curAnimation).getCurrentFrame().getHeight();//Terrain.get().getTopBlock((int)x).getYPos()
 			}
 		}
 	}

@@ -15,7 +15,7 @@ public class PartFurnace extends Part{
 	@Override
 	public void draw(int x, int y, Graphics g) {
 		// TODO Auto-generated method stub
-		
+		img.draw(x, y);
 	}
 
 	@Override

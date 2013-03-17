@@ -42,7 +42,7 @@ public class InventorySlot extends StandardButton {
 	@Override
 	public void draw(Graphics g) {
 		slotImg.draw(x, y);
-		getStoredImage().draw(x, y);
+		//getStoredImage().draw(x, y);
 		if (storedItem != null) {
 			//System.out.println(x + " " + y);
 			storedItem.draw(x, y, g);

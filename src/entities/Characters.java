@@ -2,12 +2,14 @@ package entities;
 
 import java.util.HashMap;
 
+import priceofprogress.Game;
+
 import image.AnimatedImage;
 import image.AnimationStore;
 
 public enum Characters {
 	//note that the number of strings must match the number of animated images.
-	MAIN_CHAR(new EntityCharacter(0, 0, makeHashMap(
+	MAIN_CHAR(new EntityCharacter(Game.getGameContainer().getWidth(), 100, makeHashMap(
 			toStringArray(
 					"WalkLeft", 
 					"WalkRight",

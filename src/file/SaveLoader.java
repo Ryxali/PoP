@@ -1,6 +1,8 @@
 package file;
 
 import gui.LoadingInterface;
+import image.BackDrop;
+import image.ImageCluster;
 import image.ImageStore;
 
 import java.io.File;
@@ -17,19 +19,31 @@ import button.StandardButton;
 
 /**
  * This class is responsible for loading and saving the user's progress. The
- * structure of such a save file is as follows:
+ * structure of such a save folder is as follows:
+ * <ol>
+ * 
+ * <li>
+ * Old World References File (.pps)
  * <ol>
  * <li>Old World References <br />
  * (Separated by ".ppw")</li>
  * <li>Current Map Reference <br />
  * (on separate line, ending with ".ppw")</li>
- * <li>Character Position in world<br />
+ * <li>Character Position in current world<br />
  * (Written as "{blockX; blockY}")</li>
- * <li>Character Inventory <br />
- * (Separated by ", ")</li>
+ * </ol>
+ * </li>
+ * 
+ * <li>
+ * Character Inventory File (.pps) <br />
+ * (Item ids separated by ", ")
+ * </li>
  * </ol>
  * 
  * @author Niklas Lindblad
+ * @see SaveFileCreator
+ * @see LoadingInterface
+ * @see PPWDataLoader
  * 
  */
 public class SaveLoader implements Runnable {
@@ -136,7 +150,9 @@ public class SaveLoader implements Runnable {
 	@Override
 	public void run() {
 		try {
-			for(int i = 0; i < 101; i++){
+			WorldFileLoader.loadWorld("maps/op.PPW");
+			BackDrop.get().rebuild(ImageCluster.FOREST);
+			for(int i = 0; i < 100; i++){
 				LoadingInterface.get().stageIncrement(1);
 				Thread.sleep(100);
 			}
@@ -157,6 +173,7 @@ public class SaveLoader implements Runnable {
 			Thread.sleep(300);*/
 			// } catch (FileNotFoundException e) {
 			// e.printStackTrace();
+			LoadingInterface.get().stageIncrement(100);
 		} catch (InterruptedException ex) {
 
 		}

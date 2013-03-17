@@ -22,25 +22,28 @@ public class Inventory extends Interface {
 
 	private final ArrayList<InventorySlot> slots;
 	private static Inventory inv;
-
+	//private static final int getFrameX = 300;
+	private static final int buttonFrameY = 900;
 	private Inventory() {
 		slots = new ArrayList<InventorySlot>();
 		int x = 8;
 		for (int i = 1; i < x; i++) {
 			slots.add(new InventorySlot(
-					(int) (i * 1920 * Game.getWidthScale() / (double) x),
-					(int) (1200d * Game.getHeightScale() - ImageStore.INVENTORY_FRAME_SLOT
-							.getImage().getHeight()),
+					(int) (getFrameX() + ImageStore.INVENTORY_FRAME.getImage().getWidth()*i/x
+							-ImageStore.INVENTORY_FRAME_SLOT.getImage().getWidth()/2),
+					buttonFrameY + ImageStore.INVENTORY_FRAME.getImage().getHeight()/2
+					- ImageStore.INVENTORY_FRAME_SLOT.getImage().getHeight()/2,
 					ImageStore.INVENTORY_FRAME_SLOT,
 					ImageStore.INVENTORY_FRAME_SLOT_IDLE,
 					ImageStore.INVENTORY_FRAME_SLOT_HOVER,
 					ImageStore.INVENTORY_FRAME_SLOT_PRESSED));
 
 		}
-		slots.get(0).put(Component.VACCUM.getPart());
-		slots.get(1).put(Component.FURNACE.getPart());
-		slots.get(2).put(Component.FUNNEL.getPart());
-		slots.get(4).put(Component.FURNACE.getPart());
+		slots.get(0).put(Component.COG.getPart());
+		slots.get(1).put(Component.DUST.getPart());
+		slots.get(2).put(Component.STICK.getPart());
+		slots.get(4).put(Component.GUN.getPart());
+		//slots.get(6).put(Component.VACCUM.getPart());
 	}
 
 	public static Inventory get() {
@@ -49,9 +52,14 @@ public class Inventory extends Interface {
 		}
 		return inv;
 	}
+	
+	private static int getFrameX(){
+		return Game.getGameContainer().getWidth()/2 - ImageStore.INVENTORY_FRAME.getImage().getWidth()/2;
+	}
 
 	@Override
 	public void draw(Graphics g) {
+		ImageStore.INVENTORY_FRAME.draw(getFrameX(), buttonFrameY);
 		for (int i = 0; i < slots.size(); i++) {
 			slots.get(i).draw(g);
 		}

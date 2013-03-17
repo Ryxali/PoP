@@ -1,8 +1,15 @@
 package terrain;
 
+import image.DrawableG;
+
 import java.util.ArrayList;
 
-public class Terrain {
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
+import priceofprogress.Game;
+
+public class Terrain implements DrawableG{
 	private static Terrain curMap;
 
 	public static Terrain get() {
@@ -17,87 +24,41 @@ public class Terrain {
 	private double baseX = 0;
 	private double baseY = 0;
 	
-	private ArrayList<ArrayList<Block>> col;
-
-	public Block getBlockOnScreen(int x, int y) {
-		return getBlock((int) ((x - baseX) / Blocks.EARTH_BLOCK.getBlock()
-				.getImage().getImage().getWidth()),
-				(int) ((y - baseY) / Blocks.EARTH_BLOCK.getBlock().getImage()
-						.getImage().getHeight()));
-	}
-	public Terrain() {
-		col = new ArrayList<ArrayList<Block>>();
+	private TerrainColumns columns = new TerrainColumns();
+	
+	public TerrainColumns getColumns(){
+		return columns;
 	}
 	
-	public Block getTopBlock(int blockX){
-		for (int i = 0; i < col.get(blockX/Blocks.EARTH_BLOCK.getBlock().getImage().getImage().getWidth()).size(); i++) {
-			if(col.get(blockX/Blocks.EARTH_BLOCK.getBlock().getImage().getImage().getWidth()).get(i).getID() != Blocks.GRAVEL_BLOCK.getId()){
-				return col.get(blockX/Blocks.EARTH_BLOCK.getBlock().getImage().getImage().getWidth()).get(i);
+	public Block getBlockOnScreen(int x, int y) {
+		return getColumnOnScreen(x).get((int) ((int)(y-baseY)/Blocks.getBlockYDimension()));
+	}
+	
+	private TerrainColumn getColumnOnScreen(int screenX){
+		return columns.get((int) (((screenX-baseX)/Blocks.getBlockXDimension())));
+	}
+	
+	public int getTopBlockY(int blockX){
+		TerrainColumn column = getColumnOnScreen(blockX);
+		for(int y = 0; y < column.size();y++){
+			if(column.get(y).getID() != Blocks.AIR_BLOCK.getBlock().getID()){
+				//System.out.println(y);
+				//System.out.println(y*Blocks.getBlockYDimension()*Game.getHeightScale());
+				return (int) ((columns.getY(y))*Game.getHeightScale());
+			}else{
 			}
 		}
-		return null;
-	}
-
-	public void draw() {
-		// System.out.println("Derr");
-		for (int y = 0; y < size(); y++) {
-			for (int x = 0; x < rowSize(y); x++) {
-				getBlock(x, y).getImage().draw(
-						(int) (baseX + getBlock(x, y).getXPos()),
-						(int) (baseY + getBlock(x, y).getYPos()));
-				// System.out.println("x: "+Terrain.get().getBlock(x,
-				// y).getXPos()+" y: "+ Terrain.get().getBlock(x, y).getYPos());
-			}
-		}
-	}
-
-	public void addBlockRow(ArrayList<Block> blockRow) {
-		col.add(blockRow);
-	}
-
-	public ArrayList<Block> getRow(int rowN) {
-		return col.get(rowN);
-	}
-
-	public Block getBlock(int colN, ArrayList<Block> row) {
-		return row.get(colN);
-	}
-
-	/**
-	 * Fetch the block at a specified position.
-	 * 
-	 * @param colN
-	 *            the column of the block (block x should be colN*64).
-	 * @param rowN
-	 *            the row of the block (block y should be 1200-rowN*64).
-	 * @return the block at the specified position.
-	 */
-	public Block getBlock(int colN, int rowN) {
-		return col.get(rowN).get(colN);
-	}
-
-	/**
-	 * Returns the number rows of blocks in the current map.
-	 * 
-	 * @return the number of rows of the current map.
-	 */
-	public int size() {
-		return col.size();
-	}
-
-	/**
-	 * Returns the number of blocks on a specified row in the current map.
-	 * 
-	 * @param row
-	 *            the row whose size shall be measured.
-	 * @return the number of blocks in the row.
-	 */
-	public int rowSize(int row) {
-		return col.get(row).size();
+		return 0;
 	}
 
 	public void move(double d, double e) {
 		baseX += d;
 		baseY += e;
+	}
+	@Override
+	public void draw(Graphics g) {
+		System.out.println(baseX + " ; " + baseY);
+		columns.draw((int)baseX, (int)
+				baseY, g);
 	}
 }

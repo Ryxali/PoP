@@ -162,7 +162,7 @@ public class EntityCharacter extends Entity {
 	}
 
 	@Override
-	public void update(Input input) {
+	protected void update(Input input) {
 		checkInput(input);
 		setProperAnimation();
 		characterMovement();

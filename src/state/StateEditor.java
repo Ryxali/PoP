@@ -44,12 +44,12 @@ public class StateEditor extends BasicGeneralState {
 		//backdrop
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		//draws all blocks 
-		for (int y = 0; y < Terrain.get().size(); y++) {
-			for (int x = 0; x < Terrain.get().rowSize(y); x++) {
-				Terrain.get().getBlock(x, y).getImage().draw(Terrain.get().getBlock(x, y).getXPos(), Terrain.get().getBlock(x, y).getYPos());
+	//	for (int y = 0; y < Terrain.get().size(); y++) {
+	//		for (int x = 0; x < Terrain.get().rowSize(y); x++) {
+				//Terrain.get().getBlock(x, y).getImage().draw(Terrain.get().getBlock(x, y).getXPos(), Terrain.get().getBlock(x, y).getYPos());
 				//System.out.println("x: "+Terrain.get().getBlock(x, y).getXPos()+" y: "+ Terrain.get().getBlock(x, y).getYPos());
-			}
-		}
+	//		}
+		//}
 	}
 	
 	@Override
@@ -70,10 +70,10 @@ public class StateEditor extends BasicGeneralState {
 		for (int i = 0; i < defaultBlockHeight; i++) {
 			ArrayList<Block> currentBlockRow = new ArrayList<Block>();
 			for (int j = 0; j < defaultBlockLength; j++) {
-				currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-(i+1)*64));
+				//currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200-(i+1)*64));
 				//System.out.println("x: "+j*64+" y: "+ (1200-(i+1)*64));
 			}
-			Terrain.get().addBlockRow(currentBlockRow);
+		//	Terrain.get().addBlockRow(currentBlockRow);
 		}
 	}
 	

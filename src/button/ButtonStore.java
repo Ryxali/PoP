@@ -55,14 +55,28 @@ public enum ButtonStore {
 			ImageStore.BUTTON_EXIT_HOVER,
 			ImageStore.BUTTON_EXIT_PRESSED));
 	
-	public static final int STATE_IDLE = 0;
-	public static final int STATE_HOVER = 1;
-	public static final int STATE_PRESSED = 2;
+	//public static final int STATE_IDLE = 0;
+	//public static final int STATE_HOVER = 1;
 	
+	//public static final int STATE_PRESSED = 2;
+	/**
+	 * This value indicates that this button function like a
+	 * regular button.
+	 */
 	public static final int MODE_REGULAR = 0;
+	/**
+	 * This value indicates that this button functions like a
+	 * dropdown button.
+	 */
 	public static final int MODE_DROPDOWN = 1;
+	/**
+	 * This value indicates that this button functions like a
+	 * slider button.
+	 */
 	public static final int MODE_SLIDER = 2;
-	
+	/**
+	 * The button object in this enumeration
+	 */
 	private Button button;
 	
 	private ButtonStore(Button button){

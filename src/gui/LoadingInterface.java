@@ -41,7 +41,6 @@ public class LoadingInterface implements Drawable {
 
 	@Override
 	public void draw() {
-		System.out.println(stage);
 		ImageStore.LOADING_SCREEN.draw(0, 0);
 
 		for (int i = 0; (i+1) * ImageStore.LOADING_BAR_FILL.getImage().getWidth() < (float)stage/100f

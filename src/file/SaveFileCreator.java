@@ -10,36 +10,60 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import priceofprogress.PoPError;
-
+/**
+ * This is a class of static methods called when creating a fresh
+ * save file.
+ * @author Niklas L
+ * 
+ * @see file.SaveLoader
+ * @see file.SaveData
+ * @see file.PPWDataLoader
+ *
+ */
 public class SaveFileCreator {
-	// TODO Create a save file
-
-	public static void createNewFile(String path) {
-		makeDir(path);
-		createOldMapReferencesFile(path);
-		createInventorySaveFile(path);
+	public static final String SAVE_LOC = "saves/";
+	public static final String MAPS_LOC = "maps/";
+	/**
+	 * Creates a new save file with the given name
+	 * @param saveName the name of the new save file
+	 */
+	public static void createNewFile(String saveName) {
+		makeDir(saveName);
+		createOldMapReferencesFile(saveName);
+		copyMaps(saveName + "/maps");
+		createInventorySaveFile(saveName);
 	}
-	
-	private static void createInventorySaveFile(String path){
-		File f = new File(path + "/inv.pps");
+	/**
+	 * Creates a savefile containing the character's inventory items.
+	 * @param saveName the name of the save file.
+	 */
+	private static void createInventorySaveFile(String saveName){
+		File f = new File(SAVE_LOC + saveName + "/inv.pps");
 		try {
 			f.createNewFile();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	private static void makeDir(String path) {
-		File f = new File(path);
+	/**
+	 * Creates the directory that contains the save files.
+	 * @param saveName the name of the save file.
+	 */
+	private static void makeDir(String saveName) {
+		File f = new File(SAVE_LOC + saveName);
 		if (f.mkdir() == false) {
 			PoPError.get().safeExitWithPrompt(
 					"The file path could not be created!");
 			throw new SecurityException();
 		}
 	}
-
-	private static void createOldMapReferencesFile(String path) {
-		File f = new File(path + "/maps/hist.pps");
+	/**
+	 * Creates the file containing old map references.
+	 * @param saveName the name of the save file
+	 */
+	private static void createOldMapReferencesFile(String saveName) {
+		File f = new File(SAVE_LOC + saveName + "/maps/hist.pps");
 		if (f.mkdirs() == false) {
 			PoPError.get().safeExitWithPrompt(
 					"The file path could not be created!");
@@ -51,9 +75,12 @@ public class SaveFileCreator {
 			e.printStackTrace();
 		}
 		writeMapReferences(f);
-		copyMaps(path + "/maps");
+		
 	}
-
+	/**
+	 * Writes the map references to the old map references file
+	 * @param f the old map references file.
+	 */
 	private static void writeMapReferences(File f) {
 		try {
 			PrintWriter utdata = new PrintWriter(new BufferedWriter(
@@ -61,16 +88,17 @@ public class SaveFileCreator {
 			utdata.println("firstWorld.PPW");
 			utdata.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	private static void copyMaps(String path) {
-		copyMap(new File("maps/firstWorld.PPW"), new File(path+"/firstWorld.PPW"));
+	/**
+	 * copy all maps from the maps/ template folder into the save folder.
+	 * @param saveName the name of the save file
+	 */
+	private static void copyMaps(String saveName) {
+		copyMap(new File(MAPS_LOC + "firstWorld.PPW"), new File(SAVE_LOC + saveName + "/firstWorld.PPW"));
 	}
 
 	/**
@@ -89,7 +117,6 @@ public class SaveFileCreator {
 			}
 			indata.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -101,7 +128,6 @@ public class SaveFileCreator {
 			utdata.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

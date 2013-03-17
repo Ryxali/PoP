@@ -40,11 +40,6 @@ public class EntityWouble extends AIEntity{
 	}
 
 
-	@Override
-	public void update(Input input) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public double getMass() {

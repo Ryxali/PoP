@@ -120,7 +120,7 @@ public class PPWDataLoader implements Runnable{
 		ArrayList<ArrayList<String>> tempList = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tempRow = new ArrayList<String>();
 		// highest row first.
-		for (int i = Terrain.get().size()-1; i >= 0; i--) {
+		/*for (int i = Terrain.get().size()-1; i >= 0; i--) {
 			tempRow.clear();
 			for (int j = 0; j < Terrain.get().rowSize(i); j++) {
 				try {
@@ -130,7 +130,7 @@ public class PPWDataLoader implements Runnable{
 				}
 			}
 			tempList.add(tempRow);
-		}
+		}*/
 			
 		try {
 			PrintWriter utdata = new PrintWriter(new BufferedWriter(new FileWriter(mapRef)));
@@ -198,17 +198,17 @@ public class PPWDataLoader implements Runnable{
 				for (int j = 0; j < loadedMap.get(i).length; j++) {
 					if(loadedMap.get(i)[j].equals("1")){
 						System.out.println("jord");
-						currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						//currentBlockRow.add(Blocks.EARTH_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("2")){
 						System.out.println("gräs");
-						currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						//currentBlockRow.add(Blocks.GRASS_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("3")){
-						currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						//currentBlockRow.add(Blocks.GRAVEL_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}else if(loadedMap.get(i)[j].equals("4")){
-						currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
+						//currentBlockRow.add(Blocks.ROCK_BLOCK.clone(j*64, 1200 - loadedMap.size()*64 + i*64));
 					}
 				}
-				Terrain.get().addBlockRow(currentBlockRow);
+				//Terrain.get().addBlockRow(currentBlockRow);
 			}
 		}
 	}

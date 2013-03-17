@@ -45,10 +45,10 @@ public class TextButton extends StandardButton{
 	public void draw(int x, int y, Graphics g){
 		getStoredImage().draw(x, y);
 		g.drawString(title,
-				x + getStoredImage().getImage().getWidth() /2 -
-				g.getFont().getWidth(title),
-				y + getStoredImage().getImage().getHeight() /2 -
-				g.getFont().getHeight(title));
+				(x + getStoredImage().getImage().getWidth() /2 -
+				g.getFont().getWidth(title))*Game.getWidthScale(),
+				(y + getStoredImage().getImage().getHeight() /2 -
+				g.getFont().getHeight(title))*Game.getHeightScale());
 	}
 	/**
 	 * get the string text of this button.

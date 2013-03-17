@@ -4,6 +4,8 @@ import image.AnimatedImage;
 
 import java.util.HashMap;
 
+import org.newdawn.slick.Input;
+
 public abstract class AIEntity extends Entity{
 	
 	private int moveTargetX;
@@ -20,8 +22,8 @@ public abstract class AIEntity extends Entity{
 	public boolean isAtTarget(){
 		return isAtTarget;
 	}
-	
-	public void update(){
+	@Override
+	protected void update(Input input){
 		if(moveTargetX < getX()){
 			moveEntity(-moveSpeed, 0);
 		}else if(getX() < moveTargetX){

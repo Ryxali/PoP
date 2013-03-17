@@ -49,8 +49,8 @@ public class StatePlay extends BasicGeneralState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
-		BackDrop.get().rebuild(ImageCluster.FOREST);
-		PPWDataLoader.get().loadTerrain(new File("maps/op.PPW"));
+		
+		//PPWDataLoader.get().loadTerrain(new File("maps/op.PPW"));
 	}
 
 	@Override
@@ -59,16 +59,17 @@ public class StatePlay extends BasicGeneralState {
 		
 		ImageStore.COMPANY_LOGO.draw(0, 0);
 		BackDrop.get().draw();
-		//Terrain.get().draw();
+		Terrain.get().draw(g);
 		Characters.MAIN_CHAR.getCharacter().draw();
-		Entities.WOUBLE.getEntity().draw();
+		//Entities.WOUBLE.getEntity().draw();
 		Inventory.get().draw(g);
 		if (isCrafting) {
 			MachineCraftInterface.get().draw(g);
 		}
 		if (heldItem != null) {
-			heldItem.draw(mouseX, mouseY, g);
+			heldItem.draw((int)(mouseX/Game.getWidthScale()), (int)(mouseY/Game.getHeightScale()), g);
 		}
+		//g.drawString(String.valueOf(gc.getInput().getMouseY()), 300, gc.getInput().getMouseY());
 	}
 	
 	private void terrainUpdate(Input input){
@@ -85,11 +86,11 @@ public class StatePlay extends BasicGeneralState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		Game.updateDelta(gc.getTime());
-		Characters.MAIN_CHAR.getCharacter().update(gc.getInput());
-		//terrainUpdate(gc.getInput());
+		Characters.MAIN_CHAR.getCharacter().upd(gc.getInput());
+		terrainUpdate(gc.getInput());
 		BackDrop.get().update(gc.getInput());
 		
-		Entities.WOUBLE.getEntity().update();
+		//Entities.WOUBLE.getEntity().upd(gc.getInput());
 		if (gc.getInput().isKeyDown(Input.KEY_E)) {
 			Game.setGameSpeed(0.5f);
 			isCrafting = true;
