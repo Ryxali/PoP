@@ -33,15 +33,16 @@ public class LoadingState extends BasicGeneralState{
 		
 		//SaveLoader.get().draw(arg2);
 		LoadingInterface.get().draw();
+		if(LoadingInterface.get().isDone()){
+			State.enterState(arg1, State.STATE_PLAY_MAIN.getID());
+			LoadingInterface.get().stageReset();
+		}
 	}
 
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		if(LoadingInterface.get().isDone()){
-			State.enterState(arg1, State.STATE_PLAY_MAIN.getID());
-			LoadingInterface.get().stageReset();
-		}
+		
 		if(!SaveLoader.get().isRunning()){
 			//SaveLoader.get().loadSaveFile();
 		}

@@ -35,7 +35,7 @@ public class Terrain implements DrawableG{
 	}
 	
 	private TerrainColumn getColumnOnScreen(int screenX){
-		return columns.get((int) (((screenX-baseX)/Blocks.getBlockXDimension())));
+		return columns.get((int) ((((screenX/Game.getWidthScale()-baseX))/Blocks.getBlockXDimension())));
 	}
 	
 	public int getTopBlockY(int blockX){
